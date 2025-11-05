@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sanjay Marimuthu — Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header>
+    <h1 class="logo">SANJAY</h1>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#about">Who I Am</a>
+      <a href="#skills">Tech Stack</a>
+      <a href="#projects">Case Studies</a>
+      <a href="#experience">Career Highlights</a>
+      <a href="#education">Learning Path</a>
+      <a href="#contact">Let's Connect</a>
+    </nav>
+  </header>
+
+  <!-- ===== HERO SECTION ===== -->
+  <section id="home" class="hero fade-in">
+    <div class="hero-left">
+      <div class="hex-container">
+        <img src="images/profile.png" alt="Sanjay Profile">
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <h2>Hi, I’m Sanjay — Data Analyst & AI Engineering Enthusiast</h2>
+      <p>Turning Data into Intelligent Insights</p>
+      <a href="#projects" class="btn">View Projects</a>
+    </div>
+  </section>
+
+  <!-- ===== ABOUT SECTION ===== -->
+  <section id="about" class="fade-in">
+    <h3 class="section-title">Who I Am</h3>
+    <p>
+      I’m a passionate Data Analyst currently pursuing <b>B.Tech in Artificial Intelligence & Data Science (2023–2027)</b> at Kangeyam Institute of Technology. 
+      I completed an internship at Qaroo Learning India Pvt. Ltd., working on predictive analytics and dashboarding. 
+      My focus is on using data-driven insights to create meaningful impact through AI and analytics.
+    </p>
+  </section>
+
+  <!-- ===== SKILLS SECTION ===== -->
+  <section id="skills" class="fade-in">
+    <h3 class="section-title">Tech Stack</h3>
+    <div class="skills-grid">
+      <div class="skill-card"><h4>Data Tools</h4><p>Power BI, SQL, Excel</p></div>
+      <div class="skill-card"><h4>Programming</h4><p>Python, Pandas, Scikit-learn</p></div>
+      <div class="skill-card"><h4>Visualization</h4><p>Power BI, Matplotlib</p></div>
+      <div class="skill-card"><h4>Soft Skills</h4><p>Problem Solving, Data Storytelling</p></div>
+    </div>
+  </section>
+
+  <!-- ===== PROJECTS SECTION ===== -->
+  <section id="projects" class="fade-in">
+    <h3 class="section-title">Case Studies</h3>
+    <div class="projects">
+      <div class="project">
+        <img src="https://i.imgur.com/FRyN9cO.jpg" alt="Road Accident Prediction">
+        <div class="project-content">
+          <h4>Road Accident Prediction</h4>
+          <p>Developed ML model to predict accident-prone zones and visualized insights using Power BI dashboards.</p>
+        </div>
+      </div>
+      <div class="project">
+        <img src="https://i.imgur.com/C6l4L5V.jpg" alt="Academic Risk Detection">
+        <div class="project-content">
+          <h4>Academic Risk Detection</h4>
+          <p>Created model to identify students at academic risk and built interactive dashboards for faculty insights.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== EXPERIENCE SECTION ===== -->
+  <section id="experience" class="fade-in">
+    <h3 class="section-title">Career Highlights</h3>
+    <div class="timeline">
+      <div class="timeline-item">
+        <h4>Data Analyst Intern — Qaroo Learning India Pvt. Ltd.</h4>
+        <span>Performed predictive analytics, built Power BI dashboards, and automated reporting processes.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== EDUCATION SECTION ===== -->
+  <section id="education" class="fade-in">
+    <h3 class="section-title">Learning Path</h3>
+    <div class="timeline">
+      <div class="timeline-item">
+        <h4>B.Tech in AI & Data Science</h4>
+        <span>Kangeyam Institute of Technology (2023–2027)</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT SECTION ===== -->
+  <section id="contact" class="contact fade-in">
+    <h3 class="section-title">Let's Connect</h3>
+
+    <div class="contact-links">
+      <a href="mailto:sanjaymarimuthu505@gmail.com">Email</a>
+      <a href="https://www.linkedin.com/in/sanjaymarimuthu" target="_blank">LinkedIn</a>
+      <a href="https://github.com/SANJAYMARIMUTHU" target="_blank">GitHub</a>
+      <a href="Sanjay Marimuthu.pdf" download class="btn">Download Resume</a>
+    </div>
+  </section>
+
+  <footer>
+    © 2025 Sanjay Marimuthu
+  </footer>
+
+  <!-- ===== SCROLL TO TOP BUTTON ===== -->
+  <button id="scrollToTop" title="Go to top">↑</button>
+
+  <!-- ===== SCRIPT ===== -->
+  <script>
+    const scrollBtn = document.getElementById("scrollToTop");
+    window.onscroll = () => {
+      scrollBtn.style.display = (window.scrollY > 300) ? "block" : "none";
+    };
+    scrollBtn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    const fadeEls = document.querySelectorAll(".fade-in");
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add("visible") });
+    }, { threshold: 0.2 });
+    fadeEls.forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
