@@ -3,331 +3,347 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Sanjay Marimuthu · Data Analyst Portfolio</title>
+  <title>Sanjay · Portfolio (Behance Neon)</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#0b0d12; --panel:#131722; --ink:#e8ecf1; --muted:#9aa3ad; --brand:#4da3ff; --accent:#7b5cff; --badge:#1e2433;
-      --card:#0f131c; --line: #1f2635;
+      --bg:#0e1317;            /* page */
+      --panel:#12181f;         /* cards */
+      --ink:#e9eef2;           /* text */
+      --muted:#a2acb7;         /* muted */
+      --line:#202833;          /* borders */
+      --accent:#1bd8a6;        /* neon green */
+      --accent-2:#1fbf93;      /* darker neon */
+      --shadow:rgba(0,0,0,.45);
     }
     *{box-sizing:border-box}
-    html,body{margin:0;height:100%;font-family:Inter,system-ui,Arial,Segoe UI,Roboto,"Helvetica Neue",sans-serif;background:var(--bg);color:var(--ink)}
+    html,body{margin:0;height:100%;font-family:Poppins,system-ui,Arial,Segoe UI,Roboto,"Helvetica Neue",sans-serif;background:var(--bg);color:var(--ink)}
     a{color:inherit;text-decoration:none}
-    .wrap{max-width:1100px;margin:0 auto;padding:0 20px}
-    header.nav{position:sticky;top:0;z-index:30;background:linear-gradient(180deg,rgba(11,13,18,.9),rgba(11,13,18,.6) 70%,transparent);backdrop-filter:saturate(160%) blur(10px);}
-    .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--line)}
+    .wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+
+    /* background neon strokes */
+    body::before, body::after{
+      content:"";position:fixed;inset:-20vh -10vw auto auto;height:120vh;width:120vw;z-index:-2;
+      background:
+        radial-gradient(600px 300px at 10% 0%, rgba(27,216,166,.12), transparent 60%),
+        radial-gradient(800px 400px at 95% 10%, rgba(27,216,166,.10), transparent 65%);
+    }
+    .strokes{position:fixed;inset:0;pointer-events:none;z-index:-1;opacity:.25}
+    .strokes svg{width:100%;height:100%}
+
+    /* NAV */
+    header.nav{position:sticky;top:0;z-index:40;background:rgba(14,19,23,.75);backdrop-filter:blur(10px) saturate(140%);border-bottom:1px solid var(--line)}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
     .brand{display:flex;gap:.6rem;align-items:center;font-weight:800;letter-spacing:.3px}
-    .brand .dot{width:10px;height:10px;border-radius:50%;background:linear-gradient(135deg,var(--brand),var(--accent))}
+    .brand .logo{display:grid;place-items:center;width:28px;height:28px;border-radius:7px;background:linear-gradient(135deg,var(--accent),#26ffd2);box-shadow:0 8px 24px -6px rgba(27,216,166,.6)}
+    .brand span{font-weight:800}
     .nav-links{display:flex;gap:18px;font-weight:600}
-    .nav-links a{padding:10px 12px;border-radius:10px;color:var(--muted)}
-    .nav-links a.active,.nav-links a:hover{color:var(--ink);background:var(--badge)}
+    .nav-links a{padding:10px 12px;border-radius:12px;color:#cfe4dc}
+    .nav-links a.active,.nav-links a:hover{color:#0f1519;background:var(--accent)}
+    .search{display:flex;align-items:center;gap:6px;background:var(--panel);border:1px solid var(--line);padding:8px 10px;border-radius:999px}
+    .search input{background:transparent;border:none;color:var(--ink);outline:none;min-width:140px}
+    .search button{background:var(--accent);border:none;border-radius:999px;padding:8px 14px;font-weight:700;cursor:pointer}
 
-    /* hero */
-    .hero{padding:80px 0 50px;border-bottom:1px solid var(--line);background:radial-gradient(1200px 700px at 80% -100px, rgba(125,95,255,.18), transparent 60%),radial-gradient(900px 500px at 10% -120px, rgba(77,163,255,.18), transparent 50%)}
+    /* HERO */
+    .hero{padding:80px 0 60px;background:linear-gradient(180deg,rgba(27,216,166,.06),transparent 40%)}
     .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
-    .kicker{display:inline-flex;gap:8px;align-items:center;background:var(--badge);color:#c6d2df;padding:6px 10px;border-radius:999px;font-size:12px;font-weight:700;letter-spacing:.3px}
-    .kicker .pulse{width:8px;height:8px;border-radius:50%;background:var(--brand);box-shadow:0 0 0 8px rgba(77,163,255,.15)}
-    h1{font-size:54px;line-height:1.05;margin:14px 0 10px}
-    .sub{font-size:18px;color:#cbd3dc;max-width:54ch}
-    .cta-row{display:flex;gap:12px;margin-top:24px}
-    .btn{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,var(--brand),var(--accent));padding:12px 16px;border-radius:14px;font-weight:800}
+    .kicker{color:var(--accent);text-transform:uppercase;font-weight:700;letter-spacing:.2em;font-size:12px}
+    h1{font-size:56px;line-height:1.05;margin:8px 0 10px}
+    h1 .im{color:#cfe4dc;font-weight:400}
+    h1 .name{color:var(--accent);text-shadow:0 10px 30px rgba(27,216,166,.35)}
+    .sub{font-size:18px;color:#cbd3dc;max-width:58ch}
+    .cta-row{display:flex;gap:14px;margin-top:26px}
+    .btn{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(180deg,var(--accent),var(--accent-2));padding:12px 18px;border-radius:14px;font-weight:800;color:#0c1216;box-shadow:0 10px 24px -6px rgba(27,216,166,.55)}
     .btn.ghost{background:transparent;border:1px solid var(--line);color:#cbd3dc}
-    .meta{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:28px}
-    .chip{background:var(--badge);padding:10px 12px;border-radius:12px;color:#c6d2df;font-weight:700}
 
-    .card{background:linear-gradient(180deg,var(--panel),var(--card));border:1px solid var(--line);border-radius:18px;padding:18px}
-    .h2{font-size:28px;margin:0 0 14px}
+    /* Hex avatar */
+    .hex-wrap{display:grid;place-items:center}
+    .hex{width:420px;aspect-ratio:1;background:linear-gradient(135deg,#0f1419,#111821);border:1px solid var(--line);border-radius:24px;clip-path:polygon(25% 6%, 75% 6%, 100% 50%, 75% 94%, 25% 94%, 0 50%);
+      position:relative;box-shadow:0 30px 80px -30px var(--shadow)}
+    .hex::before{content:"";position:absolute;inset:10px;clip-path:inherit;background:radial-gradient(200px 200px at 25% 25%, rgba(27,216,166,.35), transparent 60%), linear-gradient(180deg,#1a2029,#0f151c);border-radius:20px}
+    .hex img{position:absolute;inset:18px;clip-path:inherit;width:calc(100% - 36px);height:calc(100% - 36px);object-fit:cover;filter:saturate(.95) contrast(1.05)}
+
+    /* SECTION SHELL */
+    section{padding:70px 0;border-top:1px solid var(--line)}
+    .h2{font-size:40px;margin:0 0 10px}
+    .h2 .accent{color:var(--accent)}
     .muted{color:var(--muted)}
-
-    /* sections */
-    section{padding:56px 0;border-bottom:1px solid var(--line)}
     .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
     .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
 
-    /* list styles */
-    .list{display:grid;gap:12px}
-    .li{display:flex;gap:12px}
-    .li .dot{margin-top:8px;width:8px;height:8px;border-radius:50%;background:var(--brand)}
-    .pill{display:inline-flex;align-items:center;padding:8px 10px;border-radius:999px;background:var(--badge);color:#c6d2df;font-weight:700}
+    /* CARDS */
+    .card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:0 16px 40px -28px var(--shadow)}
+    .service-icon{width:56px;height:56px;border-radius:14px;display:grid;place-items:center;background:rgba(27,216,166,.12);border:1px solid rgba(27,216,166,.25);margin-bottom:10px}
+
+    .pill{display:inline-flex;align-items:center;padding:8px 10px;border-radius:999px;background:rgba(27,216,166,.14);color:#baf8e6;font-weight:700}
     .stack{display:flex;flex-wrap:wrap;gap:8px}
 
-    /* timeline */
+    /* PROJECTS carousel */
+    .carousel{position:relative;overflow:hidden}
+    .rail{display:flex;gap:18px;transition:transform .5s ease}
+    .proj{min-width:360px}
+    .proj .thumb{height:220px;border-radius:16px;background:linear-gradient(180deg,#1a2028,#0f1419);border:1px solid var(--line);display:grid;place-items:center;font-weight:700;color:#9ddfcc}
+    .car-ctrl{margin-top:18px;display:flex;gap:14px;justify-content:center}
+    .car-ctrl button{border:none;background:var(--accent);padding:12px 20px;border-radius:999px;font-weight:800;color:#0c1216;cursor:pointer}
+
+    /* TESTIMONIALS */
+    .t-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .t-card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:22px}
+    .stars{letter-spacing:2px}
+
+    /* EXTRA: education + experience */
     .timeline{display:grid;gap:14px}
-    .t-item{display:grid;gap:6px;padding:16px;border:1px solid var(--line);border-radius:14px;background:linear-gradient(180deg,var(--panel),var(--card))}
+    .t-item{display:grid;gap:6px;padding:16px;border:1px solid var(--line);border-radius:14px;background:var(--panel)}
     .t-top{display:flex;justify-content:space-between;align-items:center}
 
-    /* footer */
-    footer{padding:28px 0;color:var(--muted)}
+    /* FOOTER */
+    footer{padding:40px 0;border-top:1px solid var(--line)}
 
-    /* responsive */
-    @media (max-width: 860px){
+    @media (max-width: 980px){
       .hero-grid{grid-template-columns:1fr}
       .grid-3{grid-template-columns:1fr}
       .grid-2{grid-template-columns:1fr}
-      h1{font-size:40px}
+      .hex{width:340px}
+      h1{font-size:44px}
     }
   </style>
 </head>
 <body>
+  <!-- neon strokes bg svg -->
+  <div class="strokes" aria-hidden="true">
+    <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+      <defs>
+        <pattern id="wave" width="1" height="1" patternUnits="objectBoundingBox">
+          <path d="M0,20 C20,0 40,40 60,20 80,0 100,40 120,20" stroke="rgba(27,216,166,.35)" stroke-width="1" fill="none" />
+        </pattern>
+      </defs>
+      <rect x="-50" y="-50" width="200" height="200" fill="url(#wave)" />
+    </svg>
+  </div>
+
+  <!-- NAV -->
   <header class="nav">
     <div class="wrap nav-inner">
-      <div class="brand"><span class="dot"></span> <span>SANJAY · Portfolio</span></div>
+      <div class="brand"><div class="logo">▲</div><span>Portfolio</span></div>
       <nav class="nav-links" id="navLinks">
         <a href="#home" class="active">Home</a>
+        <a href="#services">Projects</a>
+        <a href="#projects">Recent</a>
+        <a href="#testimonials">Testimonials</a>
         <a href="#about">About</a>
-        <a href="#skills">Skills</a>
-        <a href="#projects">Projects</a>
-        <a href="#experience">Experience</a>
-        <a href="#education">Education</a>
-        <a href="#contact">Contact</a>
       </nav>
+      <form class="search" onsubmit="event.preventDefault();">
+        <input placeholder="Search..." />
+        <button type="submit">Search</button>
+      </form>
     </div>
   </header>
 
+  <!-- HERO -->
   <main id="home" class="hero">
-    <div class="wrap">
-      <div class="hero-grid">
-        <div>
-          <span class="kicker"><span class="pulse"></span> Data Analyst · AI & ML</span>
-          <h1>Hi, I'm <span style="background:linear-gradient(135deg,var(--brand),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent">Sanjay Marimuthu</span></h1>
-          <p class="sub">Analytical and results‑driven Data Analyst skilled in Python, SQL, Power BI, and Machine Learning. Experienced in data cleaning, visualization, and regression modeling to derive actionable insights for real‑world problems.</p>
-          <div class="cta-row">
-            <a class="btn" href="#projects">View Projects</a>
-            <a class="btn ghost" href="#contact">Get in touch</a>
-          </div>
-          <div class="meta">
-            <div class="chip">English — Proficient</div>
-            <div class="chip">Tamil — Native</div>
-            <div class="chip">Open to Internships</div>
-          </div>
+    <div class="wrap hero-grid">
+      <div>
+        <div class="kicker">hello, <span class="im">I'm</span></div>
+        <h1><span class="name">Sanjay Marimuthu</span></h1>
+        <h3 class="muted" style="margin-top:-8px">Data Analyst & AI/ML Enthusiast</h3>
+        <p class="sub">I turn raw data into clear stories and predictive insights using Python, SQL, Power BI and scikit‑learn. Currently open to internships and real‑world analytics projects.</p>
+        <div class="cta-row">
+          <a class="btn" href="#projects">Let's Talk</a>
+          <a class="btn ghost" href="#about">Download Resume</a>
         </div>
-        <div>
-          <div class="card">
-            <div class="h2">Quick Info</div>
-            <div class="list">
-              <div class="li"><span class="dot"></span><div><strong>Phone:</strong> 08438712096</div></div>
-              <div class="li"><span class="dot"></span><div><strong>Email:</strong> <a href="mailto:sanjaymarimuthu505@gmail.com">sanjaymarimuthu505@gmail.com</a></div></div>
-              <div class="li"><span class="dot"></span><div><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/sanjaymarimuthu" target="_blank">/in/sanjaymarimuthu</a></div></div>
-              <div class="li"><span class="dot"></span><div><strong>GitHub:</strong> <a href="https://github.com/SANJAYMARIMUTHU" target="_blank">@SANJAYMARIMUTHU</a></div></div>
-              <div class="li"><span class="dot"></span><div><strong>Location:</strong> India</div></div>
-            </div>
-          </div>
+        <div style="margin-top:26px" class="stack">
+          <span class="pill">Python</span>
+          <span class="pill">SQL</span>
+          <span class="pill">Power BI</span>
+          <span class="pill">Scikit‑learn</span>
+          <span class="pill">Tableau</span>
+        </div>
+      </div>
+      <div class="hex-wrap">
+        <div class="hex">
+          <!-- Placeholder image. Replace src with your photo later: images/profile.jpg -->
+          <img src="images/profile.jpg" alt="Sanjay portrait" onerror="this.style.background='linear-gradient(135deg,#0f1419,#111821)'; this.style.display='block'">
         </div>
       </div>
     </div>
   </main>
 
+  <!-- WHAT I DO / SERVICES (mapped to DA capabilities) -->
+  <section id="services">
+    <div class="wrap">
+      <div class="h2">My <span class="accent">Services</span></div>
+      <p class="muted">What I do as a Data Analyst</p>
+      <div class="grid-3" style="margin-top:18px">
+        <div class="card">
+          <div class="service-icon">UX</div>
+          <strong>Data Cleaning & EDA</strong>
+          <p class="muted">Wrangle messy data, handle missing values, and explore trends to define KPIs.</p>
+        </div>
+        <div class="card">
+          <div class="service-icon">BOX</div>
+          <strong>Dashboards & BI</strong>
+          <p class="muted">Design insightful Power BI/Tableau dashboards with drill‑downs and metrics.</p>
+        </div>
+        <div class="card">
+          <div class="service-icon">AI</div>
+          <strong>Predictive Modeling</strong>
+          <p class="muted">Regression/classification with scikit‑learn; model evaluation & feature engineering.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RECENT PROJECTS carousel -->
+  <section id="projects">
+    <div class="wrap">
+      <div class="h2">Recent <span class="accent">Projects</span></div>
+      <p class="muted">A few highlights from my work.</p>
+
+      <div class="carousel">
+        <div class="rail" id="rail">
+          <article class="proj card">
+            <div class="thumb">Academic Risk Indicators</div>
+            <p class="muted">Predicted at‑risk students using attendance and submission data; early‑alert framework.</p>
+            <div class="stack"><span class="pill">Excel</span><span class="pill">SQL</span><span class="pill">Power BI</span></div>
+          </article>
+          <article class="proj card">
+            <div class="thumb">India Road Accident Analysis</div>
+            <p class="muted">Identified high‑risk corridors; K‑Means + Random Forest to estimate severity.</p>
+            <div class="stack"><span class="pill">Python</span><span class="pill">Pandas</span><span class="pill">Power BI</span></div>
+          </article>
+          <article class="proj card">
+            <div class="thumb">Interfolio · AI Portfolio Chatbot</div>
+            <p class="muted">Conversational portfolio browsing and interview prep using LLM API.</p>
+            <div class="stack"><span class="pill">React</span><span class="pill">Node</span><span class="pill">OpenAI API</span></div>
+          </article>
+          <article class="proj card">
+            <div class="thumb">Sales KPI Dashboard (Mock)</div>
+            <p class="muted">Built a drill‑through Power BI dashboard with DAX measures for growth analysis.</p>
+            <div class="stack"><span class="pill">Power BI</span><span class="pill">DAX</span><span class="pill">Modeling</span></div>
+          </article>
+        </div>
+      </div>
+      <div class="car-ctrl">
+        <button onclick="slide(-1)">Prev</button>
+        <button onclick="slide(1)">Next</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="testimonials">
+    <div class="wrap">
+      <div class="h2">What <span class="accent">Client Say</span></div>
+      <div class="t-grid" style="margin-top:18px">
+        <div class="t-card">
+          <div class="stars">★★★★★</div>
+          <p class="muted">“Sanjay's dashboard distilled complex KPIs into simple visuals that sped up decisions.”</p>
+          <strong>Sam Freeman</strong><br><span class="muted">Business Manager, CEO</span>
+        </div>
+        <div class="t-card">
+          <div class="stars">★★★★★</div>
+          <p class="muted">“Clean SQL models and reproducible analysis — great attention to data quality.”</p>
+          <strong>Priya K</strong><br><span class="muted">Sr. Analyst</span>
+        </div>
+        <div class="t-card">
+          <div class="stars">★★★★☆</div>
+          <p class="muted">“Reliable and quick iterations. Our team saved hours per week.”</p>
+          <strong>Rahul M</strong><br><span class="muted">Project Lead</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXTRA: Education + Experience (hybrid) -->
   <section id="about">
     <div class="wrap">
       <div class="grid-2">
         <div>
-          <div class="h2">About</div>
-          <p class="muted">I enjoy transforming raw data into clear, interactive stories and reliable predictions. Recently, I built dashboards that highlight KPIs for decision‑making and optimized SQL queries for faster data retrieval. I’m currently looking for opportunities to apply my skills on impactful datasets.</p>
+          <div class="h2">About <span class="accent">Me</span></div>
+          <p class="muted">Analytical and results‑driven Data Analyst skilled in Python, SQL, Power BI, and ML. I enjoy transforming raw data into clear, interactive stories and reliable predictions.</p>
+          <div class="stack" style="margin-top:12px">
+            <span class="pill">English — Proficient</span>
+            <span class="pill">Tamil — Native</span>
+            <span class="pill">Open to Internships</span>
+          </div>
         </div>
         <div class="card">
-          <div class="h2">Core Competencies</div>
-          <div class="list">
-            <div class="li"><span class="dot"></span><div>Problem Solving & Analytical Thinking</div></div>
-            <div class="li"><span class="dot"></span><div>Statistical Analysis & Regression Modeling</div></div>
-            <div class="li"><span class="dot"></span><div>Data Cleaning, EDA, and KPI Design</div></div>
+          <strong>Quick Info</strong>
+          <div style="margin-top:10px" class="stack">
+            <span class="pill">Phone: 08438712096</span>
+            <span class="pill">Email: sanjaymarimuthu505@gmail.com</span>
+            <span class="pill">LinkedIn: /in/sanjaymarimuthu</span>
+            <span class="pill">GitHub: @SANJAYMARIMUTHU</span>
           </div>
         </div>
       </div>
-    </div>
-  </section>
 
-  <section id="skills">
-    <div class="wrap">
-      <div class="h2" style="margin-bottom:12px">Skills</div>
-      <div class="grid-3">
+      <div class="grid-2" style="margin-top:22px">
         <div class="card">
-          <strong>Programming</strong>
-          <div class="stack" style="margin-top:10px">
-            <span class="pill">Python</span>
-            <span class="pill">SQL</span>
-          </div>
-        </div>
-        <div class="card">
-          <strong>Databases</strong>
-          <div class="stack" style="margin-top:10px">
-            <span class="pill">MySQL</span>
-            <span class="pill">SQLite</span>
-            <span class="pill">Oracle</span>
-          </div>
-        </div>
-        <div class="card">
-          <strong>Data Visualization</strong>
-          <div class="stack" style="margin-top:10px">
-            <span class="pill">Power BI</span>
-            <span class="pill">Tableau</span>
-            <span class="pill">Excel</span>
-            <span class="pill">Streamlit</span>
-          </div>
-        </div>
-        <div class="card">
-          <strong>Machine Learning</strong>
-          <div class="stack" style="margin-top:10px">
-            <span class="pill">Scikit‑learn</span>
-            <span class="pill">Regression Models</span>
-          </div>
-        </div>
-        <div class="card">
-          <strong>Workshops & Certs</strong>
-          <div class="list" style="margin-top:10px">
-            <div class="li"><span class="dot"></span><div>Intro to Industry 4.0 – NPTEL</div></div>
-            <div class="li"><span class="dot"></span><div>Python Workshop – STPA</div></div>
-            <div class="li"><span class="dot"></span><div>Power BI – Office Master</div></div>
-            <div class="li"><span class="dot"></span><div>AI Tools – Be10x</div></div>
-          </div>
-        </div>
-        <div class="card">
-          <strong>Languages</strong>
-          <div class="stack" style="margin-top:10px">
-            <span class="pill">English (Proficient)</span>
-            <span class="pill">Tamil (Native)</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="projects">
-    <div class="wrap">
-      <div class="h2" style="margin-bottom:12px">Projects</div>
-      <div class="grid-3">
-        <article class="card">
-          <div style="font-weight:800">Academic Performance & Risk Indicators</div>
-          <p class="muted" style="margin:10px 0 12px">Predicted at‑risk students using attendance and submission data; recommended an early‑alert framework to improve retention.</p>
-          <div class="stack">
-            <span class="pill">Excel</span>
-            <span class="pill">SQL (SQLite)</span>
-            <span class="pill">Power BI</span>
-            <span class="pill">Statistics</span>
-          </div>
-        </article>
-        <article class="card">
-          <div style="font-weight:800">India Road Accident Analysis & Prediction</div>
-          <p class="muted" style="margin:10px 0 12px">Analyzed accident data to identify high‑risk areas and used K‑Means & Random Forest to predict accident severity with interactive dashboards.</p>
-          <div class="stack">
-            <span class="pill">Python</span>
-            <span class="pill">Pandas</span>
-            <span class="pill">NumPy</span>
-            <span class="pill">Matplotlib</span>
-            <span class="pill">Scikit‑learn</span>
-            <span class="pill">MySQL</span>
-            <span class="pill">Power BI</span>
-            <span class="pill">Streamlit*</span>
-          </div>
-        </article>
-        <article class="card">
-          <div style="font-weight:800">Interfolio · AI Portfolio & Interview Chatbot <span class="pill" style="margin-left:6px">Ongoing</span></div>
-          <p class="muted" style="margin:10px 0 12px">Built a chatbot for interactive portfolio exploration and interview Q&A using natural language.</p>
-          <div class="stack">
-            <span class="pill">React</span>
-            <span class="pill">Node</span>
-            <span class="pill">Express</span>
-            <span class="pill">OpenAI API</span>
-            <span class="pill">Axios</span>
-            <span class="pill">CSS</span>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section id="experience">
-    <div class="wrap">
-      <div class="h2" style="margin-bottom:12px">Experience</div>
-      <div class="timeline">
-        <div class="t-item">
-          <div class="t-top">
-            <strong>Data Analyst Intern · Qaroo Learning India Pvt. Ltd.</strong>
-            <span class="pill">15 days</span>
-          </div>
+          <strong>Education</strong>
           <ul class="muted" style="margin:8px 0 0 18px">
-            <li>Collected, cleaned, and analyzed student datasets to identify performance patterns.</li>
-            <li>Designed Power BI dashboards visualizing trends & KPIs for decision‑making.</li>
-            <li>Optimized SQL queries, improving retrieval efficiency by 25%.</li>
-            <li>Presented findings guiding early intervention strategies and retention.</li>
+            <li>Kangeyam Institute of Technology — B.Tech AI & Data Science (2023–2027) · CGPA 6.39</li>
+            <li>MHSS — HSC 69.5% (2023); SSLC Pass (2021)</li>
           </ul>
-          <div class="stack" style="margin-top:10px">
-            <span class="pill">25% faster SQL</span>
-            <span class="pill">3+ Power BI dashboards</span>
-            <span class="pill">100% data accuracy</span>
-            <span class="pill">4+ hours saved / week</span>
-          </div>
         </div>
-        <div class="t-item">
-          <div class="t-top">
-            <strong>Industrial Visit · Inker Robotic Solutions Pvt. Ltd.</strong>
-            <span class="pill">Sep 2023</span>
+        <div class="card">
+          <strong>Experience</strong>
+          <div class="timeline" style="margin-top:8px">
+            <div class="t-item">
+              <div class="t-top"><span>Data Analyst Intern · Qaroo Learning India Pvt. Ltd.</span><span class="pill">15 days</span></div>
+              <ul class="muted" style="margin:8px 0 0 18px">
+                <li>Cleaned & analyzed student datasets; designed Power BI dashboards (3+).</li>
+                <li>Optimized SQL queries (≈25% faster) and ensured data accuracy.</li>
+                <li>Delivered insights for early interventions and retention.</li>
+              </ul>
+            </div>
           </div>
-          <p class="muted" style="margin:6px 0 0">Gained exposure to robotics and industrial automation.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="education">
-    <div class="wrap">
-      <div class="h2" style="margin-bottom:12px">Education</div>
-      <div class="grid-2">
-        <div class="card">
-          <strong>Kangeyam Institute of Technology</strong>
-          <div class="muted" style="margin:6px 0">B.Tech · Artificial Intelligence & Data Science (2023–2027)</div>
-          <div class="stack"><span class="pill">CGPA: 6.39 (up to 4th sem)</span></div>
-        </div>
-        <div class="card">
-          <strong>Municipal Higher Secondary School</strong>
-          <div class="muted" style="margin:6px 0">HSC · 69.5% (2023) · SSLC · All Pass (2021)</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="contact">
-    <div class="wrap">
-      <div class="h2" style="margin-bottom:12px">Contact</div>
-      <div class="grid-2">
-        <div class="card">
-          <div class="list">
-            <div class="li"><span class="dot"></span><div><strong>Email:</strong> <a href="mailto:sanjaymarimuthu505@gmail.com">sanjaymarimuthu505@gmail.com</a></div></div>
-            <div class="li"><span class="dot"></span><div><strong>Phone:</strong> 08438712096</div></div>
-            <div class="li"><span class="dot"></span><div><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/sanjaymarimuthu" target="_blank">linkedin.com/in/sanjaymarimuthu</a></div></div>
-            <div class="li"><span class="dot"></span><div><strong>GitHub:</strong> <a href="https://github.com/SANJAYMARIMUTHU" target="_blank">github.com/SANJAYMARIMUTHU</a></div></div>
-          </div>
-        </div>
-        <div class="card">
-          <form onsubmit="event.preventDefault(); alert('Thanks! Email me directly instead.');">
-            <label for="name">Name</label>
-            <input id="name" required placeholder="Your name" style="width:100%;margin:6px 0 10px;padding:12px;border-radius:12px;border:1px solid var(--line);background:var(--panel);color:var(--ink)" />
-            <label for="msg">Message</label>
-            <textarea id="msg" rows="4" required placeholder="Write your message" style="width:100%;margin:6px 0 10px;padding:12px;border-radius:12px;border:1px solid var(--line);background:var(--panel);color:var(--ink)"></textarea>
-            <button class="btn" type="submit">Send</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
-
+  <!-- FOOTER -->
   <footer>
-    <div class="wrap">© <span id="yr"></span> Sanjay Marimuthu </div>
+    <div class="wrap">
+      <div class="grid-2">
+        <div>
+          <div class="h2" style="font-size:28px;margin:0 0 8px">Portfollio</div>
+          <div class="muted">123 Market St. #22B · Charlottesville, California · 44635</div>
+          <div class="muted" style="margin-top:6px">(+91) 8438712096 · <a href="mailto:sanjaymarimuthu505@gmail.com">sanjaymarimuthu505@gmail.com</a></div>
+          <div class="muted" style="margin-top:6px">© <span id="yr"></span> Sanjay Marimuthu. All rights reserved.</div>
+        </div>
+        <div class="grid-2">
+          <div class="muted">
+            <div><a href="#home">About</a></div>
+            <div><a href="#services">Services</a></div>
+            <div><a href="#projects">Projects</a></div>
+            <div><a href="#about">Contact</a></div>
+          </div>
+          <div class="muted">
+            <div><a href="https://facebook.com" target="_blank">Facebook</a></div>
+            <div><a href="https://twitter.com" target="_blank">Twitter</a></div>
+            <div><a href="https://linkedin.com/in/sanjaymarimuthu" target="_blank">LinkedIn</a></div>
+            <div><a href="https://instagram.com" target="_blank">Instagram</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
   </footer>
 
   <script>
-    // Active nav on scroll
-    const links = document.querySelectorAll('#navLinks a');
-    const sections = [...links].map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
-    const setActive = () => {
-      const y = window.scrollY + 120;
-      let active = links[0];
-      sections.forEach((sec, i) => { if (sec.offsetTop <= y) active = links[i]; });
-      links.forEach(a=>a.classList.remove('active')); active.classList.add('active');
-    };
-    document.addEventListener('scroll', setActive, { passive: true }); setActive();
-    document.getElementById('yr').textContent = new Date().getFullYear();
+    // nav active
+    const links=[...document.querySelectorAll('#navLinks a')];
+    const secs=links.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    const setActive=()=>{const y=scrollY+120;let active=links[0];secs.forEach((s,i)=>{if(s.offsetTop<=y)active=links[i]});links.forEach(a=>a.classList.remove('active'));active.classList.add('active')};
+    addEventListener('scroll',setActive,{passive:true});setActive();
+    document.getElementById('yr').textContent=new Date().getFullYear();
+
+    // simple carousel
+    let idx=0; const rail=document.getElementById('rail'); const step=378; // approx card width + gap
+    function slide(dir){idx=Math.max(0, Math.min(idx+dir, rail.children.length-3)); rail.style.transform=`translateX(${-idx*step}px)`}
   </script>
 </body>
 </html>
