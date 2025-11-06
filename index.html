@@ -2,140 +2,332 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sanjay Marimuthu — Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sanjay Marimuthu · Data Analyst Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0b0d12; --panel:#131722; --ink:#e8ecf1; --muted:#9aa3ad; --brand:#4da3ff; --accent:#7b5cff; --badge:#1e2433;
+      --card:#0f131c; --line: #1f2635;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;height:100%;font-family:Inter,system-ui,Arial,Segoe UI,Roboto,"Helvetica Neue",sans-serif;background:var(--bg);color:var(--ink)}
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+    header.nav{position:sticky;top:0;z-index:30;background:linear-gradient(180deg,rgba(11,13,18,.9),rgba(11,13,18,.6) 70%,transparent);backdrop-filter:saturate(160%) blur(10px);}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--line)}
+    .brand{display:flex;gap:.6rem;align-items:center;font-weight:800;letter-spacing:.3px}
+    .brand .dot{width:10px;height:10px;border-radius:50%;background:linear-gradient(135deg,var(--brand),var(--accent))}
+    .nav-links{display:flex;gap:18px;font-weight:600}
+    .nav-links a{padding:10px 12px;border-radius:10px;color:var(--muted)}
+    .nav-links a.active,.nav-links a:hover{color:var(--ink);background:var(--badge)}
+
+    /* hero */
+    .hero{padding:80px 0 50px;border-bottom:1px solid var(--line);background:radial-gradient(1200px 700px at 80% -100px, rgba(125,95,255,.18), transparent 60%),radial-gradient(900px 500px at 10% -120px, rgba(77,163,255,.18), transparent 50%)}
+    .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+    .kicker{display:inline-flex;gap:8px;align-items:center;background:var(--badge);color:#c6d2df;padding:6px 10px;border-radius:999px;font-size:12px;font-weight:700;letter-spacing:.3px}
+    .kicker .pulse{width:8px;height:8px;border-radius:50%;background:var(--brand);box-shadow:0 0 0 8px rgba(77,163,255,.15)}
+    h1{font-size:54px;line-height:1.05;margin:14px 0 10px}
+    .sub{font-size:18px;color:#cbd3dc;max-width:54ch}
+    .cta-row{display:flex;gap:12px;margin-top:24px}
+    .btn{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,var(--brand),var(--accent));padding:12px 16px;border-radius:14px;font-weight:800}
+    .btn.ghost{background:transparent;border:1px solid var(--line);color:#cbd3dc}
+    .meta{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:28px}
+    .chip{background:var(--badge);padding:10px 12px;border-radius:12px;color:#c6d2df;font-weight:700}
+
+    .card{background:linear-gradient(180deg,var(--panel),var(--card));border:1px solid var(--line);border-radius:18px;padding:18px}
+    .h2{font-size:28px;margin:0 0 14px}
+    .muted{color:var(--muted)}
+
+    /* sections */
+    section{padding:56px 0;border-bottom:1px solid var(--line)}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+
+    /* list styles */
+    .list{display:grid;gap:12px}
+    .li{display:flex;gap:12px}
+    .li .dot{margin-top:8px;width:8px;height:8px;border-radius:50%;background:var(--brand)}
+    .pill{display:inline-flex;align-items:center;padding:8px 10px;border-radius:999px;background:var(--badge);color:#c6d2df;font-weight:700}
+    .stack{display:flex;flex-wrap:wrap;gap:8px}
+
+    /* timeline */
+    .timeline{display:grid;gap:14px}
+    .t-item{display:grid;gap:6px;padding:16px;border:1px solid var(--line);border-radius:14px;background:linear-gradient(180deg,var(--panel),var(--card))}
+    .t-top{display:flex;justify-content:space-between;align-items:center}
+
+    /* footer */
+    footer{padding:28px 0;color:var(--muted)}
+
+    /* responsive */
+    @media (max-width: 860px){
+      .hero-grid{grid-template-columns:1fr}
+      .grid-3{grid-template-columns:1fr}
+      .grid-2{grid-template-columns:1fr}
+      h1{font-size:40px}
+    }
+  </style>
 </head>
-
 <body>
-
-  <!-- ===== HEADER ===== -->
-  <header>
-    <h1 class="logo">SANJAY</h1>
-    <nav>
-      <a href="#home">Home</a>
-      <a href="#about">Who I Am</a>
-      <a href="#skills">Tech Stack</a>
-      <a href="#projects">Case Studies</a>
-      <a href="#experience">Career Highlights</a>
-      <a href="#education">Learning Path</a>
-      <a href="#contact">Let's Connect</a>
-    </nav>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <div class="brand"><span class="dot"></span> <span>SANJAY · Portfolio</span></div>
+      <nav class="nav-links" id="navLinks">
+        <a href="#home" class="active">Home</a>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#education">Education</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
   </header>
 
-  <!-- ===== HERO SECTION ===== -->
-  <section id="home" class="hero fade-in">
-    <div class="hero-left">
-      <div class="hex-container">
-        <img src="images/profile.png" alt="Sanjay Profile">
-      </div>
-    </div>
-
-    <div class="hero-right">
-      <h2>Hi, I’m Sanjay — Data Analyst & AI Engineering Enthusiast</h2>
-      <p>Turning Data into Intelligent Insights</p>
-      <a href="#projects" class="btn">View Projects</a>
-    </div>
-  </section>
-
-  <!-- ===== ABOUT SECTION ===== -->
-  <section id="about" class="fade-in">
-    <h3 class="section-title">Who I Am</h3>
-    <p>
-      I’m a passionate Data Analyst currently pursuing <b>B.Tech in Artificial Intelligence & Data Science (2023–2027)</b> at Kangeyam Institute of Technology. 
-      I completed an internship at Qaroo Learning India Pvt. Ltd., working on predictive analytics and dashboarding. 
-      My focus is on using data-driven insights to create meaningful impact through AI and analytics.
-    </p>
-  </section>
-
-  <!-- ===== SKILLS SECTION ===== -->
-  <section id="skills" class="fade-in">
-    <h3 class="section-title">Tech Stack</h3>
-    <div class="skills-grid">
-      <div class="skill-card"><h4>Data Tools</h4><p>Power BI, SQL, Excel</p></div>
-      <div class="skill-card"><h4>Programming</h4><p>Python, Pandas, Scikit-learn</p></div>
-      <div class="skill-card"><h4>Visualization</h4><p>Power BI, Matplotlib</p></div>
-      <div class="skill-card"><h4>Soft Skills</h4><p>Problem Solving, Data Storytelling</p></div>
-    </div>
-  </section>
-
-  <!-- ===== PROJECTS SECTION ===== -->
-  <section id="projects" class="fade-in">
-    <h3 class="section-title">Case Studies</h3>
-    <div class="projects">
-      <div class="project">
-        <img src="https://i.imgur.com/FRyN9cO.jpg" alt="Road Accident Prediction">
-        <div class="project-content">
-          <h4>Road Accident Prediction</h4>
-          <p>Developed ML model to predict accident-prone zones and visualized insights using Power BI dashboards.</p>
+  <main id="home" class="hero">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <span class="kicker"><span class="pulse"></span> Data Analyst · AI & ML</span>
+          <h1>Hi, I'm <span style="background:linear-gradient(135deg,var(--brand),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent">Sanjay Marimuthu</span></h1>
+          <p class="sub">Analytical and results‑driven Data Analyst skilled in Python, SQL, Power BI, and Machine Learning. Experienced in data cleaning, visualization, and regression modeling to derive actionable insights for real‑world problems.</p>
+          <div class="cta-row">
+            <a class="btn" href="#projects">View Projects</a>
+            <a class="btn ghost" href="#contact">Get in touch</a>
+          </div>
+          <div class="meta">
+            <div class="chip">English — Proficient</div>
+            <div class="chip">Tamil — Native</div>
+            <div class="chip">Open to Internships</div>
+          </div>
+        </div>
+        <div>
+          <div class="card">
+            <div class="h2">Quick Info</div>
+            <div class="list">
+              <div class="li"><span class="dot"></span><div><strong>Phone:</strong> 08438712096</div></div>
+              <div class="li"><span class="dot"></span><div><strong>Email:</strong> <a href="mailto:sanjaymarimuthu505@gmail.com">sanjaymarimuthu505@gmail.com</a></div></div>
+              <div class="li"><span class="dot"></span><div><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/sanjaymarimuthu" target="_blank">/in/sanjaymarimuthu</a></div></div>
+              <div class="li"><span class="dot"></span><div><strong>GitHub:</strong> <a href="https://github.com/SANJAYMARIMUTHU" target="_blank">@SANJAYMARIMUTHU</a></div></div>
+              <div class="li"><span class="dot"></span><div><strong>Location:</strong> India</div></div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="project">
-        <img src="https://i.imgur.com/C6l4L5V.jpg" alt="Academic Risk Detection">
-        <div class="project-content">
-          <h4>Academic Risk Detection</h4>
-          <p>Created model to identify students at academic risk and built interactive dashboards for faculty insights.</p>
+    </div>
+  </main>
+
+  <section id="about">
+    <div class="wrap">
+      <div class="grid-2">
+        <div>
+          <div class="h2">About</div>
+          <p class="muted">I enjoy transforming raw data into clear, interactive stories and reliable predictions. Recently, I built dashboards that highlight KPIs for decision‑making and optimized SQL queries for faster data retrieval. I’m currently looking for opportunities to apply my skills on impactful datasets.</p>
+        </div>
+        <div class="card">
+          <div class="h2">Core Competencies</div>
+          <div class="list">
+            <div class="li"><span class="dot"></span><div>Problem Solving & Analytical Thinking</div></div>
+            <div class="li"><span class="dot"></span><div>Statistical Analysis & Regression Modeling</div></div>
+            <div class="li"><span class="dot"></span><div>Data Cleaning, EDA, and KPI Design</div></div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== EXPERIENCE SECTION ===== -->
-  <section id="experience" class="fade-in">
-    <h3 class="section-title">Career Highlights</h3>
-    <div class="timeline">
-      <div class="timeline-item">
-        <h4>Data Analyst Intern — Qaroo Learning India Pvt. Ltd.</h4>
-        <span>Performed predictive analytics, built Power BI dashboards, and automated reporting processes.</span>
+  <section id="skills">
+    <div class="wrap">
+      <div class="h2" style="margin-bottom:12px">Skills</div>
+      <div class="grid-3">
+        <div class="card">
+          <strong>Programming</strong>
+          <div class="stack" style="margin-top:10px">
+            <span class="pill">Python</span>
+            <span class="pill">SQL</span>
+          </div>
+        </div>
+        <div class="card">
+          <strong>Databases</strong>
+          <div class="stack" style="margin-top:10px">
+            <span class="pill">MySQL</span>
+            <span class="pill">SQLite</span>
+            <span class="pill">Oracle</span>
+          </div>
+        </div>
+        <div class="card">
+          <strong>Data Visualization</strong>
+          <div class="stack" style="margin-top:10px">
+            <span class="pill">Power BI</span>
+            <span class="pill">Tableau</span>
+            <span class="pill">Excel</span>
+            <span class="pill">Streamlit</span>
+          </div>
+        </div>
+        <div class="card">
+          <strong>Machine Learning</strong>
+          <div class="stack" style="margin-top:10px">
+            <span class="pill">Scikit‑learn</span>
+            <span class="pill">Regression Models</span>
+          </div>
+        </div>
+        <div class="card">
+          <strong>Workshops & Certs</strong>
+          <div class="list" style="margin-top:10px">
+            <div class="li"><span class="dot"></span><div>Intro to Industry 4.0 – NPTEL</div></div>
+            <div class="li"><span class="dot"></span><div>Python Workshop – STPA</div></div>
+            <div class="li"><span class="dot"></span><div>Power BI – Office Master</div></div>
+            <div class="li"><span class="dot"></span><div>AI Tools – Be10x</div></div>
+          </div>
+        </div>
+        <div class="card">
+          <strong>Languages</strong>
+          <div class="stack" style="margin-top:10px">
+            <span class="pill">English (Proficient)</span>
+            <span class="pill">Tamil (Native)</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== EDUCATION SECTION ===== -->
-  <section id="education" class="fade-in">
-    <h3 class="section-title">Learning Path</h3>
-    <div class="timeline">
-      <div class="timeline-item">
-        <h4>B.Tech in AI & Data Science</h4>
-        <span>Kangeyam Institute of Technology (2023–2027)</span>
+  <section id="projects">
+    <div class="wrap">
+      <div class="h2" style="margin-bottom:12px">Projects</div>
+      <div class="grid-3">
+        <article class="card">
+          <div style="font-weight:800">Academic Performance & Risk Indicators</div>
+          <p class="muted" style="margin:10px 0 12px">Predicted at‑risk students using attendance and submission data; recommended an early‑alert framework to improve retention.</p>
+          <div class="stack">
+            <span class="pill">Excel</span>
+            <span class="pill">SQL (SQLite)</span>
+            <span class="pill">Power BI</span>
+            <span class="pill">Statistics</span>
+          </div>
+        </article>
+        <article class="card">
+          <div style="font-weight:800">India Road Accident Analysis & Prediction</div>
+          <p class="muted" style="margin:10px 0 12px">Analyzed accident data to identify high‑risk areas and used K‑Means & Random Forest to predict accident severity with interactive dashboards.</p>
+          <div class="stack">
+            <span class="pill">Python</span>
+            <span class="pill">Pandas</span>
+            <span class="pill">NumPy</span>
+            <span class="pill">Matplotlib</span>
+            <span class="pill">Scikit‑learn</span>
+            <span class="pill">MySQL</span>
+            <span class="pill">Power BI</span>
+            <span class="pill">Streamlit*</span>
+          </div>
+        </article>
+        <article class="card">
+          <div style="font-weight:800">Interfolio · AI Portfolio & Interview Chatbot <span class="pill" style="margin-left:6px">Ongoing</span></div>
+          <p class="muted" style="margin:10px 0 12px">Built a chatbot for interactive portfolio exploration and interview Q&A using natural language.</p>
+          <div class="stack">
+            <span class="pill">React</span>
+            <span class="pill">Node</span>
+            <span class="pill">Express</span>
+            <span class="pill">OpenAI API</span>
+            <span class="pill">Axios</span>
+            <span class="pill">CSS</span>
+          </div>
+        </article>
       </div>
     </div>
   </section>
 
-  <!-- ===== CONTACT SECTION ===== -->
-  <section id="contact" class="contact fade-in">
-    <h3 class="section-title">Let's Connect</h3>
+  <section id="experience">
+    <div class="wrap">
+      <div class="h2" style="margin-bottom:12px">Experience</div>
+      <div class="timeline">
+        <div class="t-item">
+          <div class="t-top">
+            <strong>Data Analyst Intern · Qaroo Learning India Pvt. Ltd.</strong>
+            <span class="pill">15 days</span>
+          </div>
+          <ul class="muted" style="margin:8px 0 0 18px">
+            <li>Collected, cleaned, and analyzed student datasets to identify performance patterns.</li>
+            <li>Designed Power BI dashboards visualizing trends & KPIs for decision‑making.</li>
+            <li>Optimized SQL queries, improving retrieval efficiency by 25%.</li>
+            <li>Presented findings guiding early intervention strategies and retention.</li>
+          </ul>
+          <div class="stack" style="margin-top:10px">
+            <span class="pill">25% faster SQL</span>
+            <span class="pill">3+ Power BI dashboards</span>
+            <span class="pill">100% data accuracy</span>
+            <span class="pill">4+ hours saved / week</span>
+          </div>
+        </div>
+        <div class="t-item">
+          <div class="t-top">
+            <strong>Industrial Visit · Inker Robotic Solutions Pvt. Ltd.</strong>
+            <span class="pill">Sep 2023</span>
+          </div>
+          <p class="muted" style="margin:6px 0 0">Gained exposure to robotics and industrial automation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <div class="contact-links">
-      <a href="mailto:sanjaymarimuthu505@gmail.com">Email</a>
-      <a href="https://www.linkedin.com/in/sanjaymarimuthu" target="_blank">LinkedIn</a>
-      <a href="https://github.com/SANJAYMARIMUTHU" target="_blank">GitHub</a>
-      <a href="Sanjay Marimuthu.pdf" download class="btn">Download Resume</a>
+  <section id="education">
+    <div class="wrap">
+      <div class="h2" style="margin-bottom:12px">Education</div>
+      <div class="grid-2">
+        <div class="card">
+          <strong>Kangeyam Institute of Technology</strong>
+          <div class="muted" style="margin:6px 0">B.Tech · Artificial Intelligence & Data Science (2023–2027)</div>
+          <div class="stack"><span class="pill">CGPA: 6.39 (up to 4th sem)</span></div>
+        </div>
+        <div class="card">
+          <strong>Municipal Higher Secondary School</strong>
+          <div class="muted" style="margin:6px 0">HSC · 69.5% (2023) · SSLC · All Pass (2021)</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <div class="h2" style="margin-bottom:12px">Contact</div>
+      <div class="grid-2">
+        <div class="card">
+          <div class="list">
+            <div class="li"><span class="dot"></span><div><strong>Email:</strong> <a href="mailto:sanjaymarimuthu505@gmail.com">sanjaymarimuthu505@gmail.com</a></div></div>
+            <div class="li"><span class="dot"></span><div><strong>Phone:</strong> 08438712096</div></div>
+            <div class="li"><span class="dot"></span><div><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/sanjaymarimuthu" target="_blank">linkedin.com/in/sanjaymarimuthu</a></div></div>
+            <div class="li"><span class="dot"></span><div><strong>GitHub:</strong> <a href="https://github.com/SANJAYMARIMUTHU" target="_blank">github.com/SANJAYMARIMUTHU</a></div></div>
+          </div>
+        </div>
+        <div class="card">
+          <form onsubmit="event.preventDefault(); alert('Thanks! Email me directly instead.');">
+            <label for="name">Name</label>
+            <input id="name" required placeholder="Your name" style="width:100%;margin:6px 0 10px;padding:12px;border-radius:12px;border:1px solid var(--line);background:var(--panel);color:var(--ink)" />
+            <label for="msg">Message</label>
+            <textarea id="msg" rows="4" required placeholder="Write your message" style="width:100%;margin:6px 0 10px;padding:12px;border-radius:12px;border:1px solid var(--line);background:var(--panel);color:var(--ink)"></textarea>
+            <button class="btn" type="submit">Send</button>
+          </form>
+        </div>
+      </div>
     </div>
   </section>
 
   <footer>
-    © 2025 Sanjay Marimuthu
+    <div class="wrap">© <span id="yr"></span> Sanjay Marimuthu </div>
   </footer>
 
-  <!-- ===== SCROLL TO TOP BUTTON ===== -->
-  <button id="scrollToTop" title="Go to top">↑</button>
-
-  <!-- ===== SCRIPT ===== -->
   <script>
-    const scrollBtn = document.getElementById("scrollToTop");
-    window.onscroll = () => {
-      scrollBtn.style.display = (window.scrollY > 300) ? "block" : "none";
+    // Active nav on scroll
+    const links = document.querySelectorAll('#navLinks a');
+    const sections = [...links].map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    const setActive = () => {
+      const y = window.scrollY + 120;
+      let active = links[0];
+      sections.forEach((sec, i) => { if (sec.offsetTop <= y) active = links[i]; });
+      links.forEach(a=>a.classList.remove('active')); active.classList.add('active');
     };
-    scrollBtn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
-
-    const fadeEls = document.querySelectorAll(".fade-in");
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add("visible") });
-    }, { threshold: 0.2 });
-    fadeEls.forEach(el => observer.observe(el));
+    document.addEventListener('scroll', setActive, { passive: true }); setActive();
+    document.getElementById('yr').textContent = new Date().getFullYear();
   </script>
-
 </body>
 </html>
