@@ -204,7 +204,7 @@
   <!-- ABOUT -->
   <section id="about">
     <div class="wrap">
-      <div class="grid-2">
+      <div style="max-width:1100px;margin:0 auto" class="grid-2">
         <div class="card">
           <strong>Who I Am</strong>
           <p class="muted" style="margin-top:10px">I’m a Data Analyst who enjoys turning raw datasets into clear insights, stories, and measurable outcomes. I focus on simplifying complexity, building data models that make sense to humans, and creating dashboards that drive meaningful decisions. I love solving real problems using data and I’m actively looking for internship opportunities to apply my skills in impactful environments.</p>
@@ -213,11 +213,6 @@
           <strong>My AI & Impact Vision</strong>
           <p class="muted" style="margin-top:10px">I believe the future of decision-making is AI-assisted, automated, and data-first. My goal is to become a professional who bridges analytics and applied AI — not just building dashboards, but systems that learn, adapt, and support business growth intelligently. I’m continuously learning modern AI tools, LLM workflows, and practical ML techniques to contribute to long-term scalable results and industry transformation.</p>
         </div>
-      </div>
-      <div class="stack" style="margin-top:22px">
-        <span class="pill">English — Proficient</span>
-        <span class="pill">Tamil — Native</span>
-        <span class="pill">Open to Internships</span>
       </div>
     </div>
   </section>
@@ -243,28 +238,26 @@
   <section id="projects">
     <div class="wrap">
       <div class="h2">Projects</div>
-      <div class="carousel" style="margin-top:18px">
-        <div class="rail" id="rail">
-          <article class="proj card" data-index="0">
-            <div class="rib">ONGOING</div>
-            <div class="thumb">Interfolio · AI Portfolio Chatbot</div>
-            <p class="muted">Conversational portfolio browsing and interview prep using LLM API.</p>
-            <div class="stack"><span class="pill">React</span><span class="pill">Node</span><span class="pill">OpenAI API</span></div>
-            <div style="margin-top:14px;display:flex;gap:12px"><button class="btn ghost case-btn" data-index="0" type="button">Case Study</button></div>
-          </article>
-          <article class="proj card" data-index="1">
-            <div class="thumb">Academic Risk Indicators</div>
-            <p class="muted">Predicted at‑risk students using attendance and submission data; early‑alert framework.</p>
-            <div class="stack"><span class="pill">Excel</span><span class="pill">SQL</span><span class="pill">Power BI</span></div>
-            <div style="margin-top:14px;display:flex;gap:12px"><button class="btn ghost case-btn" data-index="1" type="button">Case Study</button></div>
-          </article>
-          <article class="proj card" data-index="2">
-            <div class="thumb">India Road Accident Analysis</div>
-            <p class="muted">Identified high‑risk corridors; K‑Means + Random Forest to estimate severity.</p>
-            <div class="stack"><span class="pill">Python</span><span class="pill">Pandas</span><span class="pill">Power BI</span></div>
-            <div style="margin-top:14px;display:flex;gap:12px"><button class="btn ghost case-btn" data-index="2" type="button">Case Study</button></div>
-          </article>
-        </div>
+      <div class="grid-3" style="margin-top:18px">
+        <article class="proj card" data-index="0">
+          <div class="rib">ONGOING</div>
+          <div class="thumb">Interfolio · AI Portfolio Chatbot</div>
+          <p class="muted">Conversational portfolio browsing and interview prep using LLM API.</p>
+          <div class="stack"><span class="pill">React</span><span class="pill">Node</span><span class="pill">OpenAI API</span></div>
+          <div style="margin-top:14px;display:flex;gap:12px"><button class="btn ghost case-btn" data-index="0" type="button">Case Study</button></div>
+        </article>
+        <article class="proj card" data-index="1">
+          <div class="thumb">Academic Risk Indicators</div>
+          <p class="muted">Predicted at-risk students using attendance and submission data; early-alert framework.</p>
+          <div class="stack"><span class="pill">Excel</span><span class="pill">SQL</span><span class="pill">Power BI</span></div>
+          <div style="margin-top:14px;display:flex;gap:12px"><button class="btn ghost case-btn" data-index="1" type="button">Case Study</button></div>
+        </article>
+        <article class="proj card" data-index="2">
+          <div class="thumb">India Road Accident Analysis</div>
+          <p class="muted">Identified high-risk corridors; K-Means + Random Forest to estimate severity.</p>
+          <div class="stack"><span class="pill">Python</span><span class="pill">Pandas</span><span class="pill">Power BI</span></div>
+          <div style="margin-top:14px;display:flex;gap:12px"><button class="btn ghost case-btn" data-index="2" type="button">Case Study</button></div>
+        </article>
       </div>
     </div>
   </section>
@@ -346,24 +339,16 @@
     <div class="wrap">
       <div class="h2">Contact <span class="accent">Me</span></div>
       <div class="card" style="margin-top:22px">
-        <form action="#" method="post" style="display:grid;gap:14px">
-          <input type="text" placeholder="Your Name" style="background:transparent;border:1px solid var(--line);padding:14px;border-radius:12px;color:var(--ink);font-size:16px;outline:none" required>
-          <input type="email" placeholder="Your Email" style="background:transparent;border:1px solid var(--line);padding:14px;border-radius:12px;color:var(--ink);font-size:16px;outline:none" required>
-          <textarea placeholder="Your Message" style="background:transparent;border:1px solid var(--line);padding:14px;border-radius:12px;color:var(--ink);font-size:16px;outline:none;height:140px" required></textarea>
+        <p class="muted">📧 Gmail: <a style="color:var(--accent)" href="mailto:sanjaymarimuthu505@gmail.com">sanjaymarimuthu505@gmail.com</a></p>
+        <p class="muted">🔗 LinkedIn: <a style="color:var(--accent)" href="https://www.linkedin.com/in/sanjaymarimuthu" target="_blank">linkedin.com/in/sanjaymarimuthu</a></p>
+        <p class="muted">📦 GitHub: <a style="color:var(--accent)" href="https://github.com/SANJAYMARIMUTHU" target="_blank">github.com/SANJAYMARIMUTHU</a></p>
+        <form id="contactForm" style="margin-top:20px;display:flex;flex-direction:column;gap:14px">
+          <input type="text" name="fullname" placeholder="Full Name" required style="padding:14px;border-radius:12px;border:1px solid var(--line);background:transparent;color:var(--ink)">
+          <input type="email" name="email" placeholder="Email Address" required style="padding:14px;border-radius:12px;border:1px solid var(--line);background:transparent;color:var(--ink)">
+          <textarea name="message" placeholder="Your Message" required style="padding:14px;border-radius:12px;border:1px solid var(--line);background:transparent;color:var(--ink);min-height:140px"></textarea>
+          <input type="text" name="hp" style="display:none">
           <button type="submit" class="btn" style="width:max-content">Send Message</button>
         </form>
-        <div style="margin-top:28px">
-          <p class="muted">📧 Gmail: <a style="color:var(--accent)" href="mailto:sanjaymarimuthu505@gmail.com">sanjaymarimuthu505@gmail.com</a></p>
-          <p class="muted">🔗 LinkedIn: <a style="color:var(--accent)" href="https://www.linkedin.com/in/sanjaymarimuthu" target="_blank">linkedin.com/in/sanjaymarimuthu</a></p>
-          <p class="muted">📦 GitHub: <a style="color:var(--accent)" href="https://github.com/SANJAYMARIMUTHU" target="_blank">github.com/SANJAYMARIMUTHU</a></p>
-          <form id="contactForm" style="margin-top:20px;display:flex;flex-direction:column;gap:14px">
-  <input type="text" name="fullname" placeholder="Full Name" required style="padding:14px;border-radius:12px;border:1px solid var(--line);background:transparent;color:var(--ink)">
-  <input type="email" name="email" placeholder="Email Address" required style="padding:14px;border-radius:12px;border:1px solid var(--line);background:transparent;color:var(--ink)">
-  <textarea name="message" placeholder="Your Message" required style="padding:14px;border-radius:12px;border:1px solid var(--line);background:transparent;color:var(--ink);min-height:140px"></textarea>
-  <input type="text" name="hp" style="display:none">
-  <button type="submit" class="btn" style="width:max-content">Send Message</button>
-</form>
-        </div>
       </div>
     </div>
   </section>
@@ -419,8 +404,7 @@
     // tilt removed per user preference: glow-only, no transform.
 
     // (legacy) carousel helpers kept no-op safe — no DOM call unless used
-    let idx=0; const rail=document.getElementById('rail'); const step=378;
-    function slide(dir){ if(!rail) return; idx=Math.max(0, Math.min(idx+dir, rail.children.length-3)); rail.style.transform=`translateX(${-idx*step}px)` }
+    // carousel removed (static 3-card layout now)px)` }
       // Case Study modal binding (index-based)
     const projCards=[...document.querySelectorAll('#projects .proj.card')];
     const openMap=[
