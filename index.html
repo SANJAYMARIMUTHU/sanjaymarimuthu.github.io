@@ -19,7 +19,7 @@
       --shadow:rgba(0,0,0,.45);
     }
     *{box-sizing:border-box}
-    html,body{margin:0;height:100%;font-family:Poppins,system-ui,Arial,Segoe UI,Roboto,"Helvetica Neue",sans-serif;background:var(--bg);color:var(--ink)}
+    html,body{margin:0;height:100%;scroll-behavior:smooth;font-family:Poppins,system-ui,Arial,Segoe UI,Roboto,"Helvetica Neue",sans-serif;background:var(--bg);color:var(--ink)}
     a{color:inherit;text-decoration:none}
     .wrap{max-width:1180px;margin:0 auto;padding:0 22px}
 
@@ -42,9 +42,6 @@
     .nav-links{display:flex;gap:18px;font-weight:600}
     .nav-links a{padding:10px 12px;border-radius:12px;color:#cfe4dc}
     .nav-links a.active,.nav-links a:hover{color:#0f1519;background:var(--accent)}
-    .search{display:flex;align-items:center;gap:6px;background:var(--panel);border:1px solid var(--line);padding:8px 10px;border-radius:999px}
-    .search input{background:transparent;border:none;color:var(--ink);outline:none;min-width:140px}
-    .search button{background:var(--accent);border:none;border-radius:999px;padding:8px 14px;font-weight:700;cursor:pointer}
 
     /* HERO */
     .hero{padding:80px 0 60px;background:linear-gradient(180deg,rgba(27,216,166,.06),transparent 40%)}
@@ -80,14 +77,6 @@
     .pill{display:inline-flex;align-items:center;padding:8px 10px;border-radius:999px;background:rgba(27,216,166,.14);color:#baf8e6;font-weight:700}
     .stack{display:flex;flex-wrap:wrap;gap:8px}
 
-    /* PROJECTS carousel */
-    .carousel{position:relative;overflow:hidden}
-    .rail{display:flex;gap:18px;transition:transform .5s ease}
-    .proj{min-width:360px}
-    .proj .thumb{height:220px;border-radius:16px;background:linear-gradient(180deg,#1a2028,#0f1419);border:1px solid var(--line);display:grid;place-items:center;font-weight:700;color:#9ddfcc}
-    .car-ctrl{margin-top:18px;display:flex;gap:14px;justify-content:center}
-    .car-ctrl button{border:none;background:var(--accent);padding:12px 20px;border-radius:999px;font-weight:800;color:#0c1216;cursor:pointer}
-
     /* TESTIMONIALS */
     .t-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
     .t-card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:22px}
@@ -108,9 +97,26 @@
       .hex{width:340px}
       h1{font-size:44px}
     }
+
+    /* GLOBAL CARD HOVER NEON + TILT */
+    .card{transition:transform .3s ease, box-shadow .3s ease, border .3s ease;will-change:transform}
+    .card:hover{transform:scale(1.03);box-shadow:0 0 22px var(--accent),0 0 35px var(--accent-2)}
+    .proj-links a{color:var(--accent);font-weight:600}
+    .proj-links a:hover{text-decoration:underline}
+    /* Ribbon corner for ongoing */
+    .card{position:relative}
+    .rib{position:absolute;top:10px;right:-12px;transform:rotate(45deg);background:var(--accent);color:#0c1216;padding:4px 26px;font-weight:800;font-size:11px;letter-spacing:.8px;border-radius:4px;box-shadow:0 6px 18px rgba(27,216,166,.35)}
   </style>
 </head>
 <body>
+
+  <!-- SEARCH OVERLAY -->
+  <div id="searchOverlay" style="position:fixed;inset:0;display:none;place-items:center;background:rgba(0,0,0,.65);backdrop-filter:blur(10px);z-index:9999">
+    <div style="background:var(--panel);border:1px solid var(--accent);padding:28px 26px;border-radius:18px;box-shadow:0 0 35px var(--accent);min-width:340px;position:relative;">
+      <div id="closeSearch" style="position:absolute;right:12px;top:10px;font-size:20px;color:var(--accent);cursor:pointer">✕</div>
+      <input type="text" placeholder="Type to search..." style="width:100%;background:transparent;border:1px solid var(--line);padding:14px;border-radius:12px;color:var(--ink);font-size:16px;outline:none" />
+    </div>
+  </div>
   <!-- neon strokes bg svg -->
   <div class="strokes" aria-hidden="true">
     <svg viewBox="0 0 100 100" preserveAspectRatio="none">
@@ -129,15 +135,10 @@
       <div class="brand"><div class="logo">▲</div><span>Portfolio</span></div>
       <nav class="nav-links" id="navLinks">
         <a href="#home" class="active">Home</a>
-        <a href="#services">Projects</a>
-        <a href="#projects">Recent</a>
-        <a href="#testimonials">Testimonials</a>
         <a href="#about">About</a>
+        <a href="#searchIcon">🔍</a>
       </nav>
-      <form class="search" onsubmit="event.preventDefault();">
-        <input placeholder="Search..." />
-        <button type="submit">Search</button>
-      </form>
+      <div class="search-icon" style="cursor:pointer;font-size:20px;color:var(--accent);padding:10px 14px;">🔍</div>
     </div>
   </header>
 
@@ -150,15 +151,8 @@
         <h3 class="muted" style="margin-top:-8px">Data Analyst & AI/ML Enthusiast</h3>
         <p class="sub">I turn raw data into clear stories and predictive insights using Python, SQL, Power BI and scikit‑learn. Currently open to internships and real‑world analytics projects.</p>
         <div class="cta-row">
-          <a class="btn" href="#projects">Let's Talk</a>
-          <a class="btn ghost" href="#about">Download Resume</a>
-        </div>
-        <div style="margin-top:26px" class="stack">
-          <span class="pill">Python</span>
-          <span class="pill">SQL</span>
-          <span class="pill">Power BI</span>
-          <span class="pill">Scikit‑learn</span>
-          <span class="pill">Tableau</span>
+          <a class="btn" href="#contact">Let's Talk</a>
+          <a class="btn ghost" href="assets/Sanjay Marimuthu.pdf" download>Download CV</a>
         </div>
       </div>
       <div class="hex-wrap">
@@ -170,180 +164,223 @@
     </div>
   </main>
 
-  <!-- WHAT I DO / SERVICES (mapped to DA capabilities) -->
-  <section id="services">
-    <div class="wrap">
-      <div class="h2">My <span class="accent">Services</span></div>
-      <p class="muted">What I do as a Data Analyst</p>
-      <div class="grid-3" style="margin-top:18px">
-        <div class="card">
-          <div class="service-icon">UX</div>
-          <strong>Data Cleaning & EDA</strong>
-          <p class="muted">Wrangle messy data, handle missing values, and explore trends to define KPIs.</p>
-        </div>
-        <div class="card">
-          <div class="service-icon">BOX</div>
-          <strong>Dashboards & BI</strong>
-          <p class="muted">Design insightful Power BI/Tableau dashboards with drill‑downs and metrics.</p>
-        </div>
-        <div class="card">
-          <div class="service-icon">AI</div>
-          <strong>Predictive Modeling</strong>
-          <p class="muted">Regression/classification with scikit‑learn; model evaluation & feature engineering.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- RECENT PROJECTS carousel -->
-  <section id="projects">
-    <div class="wrap">
-      <div class="h2">Recent <span class="accent">Projects</span></div>
-      <p class="muted">A few highlights from my work.</p>
-
-      <div class="carousel">
-        <div class="rail" id="rail">
-          <article class="proj card">
-            <div class="thumb">Academic Risk Indicators</div>
-            <p class="muted">Predicted at‑risk students using attendance and submission data; early‑alert framework.</p>
-            <div class="stack"><span class="pill">Excel</span><span class="pill">SQL</span><span class="pill">Power BI</span></div>
-          </article>
-          <article class="proj card">
-            <div class="thumb">India Road Accident Analysis</div>
-            <p class="muted">Identified high‑risk corridors; K‑Means + Random Forest to estimate severity.</p>
-            <div class="stack"><span class="pill">Python</span><span class="pill">Pandas</span><span class="pill">Power BI</span></div>
-          </article>
-          <article class="proj card">
-            <div class="thumb">Interfolio · AI Portfolio Chatbot</div>
-            <p class="muted">Conversational portfolio browsing and interview prep using LLM API.</p>
-            <div class="stack"><span class="pill">React</span><span class="pill">Node</span><span class="pill">OpenAI API</span></div>
-          </article>
-          <article class="proj card">
-            <div class="thumb">Sales KPI Dashboard (Mock)</div>
-            <p class="muted">Built a drill‑through Power BI dashboard with DAX measures for growth analysis.</p>
-            <div class="stack"><span class="pill">Power BI</span><span class="pill">DAX</span><span class="pill">Modeling</span></div>
-          </article>
-        </div>
-      </div>
-      <div class="car-ctrl">
-        <button onclick="slide(-1)">Prev</button>
-        <button onclick="slide(1)">Next</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- TESTIMONIALS -->
-  <section id="testimonials">
-    <div class="wrap">
-      <div class="h2">What <span class="accent">Client Say</span></div>
-      <div class="t-grid" style="margin-top:18px">
-        <div class="t-card">
-          <div class="stars">★★★★★</div>
-          <p class="muted">“Sanjay's dashboard distilled complex KPIs into simple visuals that sped up decisions.”</p>
-          <strong>Sam Freeman</strong><br><span class="muted">Business Manager, CEO</span>
-        </div>
-        <div class="t-card">
-          <div class="stars">★★★★★</div>
-          <p class="muted">“Clean SQL models and reproducible analysis — great attention to data quality.”</p>
-          <strong>Priya K</strong><br><span class="muted">Sr. Analyst</span>
-        </div>
-        <div class="t-card">
-          <div class="stars">★★★★☆</div>
-          <p class="muted">“Reliable and quick iterations. Our team saved hours per week.”</p>
-          <strong>Rahul M</strong><br><span class="muted">Project Lead</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- EXTRA: Education + Experience (hybrid) -->
+  <!-- ABOUT -->
   <section id="about">
     <div class="wrap">
       <div class="grid-2">
-        <div>
-          <div class="h2">About <span class="accent">Me</span></div>
-          <p class="muted">Analytical and results‑driven Data Analyst skilled in Python, SQL, Power BI, and ML. I enjoy transforming raw data into clear, interactive stories and reliable predictions.</p>
-          <div class="stack" style="margin-top:12px">
-            <span class="pill">English — Proficient</span>
-            <span class="pill">Tamil — Native</span>
-            <span class="pill">Open to Internships</span>
-          </div>
+        <div class="card">
+          <strong>Who I Am</strong>
+          <p class="muted" style="margin-top:10px">I’m a Data Analyst who enjoys turning raw datasets into clear insights, stories, and measurable outcomes. I focus on simplifying complexity, building data models that make sense to humans, and creating dashboards that drive meaningful decisions. I love solving real problems using data and I’m actively looking for internship opportunities to apply my skills in impactful environments.</p>
         </div>
         <div class="card">
-          <strong>Quick Info</strong>
-          <div style="margin-top:10px" class="stack">
-            <span class="pill">Phone: 08438712096</span>
-            <span class="pill">Email: sanjaymarimuthu505@gmail.com</span>
-            <span class="pill">LinkedIn: /in/sanjaymarimuthu</span>
-            <span class="pill">GitHub: @SANJAYMARIMUTHU</span>
-          </div>
+          <strong>My AI & Impact Vision</strong>
+          <p class="muted" style="margin-top:10px">I believe the future of decision-making is AI-assisted, automated, and data-first. My goal is to become a professional who bridges analytics and applied AI — not just building dashboards, but systems that learn, adapt, and support business growth intelligently. I’m continuously learning modern AI tools, LLM workflows, and practical ML techniques to contribute to long-term scalable results and industry transformation.</p>
         </div>
       </div>
+      <div class="stack" style="margin-top:22px">
+        <span class="pill">English — Proficient</span>
+        <span class="pill">Tamil — Native</span>
+        <span class="pill">Open to Internships</span>
+      </div>
+    </div>
+  </section>
 
-      <div class="grid-2" style="margin-top:22px">
-        <div class="card">
-          <strong>Education</strong>
-          <ul class="muted" style="margin:8px 0 0 18px">
-            <li>Kangeyam Institute of Technology — B.Tech AI & Data Science (2023–2027) · CGPA 6.39</li>
-            <li>MHSS — HSC 69.5% (2023); SSLC Pass (2021)</li>
-          </ul>
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="wrap">
+      <div class="h2">Projects</div>
+      <div class="carousel" style="margin-top:18px">
+        <div class="rail" id="rail">
+          <article class="proj card" data-index="0">
+            <div class="rib">ONGOING</div>
+            <div class="thumb">Interfolio · AI Portfolio Chatbot</div>
+            <p class="muted">Conversational portfolio browsing and interview prep using LLM API.</p>
+            <div class="stack"><span class="pill">React</span><span class="pill">Node</span><span class="pill">OpenAI API</span></div>
+            <div style="margin-top:14px;display:flex;gap:12px"><button class="btn ghost case-btn" data-index="0" type="button">Case Study</button></div>
+          </article>
+          <article class="proj card" data-index="1">
+            <div class="thumb">Academic Risk Indicators</div>
+            <p class="muted">Predicted at‑risk students using attendance and submission data; early‑alert framework.</p>
+            <div class="stack"><span class="pill">Excel</span><span class="pill">SQL</span><span class="pill">Power BI</span></div>
+            <div style="margin-top:14px;display:flex;gap:12px"><button class="btn ghost case-btn" data-index="1" type="button">Case Study</button></div>
+          </article>
+          <article class="proj card" data-index="2">
+            <div class="thumb">India Road Accident Analysis</div>
+            <p class="muted">Identified high‑risk corridors; K‑Means + Random Forest to estimate severity.</p>
+            <div class="stack"><span class="pill">Python</span><span class="pill">Pandas</span><span class="pill">Power BI</span></div>
+            <div style="margin-top:14px;display:flex;gap:12px"><button class="btn ghost case-btn" data-index="2" type="button">Case Study</button></div>
+          </article>
         </div>
-        <div class="card">
-          <strong>Experience</strong>
-          <div class="timeline" style="margin-top:8px">
-            <div class="t-item">
-              <div class="t-top"><span>Data Analyst Intern · Qaroo Learning India Pvt. Ltd.</span><span class="pill">15 days</span></div>
-              <ul class="muted" style="margin:8px 0 0 18px">
-                <li>Cleaned & analyzed student datasets; designed Power BI dashboards (3+).</li>
-                <li>Optimized SQL queries (≈25% faster) and ensured data accuracy.</li>
-                <li>Delivered insights for early interventions and retention.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
+      </div>
+    </div>
+  </section>
+
+<!-- CASE STUDY MODALS BLOCK -->
+
+<!-- Interfolio Modal -->
+<div id="modalInterfolio" style="position:fixed;inset:0;display:none;z-index:99999;background:rgba(0,0,0,.70);backdrop-filter:blur(14px);padding:60px 0;overflow-y:auto;">
+  <div class="wrap" style="display:grid;grid-template-columns:1.2fr .8fr;gap:32px;align-items:flex-start;background:var(--panel);border:1px solid var(--accent);border-radius:22px;padding:38px 32px;box-shadow:0 0 45px var(--accent);">
+    <div>
+      <h2 style="margin:0 0 10px" class="accent">Interfolio · AI Portfolio Chatbot</h2>
+      <p class="muted" style="margin-top:8px">Built an AI-powered chatbot to answer portfolio related queries and simulate interview Q&A using natural language. Integrated OpenAI API with React.js and Node.js backend to enable real-time responses. Project focuses on easing portfolio navigation, enhancing recruiter experience, and improving interview preparation efficiency.</p>
+      <div class="stack" style="margin-top:14px">
+        <span class="pill">React</span>
+        <span class="pill">Node.js</span>
+        <span class="pill">OpenAI API</span>
+      </div>
+      <div style="margin-top:20px" class="proj-links">
+        <a href="#" target="_blank">Repo (Coming Soon)</a> · <a href="#" target="_blank">Live Case Study (Coming Soon)</a>
+      </div>
+    </div>
+    <div>
+      <img src="images/interfolioChatbot.png" style="width:100%;border-radius:18px;border:1px solid var(--line);object-fit:cover">
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:20px">
+    <button onclick="document.getElementById('modalInterfolio').style.display='none'" style="background:var(--accent);border:none;padding:14px 26px;border-radius:12px;font-weight:800;color:#0c1216;cursor:pointer">Close</button>
+  </div>
+</div>
+<div id="caseStudyModals">
+  <!-- Interfolio Modal -->
+  <div id="modalInterfolio" class="cs-modal" style="position:fixed;inset:0;display:none;z-index:99999;background:rgba(0,0,0,.70);backdrop-filter:blur(14px);padding:60px 0;overflow-y:auto;">
+    <div class="wrap" style="display:grid;grid-template-columns:1.2fr .8fr;gap:32px;align-items:flex-start;background:var(--panel);border:1px solid var(--accent);border-radius:22px;padding:38px 32px;box-shadow:0 0 45px var(--accent);position:relative;">
+      <div>
+        <h2 style="margin:0 0 10px" class="accent">Interfolio · AI Portfolio Chatbot</h2>
+        <p class="muted" style="margin-top:8px">AI chatbot that answers portfolio questions and simulates interview prep.<br>Built using OpenAI + React + Node for real-time responses.<br>Improves recruiter navigation and candidate confidence.</p>
+        <div class="stack" style="margin-top:14px"><span class="pill">React</span><span class="pill">Node.js</span><span class="pill">OpenAI API</span></div>
+      </div>
+      <div>
+        <img src="images/interfolioChatbot.png" style="width:100%;border-radius:18px;border:1px solid var(--line);object-fit:cover">
+      </div>
+      <div class="cs-close" onclick="document.getElementById('modalInterfolio').style.display='none'" style="position:absolute;right:16px;top:12px;font-size:22px;color:var(--accent);cursor:pointer">✕</div>
+    </div>
+  </div>
+
+  <!-- Academic Modal -->
+  <div id="modalAcademicRisk" class="cs-modal" style="position:fixed;inset:0;display:none;z-index:99999;background:rgba(0,0,0,.70);backdrop-filter:blur(14px);padding:60px 0;overflow-y:auto;">
+    <div class="wrap" style="display:grid;grid-template-columns:1.2fr .8fr;gap:32px;align-items:flex-start;background:var(--panel);border:1px solid var(--accent);border-radius:22px;padding:38px 32px;box-shadow:0 0 45px var(--accent);position:relative;">
+      <div>
+        <h2 style="margin:0 0 10px" class="accent">Academic Risk Indicators</h2>
+        <p class="muted" style="margin-top:8px">Predicts students at risk using attendance + submission + score patterns.<br>Statistical modeling + Power BI visualization to guide early intervention.</p>
+        <div class="stack" style="margin-top:14px"><span class="pill">Excel</span><span class="pill">SQL</span><span class="pill">Power BI</span></div>
+      </div>
+      <div>
+        <img src="images/academicRisk.png" style="width:100%;border-radius:18px;border:1px solid var(--line);object-fit:cover">
+      </div>
+      <div class="cs-close" onclick="document.getElementById('modalAcademicRisk').style.display='none'" style="position:absolute;right:16px;top:12px;font-size:22px;color:var(--accent);cursor:pointer">✕</div>
+    </div>
+  </div>
+
+  <!-- Road Accident Modal -->
+  <div id="modalRoadAccident" class="cs-modal" style="position:fixed;inset:0;display:none;z-index:99999;background:rgba(0,0,0,.70);backdrop-filter:blur(14px);padding:60px 0;overflow-y:auto;">
+    <div class="wrap" style="display:grid;grid-template-columns:1.2fr .8fr;gap:32px;align-items:flex-start;background:var(--panel);border:1px solid var(--accent);border-radius:22px;padding:38px 32px;box-shadow:0 0 45px var(--accent);position:relative;">
+      <div>
+        <h2 style="margin:0 0 10px" class="accent">India Road Accident Analysis</h2>
+        <p class="muted" style="margin-top:8px">Analyzed national accident datasets to identify hotspot zones + patterns.<br>Used K-Means + Random Forest + Power BI dashboards for public safety insights.</p>
+        <div class="stack" style="margin-top:14px"><span class="pill">Python</span><span class="pill">Pandas</span><span class="pill">Power BI</span></div>
+      </div>
+      <div>
+        <img src="images/roadAccident.png" style="width:100%;border-radius:18px;border:1px solid var(--line);object-fit:cover">
+      </div>
+      <div class="cs-close" onclick="document.getElementById('modalRoadAccident').style.display='none'" style="position:absolute;right:16px;top:12px;font-size:22px;color:var(--accent);cursor:pointer">✕</div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+  <section id="contact">
+    <div class="wrap">
+      <div class="h2">Contact <span class="accent">Me</span></div>
+      <div class="card" style="margin-top:22px">
+        <p class="muted">📧 Gmail: <a style="color:var(--accent)" href="mailto:sanjaymarimuthu505@gmail.com">sanjaymarimuthu505@gmail.com</a></p>
+        <p class="muted">🔗 LinkedIn: <a style="color:var(--accent)" href="https://www.linkedin.com/in/sanjaymarimuthu" target="_blank">linkedin.com/in/sanjaymarimuthu</a></p>
+        <p class="muted">📦 GitHub: <a style="color:var(--accent)" href="https://github.com/SANJAYMARIMUTHU" target="_blank">github.com/SANJAYMARIMUTHU</a></p>
+        <p class="muted">📊 Kaggle: <a style="color:var(--accent)" href="https://www.kaggle.com/itzsanjay" target="_blank">kaggle.com/itzsanjay</a></p>
       </div>
     </div>
   </section>
 
   <!-- FOOTER -->
   <footer>
-    <div class="wrap">
-      <div class="grid-2">
-        <div>
-          <div class="h2" style="font-size:28px;margin:0 0 8px">Portfollio</div>
-          <div class="muted">123 Market St. #22B · Charlottesville, California · 44635</div>
-          <div class="muted" style="margin-top:6px">(+91) 8438712096 · <a href="mailto:sanjaymarimuthu505@gmail.com">sanjaymarimuthu505@gmail.com</a></div>
-          <div class="muted" style="margin-top:6px">© <span id="yr"></span> Sanjay Marimuthu. All rights reserved.</div>
-        </div>
-        <div class="grid-2">
-          <div class="muted">
-            <div><a href="#home">About</a></div>
-            <div><a href="#services">Services</a></div>
-            <div><a href="#projects">Projects</a></div>
-            <div><a href="#about">Contact</a></div>
-          </div>
-          <div class="muted">
-            <div><a href="https://facebook.com" target="_blank">Facebook</a></div>
-            <div><a href="https://twitter.com" target="_blank">Twitter</a></div>
-            <div><a href="https://linkedin.com/in/sanjaymarimuthu" target="_blank">LinkedIn</a></div>
-            <div><a href="https://instagram.com" target="_blank">Instagram</a></div>
-          </div>
-        </div>
+    <div class="wrap" style="text-align:center">
+      <div class="muted">
+        <a href="mailto:sanjaymarimuthu505@gmail.com">Gmail</a> · 
+        <a href="https://www.linkedin.com/in/sanjaymarimuthu" target="_blank">LinkedIn</a> · 
+        <a href="https://github.com/SANJAYMARIMUTHU" target="_blank">GitHub</a> · 
+        <a href="https://www.kaggle.com/itzsanjay" target="_blank">Kaggle</a>
       </div>
+      <div class="muted" style="margin-top:6px">© <span id="yr"></span> Sanjay Marimuthu. All rights reserved.</div>
     </div>
   </footer>
 
   <script>
-    // nav active
-    const links=[...document.querySelectorAll('#navLinks a')];
-    const secs=links.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);
-    const setActive=()=>{const y=scrollY+120;let active=links[0];secs.forEach((s,i)=>{if(s.offsetTop<=y)active=links[i]});links.forEach(a=>a.classList.remove('active'));active.classList.add('active')};
-    addEventListener('scroll',setActive,{passive:true});setActive();
-    document.getElementById('yr').textContent=new Date().getFullYear();
+    // Build (link, section) pairs so indices never mismatch even if a link has no section
+    const links = [...document.querySelectorAll('#navLinks a')];
+    const pairs = links
+      .map(a => [a, document.querySelector(a.getAttribute('href'))])
+      .filter(([, s]) => !!s);
 
-    // simple carousel
-    let idx=0; const rail=document.getElementById('rail'); const step=378; // approx card width + gap
-    function slide(dir){idx=Math.max(0, Math.min(idx+dir, rail.children.length-3)); rail.style.transform=`translateX(${-idx*step}px)`}
+    const setActive = () => {
+      const y = scrollY + 120;
+      let activeLink = pairs[0]?.[0] || null;
+      pairs.forEach(([link, sec]) => { if (sec.offsetTop <= y) activeLink = link; });
+      links.forEach(a => a.classList.remove('active'));
+      if (activeLink){
+        activeLink.classList.add('active');
+        // smooth neon fade for active state
+        activeLink.style.transition = 'background 0.35s ease, color 0.35s ease';
+      }
+    };
+    addEventListener('scroll', setActive, {passive:true});
+    setActive();
+
+    document.getElementById('yr').textContent = new Date().getFullYear();
+
+    // search overlay control
+    document.querySelector('.search-icon')?.addEventListener('click',()=>{
+      document.getElementById('searchOverlay').style.display='grid';
+    });
+    document.getElementById('closeSearch')?.addEventListener('click',()=>{
+      document.getElementById('searchOverlay').style.display='none';
+    });
+
+    // global tilt
+    const tiltCards=[...document.querySelectorAll('.card')];
+    tiltCards.forEach(c=>{
+      c.addEventListener('mousemove',e=>{
+        const r=c.getBoundingClientRect();
+        const x=e.clientX-r.left, y=e.clientY-r.top;
+        const rotY=((x/r.width)-0.5)*8; // max 4 deg each axis (8 total spread)
+        const rotX=((y/r.height)-0.5)*-8;
+        c.style.transform=`perspective(700px) rotateX(${rotX}deg) rotateY(${rotY}deg) scale(1.03)`;
+      });
+      c.addEventListener('mouseleave',()=>{
+        c.style.transform='perspective(700px) scale(1)';
+      });
+    });
+
+    // (legacy) carousel helpers kept no-op safe — no DOM call unless used
+    let idx=0; const rail=document.getElementById('rail'); const step=378;
+    function slide(dir){ if(!rail) return; idx=Math.max(0, Math.min(idx+dir, rail.children.length-3)); rail.style.transform=`translateX(${-idx*step}px)` }
+      // Case Study modal binding (index-based)
+    const projCards=[...document.querySelectorAll('#projects .proj.card')];
+    const openMap=[
+      ()=>document.getElementById('modalInterfolio').style.display='grid',
+      ()=>document.getElementById('modalAcademicRisk').style.display='grid',
+      ()=>document.getElementById('modalRoadAccident').style.display='grid'
+    ];
+    projCards.forEach((card, i)=>{
+      // card click opens modal
+      card.addEventListener('click', (e)=>{
+        // don't trigger when clicking links that might be added later
+        if(e.target.closest('button, a')) return;
+        openMap[i]?.();
+      });
+    });
+    document.querySelectorAll('#projects .case-btn').forEach(btn=>{
+      btn.addEventListener('click', (e)=>{ e.stopPropagation(); const i=+btn.dataset.index||0; openMap[i]?.(); });
+    });
+
   </script>
 </body>
 </html>
