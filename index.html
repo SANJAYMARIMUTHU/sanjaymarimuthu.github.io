@@ -63,41 +63,83 @@
     .hex img{position:absolute;inset:18px;clip-path:inherit;width:calc(100% - 36px);height:calc(100% - 36px);object-fit:cover;filter:saturate(.95) contrast(1.05)}
 
     /* SECTION SHELL */
-    section{padding:64px 0;border-top:1px solid var(--line)}
+    section{padding:70px 0;border-top:1px solid var(--line)}
     .h2{font-size:40px;margin:0 0 10px}
     .h2 .accent{color:var(--accent)}
     .muted{color:var(--muted)}
     .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
     .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
 
-    /* CARDS + glow */
-    .card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:0 16px 40px -28px var(--shadow);transition:box-shadow .25s ease, border .25s ease}
-    .card:hover{box-shadow:0 0 14px rgba(27,216,166,.35)}
+    /* CARDS */
+    .card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:0 16px 40px -28px var(--shadow)}
+    .service-icon{width:56px;height:56px;border-radius:14px;display:grid;place-items:center;background:rgba(27,216,166,.12);border:1px solid rgba(27,216,166,.25);margin-bottom:10px}
 
-    /* Skills (text-only, 4 per row) */
-    #skills .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-    #skills .skill{padding:14px 0;border-bottom:2px solid var(--accent);font-weight:600;text-align:center}
+    .pill{display:inline-flex;align-items:center;padding:8px 10px;border-radius:999px;background:rgba(27,216,166,.14);color:#baf8e6;font-weight:700}
+    .stack{display:flex;flex-wrap:wrap;gap:8px}
 
-    /* Repo icon hover glow inside modals */
-    .cs-modal a svg{transition:transform .22s ease, filter .22s ease}
-    .cs-modal a svg:hover{filter:drop-shadow(0 0 10px var(--accent));transform:scale(1.1)}
+    /* TESTIMONIALS */
+    .t-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .t-card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:22px}
+    .stars{letter-spacing:2px}
+
+    /* EXTRA: education + experience */
+    .timeline{display:grid;gap:14px}
+    .t-item{display:grid;gap:6px;padding:16px;border:1px solid var(--line);border-radius:14px;background:var(--panel)}
+    .t-top{display:flex;justify-content:space-between;align-items:center}
 
     /* FOOTER */
     footer{padding:40px 0;border-top:1px solid var(--line)}
 
-    @media (max-width: 900px){
+    @media (max-width: 768px){
       .hero-grid{grid-template-columns:1fr}
       .grid-3{grid-template-columns:1fr}
       .grid-2{grid-template-columns:1fr}
-      section{padding:32px 0}
+      section{padding:26px 0}
       .hex{width:320px}
       h1{font-size:42px}
-      #skills .grid{grid-template-columns:repeat(2,1fr)}
     }
+      .grid-3{grid-template-columns:1fr}
+      .grid-2{grid-template-columns:1fr}
+      .hex{width:340px}
+      h1{font-size:44px}
+    }
+
+    /* GLOBAL CARD HOVER NEON + TILT */
+    .card{transition:box-shadow .25s ease, border .25s ease}
+    .card:hover{box-shadow:0 0 14px rgba(27,216,166,.35)}
+    .proj-links a{color:var(--accent);font-weight:600}
+    .proj-links a:hover{text-decoration:underline}
+    /* Ribbon corner for ongoing */
+    .card{position:relative}
+    .rib{position:absolute;top:10px;right:-12px;transform:rotate(45deg);background:var(--accent);color:#0c1216;padding:4px 26px;font-weight:800;font-size:11px;letter-spacing:.8px;border-radius:4px;box-shadow:0 6px 18px rgba(27,216,166,.35)}
+    /* Contact form focus + validation */
+    input[type="text"], input[type="email"], textarea{
+      transition:border .25s ease, box-shadow .25s ease;
+    }
+    input[type="text"]:focus, input[type="email"]:focus, textarea:focus{
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(27,216,166,.15);
+    }
+    input:invalid, textarea:invalid{ border-color:#e57373; }
+    .ok{ border-color: var(--accent) !important; }
+
+    /* Snackbar (bottom center) */
+    #snackbar{ position:fixed; left:50%; bottom:24px; transform:translateX(-50%) translateY(10px); opacity:0; pointer-events:none; 
+      background:var(--panel); color:var(--ink); border:1px solid var(--accent); padding:12px 18px; border-radius:12px; z-index:10000;
+      box-shadow:0 0 28px rgba(27,216,166,.45); transition:opacity .35s ease, transform .35s ease; }
+    #snackbar.show{ opacity:1; transform:translateX(-50%) translateY(0); }
   </style>
 </head>
 <body>
-  <!-- bg strokes -->
+
+  <!-- SEARCH OVERLAY -->
+  <div id="searchOverlay" style="position:fixed;inset:0;display:none;place-items:center;background:rgba(0,0,0,.65);backdrop-filter:blur(10px);z-index:9999">
+    <div style="background:var(--panel);border:1px solid var(--accent);padding:28px 26px;border-radius:18px;box-shadow:0 0 35px var(--accent);min-width:340px;position:relative;">
+      <div id="closeSearch" style="position:absolute;right:12px;top:10px;font-size:20px;color:var(--accent);cursor:pointer">✕</div>
+      <input type="text" placeholder="Type to search..." style="width:100%;background:transparent;border:1px solid var(--line);padding:14px;border-radius:12px;color:var(--ink);font-size:16px;outline:none" />
+    </div>
+  </div>
+  <!-- neon strokes bg svg -->
   <div class="strokes" aria-hidden="true">
     <svg viewBox="0 0 100 100" preserveAspectRatio="none">
       <defs>
@@ -120,6 +162,7 @@
         <a href="#skills">Skills</a>
         <a href="#contact">Contact</a>
       </nav>
+      
     </div>
   </header>
 
@@ -130,24 +173,30 @@
         <div class="kicker">hello, <span class="im">I'm</span></div>
         <h1><span class="name">Sanjay Marimuthu</span></h1>
         <h3 class="muted" style="margin-top:-8px">Data Analyst & AI/ML Enthusiast</h3>
-        <p class="sub">I turn raw data into clear stories and predictive insights using Python, SQL, Power BI and scikit-learn. Currently open to internships and real-world analytics projects.</p>
+        <p class="sub">I turn raw data into clear stories and predictive insights using Python, SQL, Power BI and scikit‑learn. Currently open to internships and real‑world analytics projects.</p>
         <div class="cta-row">
           <a class="btn" href="#contact">Let's Talk</a>
           <a class="btn ghost" href="assets/Sanjay Marimuthu.pdf" download>Download CV</a>
         </div>
-        <div style="margin-top:18px;display:flex;align-items:center;gap:14px;font-weight:600">
-          <span class="muted">Check out my</span>
-          <div style="display:flex;gap:14px;align-items:center">
-            <a href="https://www.linkedin.com/in/sanjaymarimuthu" target="_blank" class="pill" style="padding:8px 12px;border-radius:999px;background:rgba(27,216,166,.14);border:1px solid rgba(27,216,166,.25);color:#baf8e6">LinkedIn</a>
-            <a href="https://github.com/SANJAYMARIMUTHU" target="_blank" class="pill" style="padding:8px 12px;border-radius:999px;background:rgba(27,216,166,.14);border:1px solid rgba(27,216,166,.25);color:#baf8e6">GitHub</a>
-            <a href="https://www.kaggle.com/itzsanjay" target="_blank" class="pill" style="padding:8px 12px;border-radius:999px;background:rgba(27,216,166,.14);border:1px solid rgba(27,216,166,.25);color:#baf8e6">Kaggle</a>
+        <div class="social-check" style="margin-top:18px;display:flex;align-items:center;gap:14px;font-weight:600">
+          <span class="muted">Check Out My</span>
+          <div class="hex-icon-wrap" style="display:flex;gap:14px;align-items:center">
+            <!-- LinkedIn icon placeholder -->
+            <a href="https://www.linkedin.com/in/sanjaymarimuthu" target="_blank" class="hex-icon"></a>
+            <a href="https://github.com/SANJAYMARIMUTHU" target="_blank" class="hex-icon"></a>
+            <a href="https://www.kaggle.com/itzsanjay" target="_blank" class="hex-icon"></a>
           </div>
         </div>
       </div>
       <div class="hex-wrap">
         <div class="hex">
+          <!-- Placeholder image. Replace src with your photo later: images/profile.jpg -->
           <img src="images/profile.jpg" alt="Sanjay portrait" onerror="this.style.background='linear-gradient(135deg,#0f1419,#111821)'; this.style.display='block'">
         </div>
+      <div style="display:flex;gap:18px;margin-top:22px">
+        <a href="https://www.linkedin.com/in/sanjaymarimuthu" target="_blank" style="font-size:26px">in</a>
+        <a href="https://github.com/SANJAYMARIMUTHU" target="_blank" style="font-size:26px">GH</a>
+        <a href="https://www.kaggle.com/itzsanjay" target="_blank" style="font-size:26px">KG</a>
       </div>
     </div>
   </main>
@@ -155,102 +204,137 @@
   <!-- ABOUT -->
   <section id="about">
     <div class="wrap">
-      <div style="text-align:center;margin-bottom:8px" class="h2">About</div>
-      <div class="grid-2" style="align-items:stretch">
+      <div style="max-width:1100px;margin:0 auto" class="grid-2">
+        <div class="card">
+          <strong>Who I Am</strong>
+          <p class="muted" style="margin-top:10px">I’m a Data Analyst who enjoys turning raw datasets into clear insights, stories, and measurable outcomes. I focus on simplifying complexity, building data models that make sense to humans, and creating dashboards that drive meaningful decisions. I love solving real problems using data and I’m actively looking for internship opportunities to apply my skills in impactful environments.</p>
+        </div>
         <div class="card">
           <strong>Experience</strong>
-          <p class="muted" style="margin-top:10px">
-            Data Analyst Intern · Qaroo Learning India Pvt. Ltd.<br>
-            Cleaned & analyzed student datasets, built 3+ dashboards, optimized SQL (~25% faster), delivered actionable insights.
-          </p>
+          <p class="muted" style="margin-top:10px">Data Analyst Intern · Qaroo Learning India Pvt. Ltd.<br>Cleaned & analyzed student datasets, built dashboards, improved SQL performance approx 25% faster, delivered actionable insights.</p>
         </div>
         <div class="card">
           <strong>Education</strong>
-          <p class="muted" style="margin-top:10px">
-            B.Tech AI & Data Science · Kangeyam Institute of Technology (2023–2027)<br>
-            HSC 69.5% (2023)
-          </p>
-        </div>
+          <p class="muted" style="margin-top:10px">B.Tech AI & Data Science · Kangeyam Institute of Technology (2023–2027)<br>HSC 69.5% (2023)</p>
       </div>
     </div>
   </section>
 
-  <!-- PROJECTS (static 3 cards) -->
+<section id="skills">
+  <div class="wrap" style="text-align:center">
+    <div class="h2">Skills</div>
+    <div class="grid-3" style="margin-top:18px;display:grid;grid-template-columns:repeat(4,1fr);gap:18px">
+      <div style="padding:14px 0;border-bottom:2px solid var(--accent);font-weight:600">Python</div>
+      <div style="padding:14px 0;border-bottom:2px solid var(--accent);font-weight:600">SQL</div>
+      <div style="padding:14px 0;border-bottom:2px solid var(--accent);font-weight:600">Power BI</div>
+      <div style="padding:14px 0;border-bottom:2px solid var(--accent);font-weight:600">Machine Learning</div>
+      <div style="padding:14px 0;border-bottom:2px solid var(--accent);font-weight:600">Scikit-Learn</div>
+      <div style="padding:14px 0;border-bottom:2px solid var(--accent);font-weight:600">Data Cleaning & Wrangling</div>
+      <div style="padding:14px 0;border-bottom:2px solid var(--accent);font-weight:600">Data Visualization</div>
+      <div style="padding:14px 0;border-bottom:2px solid var(--accent);font-weight:600">Git & GitHub</div>
+      <div style="padding:14px 0;border-bottom:2px solid var(--accent);font-weight:600">Excel</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
   <section id="projects">
     <div class="wrap">
       <div class="h2">Projects</div>
       <div class="grid-3" style="margin-top:18px">
         <article class="proj card" data-index="0">
-          <div class="rib" style="position:absolute;top:10px;right:-12px;transform:rotate(45deg);background:var(--accent);color:#0c1216;padding:4px 26px;font-weight:800;font-size:11px;letter-spacing:.8px;border-radius:4px;box-shadow:0 6px 18px rgba(27,216,166,.35)">ONGOING</div>
-          <div class="thumb" style="height:220px;border-radius:16px;background:linear-gradient(180deg,#1a2028,#0f1419);border:1px solid var(--line);display:grid;place-items:center;font-weight:700;color:#9ddfcc">Interfolio · AI Portfolio Chatbot</div>
+          <div class="rib">ONGOING</div>
+          <div class="thumb">Interfolio · AI Portfolio Chatbot</div>
           <p class="muted">Conversational portfolio browsing and interview prep using LLM API.</p>
-          <div style="margin-top:14px;display:flex;gap:12px">
-            <button class="btn ghost case-btn" data-index="0" type="button">Case Study</button>
-          </div>
+          <div class="stack"><span class="pill">React</span><span class="pill">Node</span><span class="pill">OpenAI API</span></div>
+          <div style="margin-top:14px;display:flex;gap:12px"><button class="btn ghost case-btn" data-index="0" type="button">Case Study</button></div>
         </article>
         <article class="proj card" data-index="1">
-          <div class="thumb" style="height:220px;border-radius:16px;background:linear-gradient(180deg,#1a2028,#0f1419);border:1px solid var(--line);display:grid;place-items:center;font-weight:700;color:#9ddfcc">Academic Risk Indicators</div>
+          <div class="thumb">Academic Risk Indicators</div>
           <p class="muted">Predicted at-risk students using attendance and submission data; early-alert framework.</p>
-          <div class="stack" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px"><span class="pill" style="padding:8px 10px;border-radius:999px;background:rgba(27,216,166,.14);border:1px solid rgba(27,216,166,.25);color:#baf8e6;font-weight:700">Excel</span><span class="pill" style="padding:8px 10px;border-radius:999px;background:rgba(27,216,166,.14);border:1px solid rgba(27,216,166,.25);color:#baf8e6;font-weight:700">SQL</span><span class="pill" style="padding:8px 10px;border-radius:999px;background:rgba(27,216,166,.14);border:1px solid rgba(27,216,166,.25);color:#baf8e6;font-weight:700">Power BI</span></div>
-          <div style="margin-top:14px;display:flex;gap:12px">
-            <button class="btn ghost case-btn" data-index="1" type="button">Case Study</button>
-          </div>
+          <div class="stack"><span class="pill">Excel</span><span class="pill">SQL</span><span class="pill">Power BI</span></div>
+          <div style="margin-top:14px;display:flex;gap:12px"><button class="btn ghost case-btn" data-index="1" type="button">Case Study</button></div>
         </article>
         <article class="proj card" data-index="2">
-          <div class="thumb" style="height:220px;border-radius:16px;background:linear-gradient(180deg,#1a2028,#0f1419);border:1px solid var(--line);display:grid;place-items:center;font-weight:700;color:#9ddfcc">India Road Accident Analysis</div>
+          <div class="thumb">India Road Accident Analysis</div>
           <p class="muted">Identified high-risk corridors; K-Means + Random Forest to estimate severity.</p>
-          <div class="stack" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px"><span class="pill" style="padding:8px 10px;border-radius:999px;background:rgba(27,216,166,.14);border:1px solid rgba(27,216,166,.25);color:#baf8e6;font-weight:700">Python</span><span class="pill" style="padding:8px 10px;border-radius:999px;background:rgba(27,216,166,.14);border:1px solid rgba(27,216,166,.25);color:#baf8e6;font-weight:700">Pandas</span><span class="pill" style="padding:8px 10px;border-radius:999px;background:rgba(27,216,166,.14);border:1px solid rgba(27,216,166,.25);color:#baf8e6;font-weight:700">Power BI</span></div>
-          <div style="margin-top:14px;display:flex;gap:12px">
-            <button class="btn ghost case-btn" data-index="2" type="button">Case Study</button>
-          </div>
+          <div class="stack"><span class="pill">Python</span><span class="pill">Pandas</span><span class="pill">Power BI</span></div>
+          <div style="margin-top:14px;display:flex;gap:12px"><button class="btn ghost case-btn" data-index="2" type="button">Case Study</button></div>
         </article>
       </div>
     </div>
   </section>
 
-  <!-- SKILLS -->
-  <section id="skills">
-    <div class="wrap" style="text-align:center">
-      <div class="h2">Skills</div>
-      <div class="grid" style="margin-top:18px">
-        <div class="skill">Python</div>
-        <div class="skill">SQL</div>
-        <div class="skill">Power BI</div>
-        <div class="skill">Machine Learning</div>
-        <div class="skill">Scikit-Learn</div>
-        <div class="skill">Data Cleaning & Wrangling</div>
-        <div class="skill">Data Visualization</div>
-        <div class="skill">Git & GitHub</div>
-        <div class="skill">Excel</div>
-      </div>
-    </div>
-  </section>
+<!-- CASE STUDY MODALS BLOCK -->
 
-  <!-- CONTACT -->
+<div id="caseStudyModals">
+  <!-- Interfolio Modal -->
+  <div id="modalInterfolio" class="cs-modal" style="position:fixed;inset:0;display:none;z-index:99999;background:rgba(0,0,0,.70);backdrop-filter:blur(14px);padding:60px 0;overflow-y:auto;">
+    <div class="wrap" style="display:grid;grid-template-columns:1.2fr .8fr;gap:32px;align-items:flex-start;background:var(--panel);border:1px solid var(--accent);border-radius:22px;padding:38px 32px;box-shadow:0 0 45px var(--accent);position:relative;">
+      <div>
+        <h2 style="margin:0 0 10px" class="accent">Interfolio · AI Portfolio Chatbot</h2>
+        <p class="muted" style="margin-top:8px">AI chatbot that answers portfolio questions and simulates interview prep.<br>Built using OpenAI + React + Node for real-time responses.<br>Improves recruiter navigation and candidate confidence.</p>
+        <div class="stack" style="margin-top:14px"><span class="pill">React</span><span class="pill">Node.js</span><span class="pill">OpenAI API</span></div>
+      </div>
+      <div>
+        <img src="images/interfolioChatbot.png" style="width:100%;border-radius:18px;border:1px solid var(--line);object-fit:cover">
+      </div>
+      <div class="cs-close" onclick="document.getElementById('modalInterfolio').style.display='none'" style="position:absolute;right:16px;top:12px;font-size:22px;color:var(--accent);cursor:pointer">✕</div>
+    </div>
+  </div>
+
+  <!-- Academic Modal -->
+  <div id="modalAcademicRisk" class="cs-modal" style="position:fixed;inset:0;display:none;z-index:99999;background:rgba(0,0,0,.70);backdrop-filter:blur(14px);padding:60px 0;overflow-y:auto;">
+    <div class="wrap" style="display:grid;grid-template-columns:1.2fr .8fr;gap:32px;align-items:flex-start;background:var(--panel);border:1px solid var(--accent);border-radius:22px;padding:38px 32px;box-shadow:0 0 45px var(--accent);position:relative;">
+      <div>
+        <h2 style="margin:0 0 10px" class="accent">Academic Risk Indicators</h2>
+        <p class="muted" style="margin-top:8px">Predicts students at risk using attendance + submission + score patterns.<br>Statistical modeling + Power BI visualization to guide early intervention.</p>
+        <div class="stack" style="margin-top:14px"><span class="pill">Excel</span><span class="pill">SQL</span><span class="pill">Power BI</span></div>
+      </div>
+      <div>
+        <img src="images/academicRisk.png" style="width:100%;border-radius:18px;border:1px solid var(--line);object-fit:cover">
+      </div>
+      <div class="cs-close" onclick="document.getElementById('modalAcademicRisk').style.display='none'" style="position:absolute;right:16px;top:12px;font-size:22px;color:var(--accent);cursor:pointer">✕</div>
+    </div>
+  </div>
+
+  <!-- Road Accident Modal -->
+  <div id="modalRoadAccident" class="cs-modal" style="position:fixed;inset:0;display:none;z-index:99999;background:rgba(0,0,0,.70);backdrop-filter:blur(14px);padding:60px 0;overflow-y:auto;">
+    <div class="wrap" style="display:grid;grid-template-columns:1.2fr .8fr;gap:32px;align-items:flex-start;background:var(--panel);border:1px solid var(--accent);border-radius:22px;padding:38px 32px;box-shadow:0 0 45px var(--accent);position:relative;">
+      <div>
+        <h2 style="margin:0 0 10px" class="accent">India Road Accident Analysis</h2>
+        <p class="muted" style="margin-top:8px">Analyzed national accident datasets to identify hotspot zones + patterns.<br>Used K-Means + Random Forest + Power BI dashboards for public safety insights.</p>
+        <div class="stack" style="margin-top:14px"><span class="pill">Python</span><span class="pill">Pandas</span><span class="pill">Power BI</span></div>
+      </div>
+      <div>
+        <img src="images/roadAccident.png" style="width:100%;border-radius:18px;border:1px solid var(--line);object-fit:cover">
+      </div>
+      <div class="cs-close" onclick="document.getElementById('modalRoadAccident').style.display='none'" style="position:absolute;right:16px;top:12px;font-size:22px;color:var(--accent);cursor:pointer">✕</div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
   <section id="contact">
     <div class="wrap">
       <div class="h2">Contact <span class="accent">Me</span></div>
-      <div class="card" style="margin-top:18px">
-        <form id="contactForm" style="display:flex;flex-direction:column;gap:14px">
+      <div class="card" style="margin-top:22px">
+        <p class="muted">📧 Gmail: <a style="color:var(--accent)" href="mailto:sanjaymarimuthu505@gmail.com">sanjaymarimuthu505@gmail.com</a></p>
+        <p class="muted">🔗 LinkedIn: <a style="color:var(--accent)" href="https://www.linkedin.com/in/sanjaymarimuthu" target="_blank">linkedin.com/in/sanjaymarimuthu</a></p>
+        <p class="muted">📦 GitHub: <a style="color:var(--accent)" href="https://github.com/SANJAYMARIMUTHU" target="_blank">github.com/SANJAYMARIMUTHU</a></p>
+        <form id="contactForm" style="margin-top:20px;display:flex;flex-direction:column;gap:14px">
           <input type="text" name="fullname" placeholder="Full Name" required style="padding:14px;border-radius:12px;border:1px solid var(--line);background:transparent;color:var(--ink)">
           <input type="email" name="email" placeholder="Email Address" required style="padding:14px;border-radius:12px;border:1px solid var(--line);background:transparent;color:var(--ink)">
           <textarea name="message" placeholder="Your Message" required style="padding:14px;border-radius:12px;border:1px solid var(--line);background:transparent;color:var(--ink);min-height:140px"></textarea>
           <input type="text" name="hp" style="display:none">
           <button type="submit" class="btn" style="width:max-content">Send Message</button>
         </form>
-        <div style="margin-top:22px">
-          <p class="muted">📧 Gmail: <a style="color:var(--accent)" href="mailto:sanjaymarimuthu505@gmail.com">sanjaymarimuthu505@gmail.com</a></p>
-          <p class="muted">🔗 LinkedIn: <a style="color:var(--accent)" href="https://www.linkedin.com/in/sanjaymarimuthu" target="_blank">linkedin.com/in/sanjaymarimuthu</a></p>
-          <p class="muted">📦 GitHub: <a style="color:var(--accent)" href="https://github.com/SANJAYMARIMUTHU" target="_blank">github.com/SANJAYMARIMUTHU</a></p>
-        </div>
       </div>
     </div>
   </section>
 
   <!-- SNACKBAR -->
-  <div id="snackbar" role="status" aria-live="polite" style="position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(10px);opacity:0;pointer-events:none;background:var(--panel);color:var(--ink);border:1px solid var(--accent);padding:12px 18px;border-radius:12px;z-index:10000;box-shadow:0 0 28px rgba(27,216,166,.45);transition:opacity .35s ease, transform .35s ease;">
-    Message sent successfully
-  </div>
+  <div id="snackbar" role="status" aria-live="polite">Message sent successfully ✅</div>
 
   <!-- FOOTER -->
   <footer>
@@ -265,85 +349,43 @@
     </div>
   </footer>
 
-  <!-- CASE STUDY MODALS (single set, no duplicates) -->
-  <div id="caseStudyModals">
-    <!-- Interfolio -->
-    <div id="modalInterfolio" class="cs-modal" style="position:fixed;inset:0;display:none;z-index:99999;background:rgba(0,0,0,.70);backdrop-filter:blur(14px);padding:60px 0;overflow-y:auto;">
-      <div class="wrap" style="display:grid;grid-template-columns:1.2fr .8fr;gap:32px;align-items:flex-start;background:var(--panel);border:1px solid var(--accent);border-radius:22px;padding:38px 32px;box-shadow:0 0 45px var(--accent);position:relative;">
-        <div>
-          <h2 style="margin:0 0 10px" class="accent">Interfolio · AI Portfolio Chatbot</h2>
-          <p class="muted" style="margin-top:8px">AI chatbot that answers portfolio questions and simulates interview prep. Built using OpenAI + React + Node for real-time responses. Improves recruiter navigation and candidate confidence.</p>
-          <div class="stack" style="margin-top:14px"><span class="pill" style="padding:8px 10px;border-radius:999px;background:rgba(27,216,166,.14);border:1px solid rgba(27,216,166,.25);color:#baf8e6;font-weight:700">React</span><span class="pill" style="padding:8px 10px;border-radius:999px;background:rgba(27,216,166,.14);border:1px solid rgba(27,216,166,.25);color:#baf8e6;font-weight:700">Node.js</span><span class="pill" style="padding:8px 10px;border-radius:999px;background:rgba(27,216,166,.14);border:1px solid rgba(27,216,166,.25);color:#baf8e6;font-weight:700">OpenAI API</span></div>
-          <!-- Repo icon row (centered) -->
-          <div style="margin-top:12px;display:flex;justify-content:center;">
-            <a href="https://github.com/SANJAYMARIMUTHU" target="_blank" aria-label="GitHub Repository">
-              <svg width="28" height="28" viewBox="0 0 32 32" fill="var(--accent)" xmlns="http://www.w3.org/2000/svg">
-                <path d="M16 0C7.163 0 0 7.163 0 16c0 7.073 4.584 13.066 10.94 15.18.8.147 1.093-.347 1.093-.77v-2.7c-4.452.967-5.39-2.146-5.39-2.146-.726-1.847-1.773-2.338-1.773-2.338-1.452-.993.11-.974.11-.974 1.604.113 2.449 1.66 2.449 1.66 1.428 2.447 3.745 1.739 4.657 1.33.146-1.034.558-1.74 1.016-2.14-3.554-.404-7.29-1.777-7.29-7.907 0-1.747.624-3.174 1.648-4.29-.166-.404-.714-2.03.155-4.23 0 0 1.34-.43 4.39 1.64a15.29 15.29 0 0 1 8 0c3.05-2.07 4.39-1.64 4.39-1.64.87 2.2.32 3.826.155 4.23a6.06 6.06 0 0 1 1.65 4.29c0 6.145-3.74 7.5-7.31 7.89.57.49 1.08 1.46 1.08 2.95v4.37c0 .43.29.92 1.1.77C27.42 29.06 32 23.073 32 16 32 7.163 24.837 0 16 0Z"/>
-              </svg>
-            </a>
-          </div>
-        </div>
-        <div>
-          <img src="images/interfolioChatbot.png" style="width:100%;border-radius:18px;border:1px solid var(--line);object-fit:cover" alt="Interfolio preview">
-        </div>
-        <div class="cs-close" onclick="document.getElementById('modalInterfolio').style.display='none'" style="position:absolute;right:16px;top:12px;font-size:22px;color:var(--accent);cursor:pointer">✕</div>
-      </div>
-    </div>
-
-    <!-- Academic -->
-    <div id="modalAcademicRisk" class="cs-modal" style="position:fixed;inset:0;display:none;z-index:99999;background:rgba(0,0,0,.70);backdrop-filter:blur(14px);padding:60px 0;overflow-y:auto;">
-      <div class="wrap" style="display:grid;grid-template-columns:1.2fr .8fr;gap:32px;align-items:flex-start;background:var(--panel);border:1px solid var(--accent);border-radius:22px;padding:38px 32px;box-shadow:0 0 45px var(--accent);position:relative;">
-        <div>
-          <h2 style="margin:0 0 10px" class="accent">Academic Risk Indicators</h2>
-          <p class="muted" style="margin-top:8px">Predicts students at risk using attendance + submission + score patterns. Statistical modeling + Power BI visualization to guide early intervention.</p>
-          <div class="stack" style="margin-top:14px"><span class="pill" style="padding:8px 10px;border-radius:999px;background:rgba(27,216,166,.14);border:1px solid rgba(27,216,166,.25);color:#baf8e6;font-weight:700">Excel</span><span class="pill" style="padding:8px 10px;border-radius:999px;background:rgba(27,216,166,.14);border:1px solid rgba(27,216,166,.25);color:#baf8e6;font-weight:700">SQL</span><span class="pill" style="padding:8px 10px;border-radius:999px;background:rgba(27,216,166,.14);border:1px solid rgba(27,216,166,.25);color:#baf8e6;font-weight:700">Power BI</span></div>
-          <div style="margin-top:12px;display:flex;justify-content:center;">
-            <a href="https://github.com/SANJAYMARIMUTHU" target="_blank" aria-label="GitHub Repository">
-              <svg width="28" height="28" viewBox="0 0 32 32" fill="var(--accent)" xmlns="http://www.w3.org/2000/svg">
-                <path d="M16 0C7.163 0 0 7.163 0 16c0 7.073 4.584 13.066 10.94 15.18.8.147 1.093-.347 1.093-.77v-2.7c-4.452.967-5.39-2.146-5.39-2.146-.726-1.847-1.773-2.338-1.773-2.338-1.452-.993.11-.974.11-.974 1.604.113 2.449 1.66 2.449 1.66 1.428 2.447 3.745 1.739 4.657 1.33.146-1.034.558-1.74 1.016-2.14-3.554-.404-7.29-1.777-7.29-7.907 0-1.747.624-3.174 1.648-4.29-.166-.404-.714-2.03.155-4.23 0 0 1.34-.43 4.39 1.64a15.29 15.29 0 0 1 8 0c3.05-2.07 4.39-1.64 4.39-1.64.87 2.2.32 3.826.155 4.23a6.06 6.06 0 0 1 1.65 4.29c0 6.145-3.74 7.5-7.31 7.89.57.49 1.08 1.46 1.08 2.95v4.37c0 .43.29.92 1.1.77C27.42 29.06 32 23.073 32 16 32 7.163 24.837 0 16 0Z"/>
-              </svg>
-            </a>
-          </div>
-        </div>
-        <div>
-          <img src="images/academicRisk.png" style="width:100%;border-radius:18px;border:1px solid var(--line);object-fit:cover" alt="Academic Risk preview">
-        </div>
-        <div class="cs-close" onclick="document.getElementById('modalAcademicRisk').style.display='none'" style="position:absolute;right:16px;top:12px;font-size:22px;color:#27d8a6;cursor:pointer">✕</div>
-      </div>
-    </div>
-
-    <!-- Road Accident -->
-    <div id="modalRoadAccident" class="cs-modal" style="position:fixed;inset:0;display:none;z-index:99999;background:rgba(0,0,0,.70);backdrop-filter:blur(14px);padding:60px 0;overflow-y:auto;">
-      <div class="wrap" style="display:grid;grid-template-columns:1.2fr .8fr;gap:32px;align-items:flex-start;background:var(--panel);border:1px solid var(--accent);border-radius:22px;padding:38px 32px;box-shadow:0 0 45px var(--accent);position:relative;">
-        <div>
-          <h2 style="margin:0 0 10px" class="accent">India Road Accident Analysis</h2>
-          <p class="muted" style="margin-top:8px">Analyzed national accident datasets to identify hotspot zones + patterns. Used K-Means + Random Forest + Power BI dashboards for public safety insights.</p>
-          <div class="stack" style="margin-top:14px"><span class="pill" style="padding:8px 10px;border-radius:999px;background:rgba(27,216,166,.14);border:1px solid rgba(27,216,166,.25);color:#baf8e6;font-weight:700">Python</span><span class="pill" style="padding:8px 10px;border-radius:999px;background:rgba(27,216,166,.14);border:1px solid rgba(27,216,166,.25);color:#baf8e6;font-weight:700">Pandas</span><span class="pill" style="padding:8px 10px;border-radius:999px;background:rgba(27,216,166,.14);border:1px solid rgba(27,216,166,.25);color:#baf8e6;font-weight:700">Power BI</span></div>
-          <div style="margin-top:12px;display:flex;justify-content:center;">
-            <a href="https://github.com/SANJAYMARIMUTHU" target="_blank" aria-label="GitHub Repository">
-              <svg width="28" height="28" viewBox="0 0 32 32" fill="var(--accent)" xmlns="http://www.w3.org/2000/svg">
-                <path d="M16 0C7.163 0 0 7.163 0 16c0 7.073 4.584 13.066 10.94 15.18.8.147 1.093-.347 1.093-.77v-2.7c-4.452.967-5.39-2.146-5.39-2.146-.726-1.847-1.773-2.338-1.773-2.338-1.452-.993.11-.974.11-.974 1.604.113 2.449 1.66 2.449 1.66 1.428 2.447 3.745 1.739 4.657 1.33.146-1.034.558-1.74 1.016-2.14-3.554-.404-7.29-1.777-7.29-7.907 0-1.747.624-3.174 1.648-4.29-.166-.404-.714-2.03.155-4.23 0 0 1.34-.43 4.39 1.64a15.29 15.29 0 0 1 8 0c3.05-2.07 4.39-1.64 4.39-1.64.87 2.2.32 3.826.155 4.23a6.06 6.06 0 0 1 1.65 4.29c0 6.145-3.74 7.5-7.31 7.89.57.49 1.08 1.46 1.08 2.95v4.37c0 .43.29.92 1.1.77C27.42 29.06 32 23.073 32 16 32 7.163 24.837 0 16 0Z"/>
-              </svg>
-            </a>
-          </div>
-        </div>
-        <div>
-          <img src="images/roadAccident.png" style="width:100%;border-radius:18px;border:1px solid var(--line);object-fit:cover" alt="Road Accident preview">
-        </div>
-        <div class="cs-close" onclick="document.getElementById('modalRoadAccident').style.display='none'" style="position:absolute;right:16px;top:12px;font-size:22px;color:#27d8a6;cursor:pointer">✕</div>
-      </div>
-    </div>
-  </div>
-
   <script>
-    // nav active
-    const links=[...document.querySelectorAll('#navLinks a')];
-    const secs=links.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);
-    const setActive=()=>{const y=scrollY+120;let active=links[0];secs.forEach((s,i)=>{if(s.offsetTop<=y)active=links[i]});links.forEach(a=>a.classList.remove('active'));active.classList.add('active')};
-    addEventListener('scroll',setActive,{passive:true});setActive();
-    document.getElementById('yr').textContent=new Date().getFullYear();
+    // Build (link, section) pairs so indices never mismatch even if a link has no section
+    const links = [...document.querySelectorAll('#navLinks a')];
+    const pairs = links
+      .map(a => [a, document.querySelector(a.getAttribute('href'))])
+      .filter(([, s]) => !!s);
 
-    // Case Study modals open from project cards
+    const setActive = () => {
+      const y = scrollY + 120;
+      let activeLink = pairs[0]?.[0] || null;
+      pairs.forEach(([link, sec]) => { if (sec.offsetTop <= y) activeLink = link; });
+      links.forEach(a => a.classList.remove('active'));
+      if (activeLink){
+        activeLink.classList.add('active');
+        // smooth neon fade for active state
+        activeLink.style.transition = 'background 0.35s ease, color 0.35s ease';
+      }
+    };
+    addEventListener('scroll', setActive, {passive:true});
+    setActive();
+
+    document.getElementById('yr').textContent = new Date().getFullYear();
+
+    // search overlay control
+    document.querySelector('.search-icon')?.addEventListener('click',()=>{
+      document.getElementById('searchOverlay').style.display='grid';
+    });
+    document.getElementById('closeSearch')?.addEventListener('click',()=>{
+      document.getElementById('searchOverlay').style.display='none';
+    });
+
+    // global tilt
+    // tilt removed per user preference: glow-only, no transform.
+
+    // (legacy) carousel helpers kept no-op safe — no DOM call unless used
+    // carousel removed (static 3-card layout now)px)` }
+      // Case Study modal binding (index-based)
     const projCards=[...document.querySelectorAll('#projects .proj.card')];
     const openMap=[
       ()=>document.getElementById('modalInterfolio').style.display='grid',
@@ -351,8 +393,10 @@
       ()=>document.getElementById('modalRoadAccident').style.display='grid'
     ];
     projCards.forEach((card, i)=>{
+      // card click opens modal
       card.addEventListener('click', (e)=>{
-        if(e.target.closest('button, a')) return; // ignore button clicks
+        // don't trigger when clicking links that might be added later
+        if(e.target.closest('button, a')) return;
         openMap[i]?.();
       });
     });
@@ -360,28 +404,39 @@
       btn.addEventListener('click', (e)=>{ e.stopPropagation(); const i=+btn.dataset.index||0; openMap[i]?.(); });
     });
 
-    // Contact form success (snackbar)
+      // ===== Contact form handler (EmailJS-ready skeleton) =====
     (function(){
       const form = document.getElementById('contactForm');
       if(!form) return;
       const hp = form.querySelector('[name="hp"]');
       let start = Date.now();
+
+      // live validity styling
       form.querySelectorAll('input[required], textarea[required]').forEach(el=>{
-        el.addEventListener('input',()=> el.classList.toggle('ok', el.checkValidity()));
+        el.addEventListener('input',()=>{
+          if(el.checkValidity()) { el.classList.add('ok'); } else { el.classList.remove('ok'); }
+        });
       });
+
       form.addEventListener('submit', (e)=>{
         e.preventDefault();
-        if(hp && hp.value) return;
-        if(Date.now() - start < 1500) return;
-        if(!form.checkValidity()){ form.reportValidity(); return; }
+        const elapsed = Date.now() - start;
+        // anti-spam: honeypot or too fast
+        if(hp && hp.value) return; // bot filled hidden field
+        if(elapsed < 1500) return; // too fast
+        if(!form.checkValidity()) { form.reportValidity(); return; }
+
+        // success snackbar
         const bar = document.getElementById('snackbar');
-        bar.textContent = 'Message sent successfully ✅';
-        bar.style.opacity = '1'; bar.classList.add('show');
-        setTimeout(()=> bar.classList.remove('show'), 5000);
-        form.reset(); start = Date.now();
+        if(bar){
+          bar.textContent = 'Message sent successfully ✅';
+          bar.classList.add('show');
+          setTimeout(()=> bar.classList.remove('show'), 5000); // 5s per your choice
+        }
+        form.reset();
+        start = Date.now();
       });
     })();
   </script>
 </body>
 </html>
-
