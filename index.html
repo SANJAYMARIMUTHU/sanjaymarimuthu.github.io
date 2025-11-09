@@ -9,16 +9,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root{
-  /* THEME — Charcoal Black + Royal Silver */
-  --bg:#0B0B0D;           /* ultra dark charcoal base */
-  --panel:#111217;        /* panel / card slightly raised dark */
-  --ink:#E6E6E8;          /* main text silver white */
-  --muted:#8E9198;        /* muted silver */
-  --line:#1b1d24;         /* border dark char */
+  /* THEME — Charcoal Black + Lavender */
+  --bg:#0B0B0D;            /* charcoal page */
+  --panel:#121318;         /* card dark */
+  --ink:#E9EAF0;           /* text light */
+  --muted:#9ea2ad;         /* muted text */
+  --line:#1c1e25;          /* borders */
 
-  /* Royal Silver accent */
-  --accent:#D3D6DD;       /* primary royal silver */
-  --accent-2:#AEB2BA;     /* deeper metallic silver */
+  /* Lavender accent stays same */
+  --accent:#C38DFF;
+  --accent-2:#7B3CE3;
 
   --shadow:rgba(0,0,0,.55);
 }
@@ -30,31 +30,23 @@
 
     /* background lavender strokes + micro particles */
     body::before, body::after{
-  content:"";position:fixed;inset:-20vh -10vw auto auto;height:120vh;width:120vw;z-index:-2;
-  background:
-    radial-gradient(600px 300px at 10% 0%, rgba(211,214,221,.09), transparent 60%),
-    radial-gradient(800px 400px at 95% 10%, rgba(211,214,221,.08), transparent 65%),
-    radial-gradient(4px 4px at 20% 70%, rgba(211,214,221,.25), transparent 60%),
-    radial-gradient(4px 4px at 75% 50%, rgba(211,214,221,.25), transparent 60%),
-    radial-gradient(4px 4px at 55% 85%, rgba(211,214,221,.22), transparent 60%);
-}
-
+      content:"";position:fixed;inset:-20vh -10vw auto auto;height:120vh;width:120vw;z-index:-2;
+      background:
+        radial-gradient(600px 300px at 10% 0%, rgba(195,141,255,.12), transparent 60%),
+        radial-gradient(800px 400px at 95% 10%, rgba(195,141,255,.10), transparent 65%),
+        /* micro neon particles */
+        radial-gradient(4px 4px at 20% 70%, rgba(195,141,255,.45), transparent 60%),
+        radial-gradient(4px 4px at 75% 50%, rgba(195,141,255,.45), transparent 60%),
+        radial-gradient(4px 4px at 55% 85%, rgba(195,141,255,.35), transparent 60%);
+    }
     .strokes{position:fixed;inset:0;pointer-events:none;z-index:-1;opacity:.25}
     .strokes svg{width:100%;height:100%}
 
     /* NAV */
-    header.nav{position:sticky;top:0;z-index:40;background:rgba(211,214,221,.35);backdrop-filter:blur(10px) saturate(140%);border-bottom:1px solid var(--line)}
+    header.nav{position:sticky;top:0;z-index:40;background:rgba(255,248,231,.75);backdrop-filter:blur(10px) saturate(140%);border-bottom:1px solid var(--line)}
     .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
     .brand{display:flex;gap:.6rem;align-items:center;font-weight:800;letter-spacing:.3px}
-.brand .logo{
-  display:grid;
-  place-items:center;
-  width:28px;
-  height:28px;
-  border-radius:7px;
-  background:linear-gradient(135deg,#D3D6DD,#AEB2BA);
-  box-shadow:0 0 24px -6px rgba(211,214,221,.55);
-}
+    .brand .logo{display:grid;place-items:center;width:28px;height:28px;border-radius:7px;background:linear-gradient(135deg,var(--accent),#26ffd2);box-shadow:0 8px 24px -6px rgba(27,216,166,.6)}
     /* brand mark above still uses legacy gradient for the ▲ glyph — keeping as-is per "no content changes" */
 
     .brand span{font-weight:800}
@@ -83,16 +75,20 @@
       padding:12px 18px;border-radius:14px;font-weight:800;color:#1a1a1a;
       box-shadow:0 10px 30px -6px rgba(195,141,255,.55)
     }
-    .pill{
-  display:inline-flex;align-items:center;padding:8px 12px;border-radius:999px;font-weight:700;
-  border:1px solid rgba(211,214,221,.65);background:transparent;color:#D3D6DD;transition:all .25s ease;
-}
-.pill:hover{
-  border-color:rgba(211,214,221,1);
-  background:rgba(211,214,221,.14);
-  color:#0B0B0D;
-}
-
+    .btn.ghost{
+      background:rgba(195,141,255,.12);
+      border:1px solid rgba(195,141,255,.45);
+      color:#4e2b7d;
+      backdrop-filter:blur(7px) saturate(140%);
+      box-shadow:0 0 22px -4px rgba(195,141,255,.35);
+      transition:all .25s ease;
+    }
+    .btn.ghost:hover{
+      background:rgba(195,141,255,.26);
+      border-color:rgba(195,141,255,.85);
+      box-shadow:0 0 30px -2px rgba(195,141,255,.45);
+      color:#1a1a1a;
+    }
 
     /* Hex avatar */
     .hex-wrap{display:grid;place-items:center}
@@ -116,8 +112,7 @@
     /* Outline link pills (LinkedIn / GitHub / Kaggle) */
     .pill{
       display:inline-flex;align-items:center;padding:8px 12px;border-radius:999px;font-weight:700;
-border:1px solid rgba(211,214,221,.45);
-box-shadow:0 0 12px rgba(211,214,221,.18);
+      border:1px solid rgba(195,141,255,.65);background:transparent;color:#5e2d94;transition:all .25s ease;
     }
     .pill:hover{border-color:rgba(195,141,255,1);background:rgba(195,141,255,.18);color:#1a1a1a;}
 
@@ -490,4 +485,3 @@ box-shadow:0 0 12px rgba(211,214,221,.18);
   </script>
 </body>
 </html>
-
