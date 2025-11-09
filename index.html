@@ -3,201 +3,61 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Sanjay · Portfolio (Behance Neon)</title>
+  <title>Sanjay Marimuthu · Data Analyst Portfolio</title>
+
+  <!-- SEO: S3 (Title + Meta + OpenGraph + Twitter + JSON-LD) -->
+  <meta name="description" content="Sanjay Marimuthu — Data Analyst & AI/ML Enthusiast. Python, SQL, Power BI, scikit-learn. Projects: Interfolio AI Portfolio Chatbot, Academic Risk Indicators, India Road Accident Analysis." />
+  <meta name="keywords" content="Sanjay Marimuthu, Data Analyst, AI, Machine Learning, Python, SQL, Power BI, scikit-learn, Portfolio, Dashboard, India Road Accident, Academic Risk" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Sanjay Marimuthu · Data Analyst Portfolio" />
+  <meta property="og:description" content="Turning raw data into clear stories & predictive insights. Explore projects, skills, and contact." />
+  <meta property="og:url" content="https://sanjaymarimuthu.github.io" />
+  <meta property="og:image" content="https://sanjaymarimuthu.github.io/images/profile.jpg" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Sanjay Marimuthu · Data Analyst Portfolio" />
+  <meta name="twitter:description" content="Python, SQL, Power BI, scikit-learn. Explore projects & get in touch." />
+  <meta name="twitter:image" content="https://sanjaymarimuthu.github.io/images/profile.jpg" />
+
+  <!-- JSON-LD Schema.org -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Sanjay Marimuthu",
+    "jobTitle": "Data Analyst",
+    "url": "https://sanjaymarimuthu.github.io",
+    "image": "https://sanjaymarimuthu.github.io/images/profile.jpg",
+    "sameAs": [
+      "https://www.linkedin.com/in/sanjaymarimuthu",
+      "https://github.com/SANJAYMARIMUTHU",
+      "https://www.kaggle.com/itzsanjay"
+    ],
+    "knowsAbout": ["Data Analysis","Python","SQL","Power BI","Machine Learning","scikit-learn"]
+  }
+  </script>
+
+  <!-- Favicon (optional) -->
+  <link rel="icon" href="/images/favicon.png" />
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    :root{
-  /* THEME — Charcoal Black + Lavender */
-  --bg:#0B0B0D;            /* charcoal page */
-  --panel:#121318;         /* card dark */
-  --ink:#E9EAF0;           /* text light */
-  --muted:#9ea2ad;         /* muted text */
-  --line:#1c1e25;          /* borders */
 
-  /* Lavender accent stays same */
-  --accent:#C38DFF;
-  --accent-2:#7B3CE3;
-
-  --shadow:rgba(0,0,0,.55);
-}
-
-    *{box-sizing:border-box}
-    html,body{margin:0;height:100%;scroll-behavior:smooth;font-family:Poppins,system-ui,Arial,Segoe UI,Roboto,"Helvetica Neue",sans-serif;background:var(--bg);color:var(--ink)}
-    a{color:inherit;text-decoration:none}
-    .wrap{max-width:1180px;margin:0 auto;padding:0 22px}
-
-    /* background lavender strokes + micro particles */
-    body::before, body::after{
-      content:"";position:fixed;inset:-20vh -10vw auto auto;height:120vh;width:120vw;z-index:-2;
-      background:
-        radial-gradient(600px 300px at 10% 0%, rgba(195,141,255,.12), transparent 60%),
-        radial-gradient(800px 400px at 95% 10%, rgba(195,141,255,.10), transparent 65%),
-        /* micro neon particles */
-        radial-gradient(4px 4px at 20% 70%, rgba(195,141,255,.45), transparent 60%),
-        radial-gradient(4px 4px at 75% 50%, rgba(195,141,255,.45), transparent 60%),
-        radial-gradient(4px 4px at 55% 85%, rgba(195,141,255,.35), transparent 60%);
-    }
-    .strokes{position:fixed;inset:0;pointer-events:none;z-index:-1;opacity:.25}
-    .strokes svg{width:100%;height:100%}
-
-    /* NAV */
-    header.nav{position:sticky;top:0;z-index:40;background:rgba(255, 248, 231, 0.475);backdrop-filter:blur(10px) saturate(140%);border-bottom:1px solid var(--line)}
-    .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
-    .brand{display:flex;gap:.6rem;align-items:center;font-weight:800;letter-spacing:.3px}
-    .brand .logo{display:grid;place-items:center;width:28px;height:28px;border-radius:7px;background:linear-gradient(135deg,var(--accent),#26ffd2);box-shadow:0 8px 24px -6px rgba(27,216,166,.6)}
-    /* brand mark above still uses legacy gradient for the ▲ glyph — keeping as-is per "no content changes" */
-
-    .brand span{font-weight:800}
-    .nav-links{display:flex;gap:18px;font-weight:600}
-    .nav-links a{padding:10px 12px;border-radius:12px;color:#4b4b4b}
-    .nav-links a.active,
-    .nav-links a:hover{
-      background:linear-gradient(180deg, #C38DFF 0%, #7B3CE3 100%);
-      color:#1a1a1a;
-      box-shadow:0 0 14px rgba(195,141,255,.38);
-      transition:all .28s ease;
-    }
-
-    /* HERO */
-    .hero{padding:80px 0 60px;background:linear-gradient(180deg,rgba(195,141,255,.08),transparent 40%)}
-    .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
-    .kicker{color:var(--accent);text-transform:uppercase;font-weight:700;letter-spacing:.2em;font-size:12px}
-    h1{font-size:56px;line-height:1.05;margin:8px 0 10px}
-    h1 .im{color:#5a5a5a;font-weight:400}
-    h1 .name{color:var(--accent);text-shadow:0 10px 30px rgba(195,141,255,.35)}
-    .sub{font-size:18px;color:#4f5660;max-width:58ch}
-    .cta-row{display:flex;gap:14px;margin-top:26px}
-    .btn{
-      display:inline-flex;align-items:center;gap:10px;
-      background:linear-gradient(180deg, #C38DFF 0%, #7B3CE3 100%);
-      padding:12px 18px;border-radius:14px;font-weight:800;color:#1a1a1a;
-      box-shadow:0 10px 30px -6px rgba(195,141,255,.55)
-    }
-    .btn.ghost{
-      background:rgba(195,141,255,.12);
-      border:1px solid rgba(195,141,255,.45);
-      color:#4e2b7d;
-      backdrop-filter:blur(7px) saturate(140%);
-      box-shadow:0 0 22px -4px rgba(195,141,255,.35);
-      transition:all .25s ease;
-    }
-    .btn.ghost:hover{
-      background:rgba(195,141,255,.26);
-      border-color:rgba(195,141,255,.85);
-      box-shadow:0 0 30px -2px rgba(195,141,255,.45);
-      color:#1a1a1a;
-    }
-
-    /* Hex avatar */
-    .hex-wrap{display:grid;place-items:center}
-    .hex{width:420px;aspect-ratio:1;background:linear-gradient(135deg,#000000,#f3e7d2);border:1px solid var(--line);border-radius:24px;clip-path:polygon(25% 6%, 75% 6%, 100% 50%, 75% 94%, 25% 94%, 0 50%);
-      position:relative;box-shadow:0 30px 80px -30px var(--shadow)}
-    .hex::before{content:"";position:absolute;inset:10px;clip-path:inherit;background:radial-gradient(200px 200px at 25% 25%, rgba(195,141,255,.35), transparent 60%), linear-gradient(180deg,#fffaf1,#f7efdf);border-radius:20px}
-    .hex img{position:absolute;inset:18px;clip-path:inherit;width:calc(100% - 36px);height:calc(100% - 36px);object-fit:cover;filter:saturate(.98) contrast(1.02)}
-
-    /* SECTION SHELL */
-    section{padding:70px 0;border-top:1px solid var(--line)}
-    .h2{font-size:40px;margin:0 0 10px}
-    .h2 .accent{color:var(--accent)}
-    .muted{color:var(--muted)}
-    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
-
-    /* CARDS */
-    .card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:0 16px 40px -28px var(--shadow)}
-    .service-icon{width:56px;height:56px;border-radius:14px;display:grid;place-items:center;background:rgba(195,141,255,.12);border:1px solid rgba(195,141,255,.25);margin-bottom:10px}
-
-    /* Outline link pills (LinkedIn / GitHub / Kaggle) */
-    .pill{
-      display:inline-flex;align-items:center;padding:8px 12px;border-radius:999px;font-weight:700;
-      border:1px solid rgba(195,141,255,.65);background:transparent;color:#5e2d94;transition:all .25s ease;
-    }
-    .pill:hover{border-color:rgba(195,141,255,1);background:rgba(195,141,255,.18);color:#1a1a1a;}
-
-    .stack{display:flex;flex-wrap:wrap;gap:8px}
-
-    /* TESTIMONIALS */
-    .t-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    .t-card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:22px}
-    .stars{letter-spacing:2px}
-
-    /* EXTRA: education + experience */
-    .timeline{display:grid;gap:14px}
-    .t-item{display:grid;gap:6px;padding:16px;border:1px solid var(--line);border-radius:14px;background:var(--panel)}
-    .t-top{display:flex;justify-content:space-between;align-items:center}
-
-    /* FOOTER */
-    footer{padding:40px 0;border-top:1px solid var(--line)}
-
-    @media (max-width: 768px){
-      .hero-grid{grid-template-columns:1fr}
-      .grid-3{grid-template-columns:1fr}
-      .grid-2{grid-template-columns:1fr}
-      section{padding:26px 0}
-      .hex{width:320px}
-      h1{font-size:42px}
-    }
-      .grid-3{grid-template-columns:1fr}
-      .grid-2{grid-template-columns:1fr}
-      .hex{width:340px}
-      h1{font-size:44px}
-    
-
-    /* GLOBAL CARD HOVER — Lavender Neon Bloom */
-    .card{transition:box-shadow .28s ease, border .28s ease, transform .28s ease}
-    .card:hover{
-      box-shadow:0 0 18px rgba(195,141,255,.45), 0 0 36px rgba(195,141,255,.25);
-      border:1px solid rgba(195,141,255,.75);
-    }
-    .proj-links a{color:var(--accent);font-weight:600}
-    .proj-links a:hover{text-decoration:underline}
-    /* Ribbon corner for ongoing */
-    .card{position:relative}
-    .rib{position:absolute;top:10px;right:-12px;transform:rotate(45deg);background:var(--accent);color:#0c1216;padding:4px 26px;font-weight:800;font-size:11px;letter-spacing:.8px;border-radius:4px;box-shadow:0 6px 18px rgba(195,141,255,.35)}
-    /* Contact form focus + validation */
-    input[type="text"], input[type="email"], textarea{
-      transition:border .25s ease, box-shadow .25s ease;
-    }
-    input[type="text"]:focus, input[type="email"]:focus, textarea:focus{
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(195,141,255,.15);
-    }
-    input:invalid, textarea:invalid{ border-color:#ffffff; }
-    .ok{ border-color: var(--accent) !important; }
-
-    /* Snackbar (bottom center) */
-    #snackbar{ position:fixed; left:50%; bottom:24px; transform:translateX(-50%) translateY(10px); opacity:0; pointer-events:none; 
-      background:var(--panel); color:var(--ink); border:1px solid var(--accent); padding:12px 18px; border-radius:12px; z-index:10000;
-      box-shadow:0 0 28px rgba(195,141,255,.45); transition:opacity .35s ease, transform .35s ease; }
-    #snackbar.show{ opacity:1; transform:translateX(-50%) translateY(0); }
-
-    /* Lavender Scrollbar */
-    ::-webkit-scrollbar{ width:8px; }
-    ::-webkit-scrollbar-track{ background:rgba(0,0,0,0.08); border-radius:10px; }
-    ::-webkit-scrollbar-thumb{ background:rgba(195,141,255,.55); border-radius:10px; }
-    ::-webkit-scrollbar-thumb:hover{ background:rgba(195,141,255,.85); }
-
-    /* Text selection highlight */
-    ::selection{ background:rgba(195,141,255,.35); color:#1A1A1A; }
-  </style>
+  <!-- App CSS -->
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
-  <!-- SEARCH OVERLAY -->
-  <div id="searchOverlay" style="position:fixed;inset:0;display:none;place-items:center;background:rgba(0,0,0,.65);backdrop-filter:blur(10px);z-index:9999">
-    <div style="background:var(--panel);border:1px solid var(--accent);padding:28px 26px;border-radius:18px;box-shadow:0 0 35px var(--accent);min-width:340px;position:relative;">
-      <div id="closeSearch" style="position:absolute;right:12px;top:10px;font-size:20px;color:var(--accent);cursor:pointer">✕</div>
-      <input type="text" placeholder="Type to search..." style="width:100%;background:transparent;border:1px solid var(--line);padding:14px;border-radius:12px;color:var(--ink);font-size:16px;outline:none" />
-    </div>
-  </div>
-  <!-- lavender strokes bg svg -->
+  <!-- Background strokes -->
   <div class="strokes" aria-hidden="true">
     <svg viewBox="0 0 100 100" preserveAspectRatio="none">
       <defs>
         <pattern id="wave" width="1" height="1" patternUnits="objectBoundingBox">
-          <path d="M0,20 C20,0 40,40 60,20 80,0 100,40 120,20" stroke="rgba(195,141,255,.35)" stroke-width="1" fill="none" />
+          <path d="M0,20 C20,0 40,40 60,20 80,0 100,40 120,20" stroke="rgba(27,216,166,.35)" stroke-width="1" fill="none" />
         </pattern>
       </defs>
       <rect x="-50" y="-50" width="200" height="200" fill="url(#wave)" />
@@ -209,13 +69,12 @@
     <div class="wrap nav-inner">
       <div class="brand"><div class="logo">▲</div><span>Portfolio</span></div>
       <nav class="nav-links" id="navLinks">
-        <a href="#home" class="active">Home</a>
-        <a href="#about">About</a>
-        <a href="#projects">Projects</a>
-        <a href="#skills">Skills</a>
-        <a href="#contact">Contact</a>
+        <a href="#home" class="active">HOME</a>
+        <a href="#about">ABOUT</a>
+        <a href="#projects">PROJECTS</a>
+        <a href="#skills">SKILLS</a>
+        <a href="#contact">CONTACT</a>
       </nav>
-      
     </div>
   </header>
 
@@ -225,176 +84,250 @@
       <div>
         <div class="kicker">hello, <span class="im">I'm</span></div>
         <h1><span class="name">Sanjay Marimuthu</span></h1>
-        <h3 class="muted" style="margin-top:-8px">Data Analyst & AI/ML Enthusiast</h3>
+        <h3 class="muted hero-role">Data Analyst & AI/ML Enthusiast</h3>
         <p class="sub">I turn raw data into clear stories and predictive insights using Python, SQL, Power BI and scikit-learn. Currently open to internships and real-world analytics projects.</p>
         <div class="cta-row">
           <a class="btn" href="#contact">Let's Talk</a>
           <a class="btn ghost" href="assets/Sanjay Marimuthu.pdf" download>Download CV</a>
         </div>
-        <div style="margin-top:31px;font-weight:600;display:flex;align-items:center;gap:14px">
+
+        <div class="check-row">
           <span class="muted">Check out my</span>
-          <a href="https://www.linkedin.com/in/sanjaymarimuthu" target="_blank" class="pill">LinkedIn</a>
-          <a href="https://github.com/SANJAYMARIMUTHU" target="_blank" class="pill">GitHub</a>
-          <a href="https://www.kaggle.com/itzsanjay" target="_blank" class="pill">Kaggle</a>
+          <div class="pill-row">
+            <a class="pill" target="_blank" href="https://www.linkedin.com/in/sanjaymarimuthu" aria-label="LinkedIn">LinkedIn</a>
+            <a class="pill" target="_blank" href="https://github.com/SANJAYMARIMUTHU" aria-label="GitHub">GitHub</a>
+            <a class="pill" target="_blank" href="https://www.kaggle.com/itzsanjay" aria-label="Kaggle">Kaggle</a>
+          </div>
         </div>
       </div>
-      <div class="hex-wrap">
-        <div class="hex">
-          <!-- Final avatar keeps same filename per your choice -->
-          <img src="images/profile.jpg" alt="Sanjay portrait" onerror="this.style.background='linear-gradient(135deg,#f9efe0,#f3e7d2)'; this.style.display='block'">
-        </div>
+
+      <div class="hero-image">
+    <img src="images/sanjay.png" alt="Sanjay Photo" />
+  </div>
+</section>
+    </div>
   </main>
 
   <!-- ABOUT -->
   <section id="about">
-    <div class="wrap" style="text-align:center">
-      <div class="h2">ABOUT</div>
-      <div style="max-width:1100px;margin:0 auto" class="grid-2">
-        <div class="card">
-          <strong>Who I Am</strong>
-          <p class="muted" style="margin-top:10px">I’m a Data Analyst who enjoys turning raw datasets into clear insights, stories, and measurable outcomes. I focus on simplifying complexity, building data models that make sense to humans, and creating dashboards that drive meaningful decisions. I love solving real problems using data and I’m actively looking for internship opportunities to apply my skills in impactful environments.</p>
-        </div>
-        <div class="card">
-          <strong>Experience</strong>
-          <p class="muted" style="margin-top:10px">Data Analyst Intern · Qaroo Learning India Pvt. Ltd.<br>Cleaned & analyzed student datasets, built dashboards, improved SQL performance approx 25% faster, delivered actionable insights.</p>
-        </div>
-        <div class="card">
-          <strong>Education</strong>
-          <p class="muted" style="margin-top:10px">B.Tech AI & Data Science · Kangeyam Institute of Technology (2023–2027)<br>HSC 69.5% (2023)</p>
-      </div>
-    </div>
-  </section>
-  
-
-  <!-- SKILLS (id fixed to lowercase to match nav) -->
-  <section id="skills">
-    <div class="wrap" style="text-align:center">
-      <div class="h2">SKILLS</div>
-      <div class="grid-3" style="margin-top:18px;display:grid;grid-template-columns:repeat(4,1fr);gap:18px">
-        <div style="padding:14px 0;border-bottom:2px solid var(--accent);font-weight:600">Python</div>
-        <div style="padding:14px 0;border-bottom:2px solid var(--accent);font-weight:600">SQL</div>
-        <div style="padding:14px 0;border-bottom:2px solid var(--accent);font-weight:600">Power BI</div>
-        <div style="padding:14px 0;border-bottom:2px solid var(--accent);font-weight:600">Machine Learning</div>
-        <div style="padding:14px 0;border-bottom:2px solid var(--accent);font-weight:600">Scikit-Learn</div>
-        <div style="padding:14px 0;border-bottom:2px solid var(--accent);font-weight:600">Data Cleaning & Wrangling</div>
-        <div style="padding:14px 0;border-bottom:2px solid var(--accent);font-weight:600">Data Visualization</div>
-        <div style="padding:14px 0;border-bottom:2px solid var(--accent);font-weight:600">Git & GitHub</div>
-        <div style="padding:14px 0;border-bottom:2px solid var(--accent);font-weight:600">Excel</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PROJECTS -->
- <section id="projects">
     <div class="wrap center">
-      <div class="h2">Projects</div>
-      <div class="grid-3 mt-18">
-        <article class="proj card" data-index="0">
+      <div class="h2">ABOUT</div>
+      <div class="grid-2 about-grid">
+        <article class="card">
+          <strong>Who I Am</strong>
+          <p class="muted">I’m a Data Analyst who enjoys turning raw datasets into clear insights, stories, and measurable outcomes. I focus on simplifying complexity, building data models that make sense to humans, and creating dashboards that drive meaningful decisions. I love solving real problems using data and I’m actively looking for internship opportunities to apply my skills in impactful environments.</p>
+        </article>
+        <article class="card">
+          <strong>Experience</strong>
+          <p class="muted">Data Analyst Intern · Qaroo Learning India Pvt. Ltd. Cleaned & analyzed student datasets, built dashboards, improved SQL performance ≈25% faster, delivered actionable insights.</p>
+        </article>
+        <article class="card">
+          <strong>Education</strong>
+          <p class="muted">B.Tech AI & Data Science · Kangeyam Institute of Technology (2023–2027). HSC 69.5% (2023).</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="wrap">
+    <div class="h2">Projects</div>
+
+    <!-- viewport (3 visible; horizontal scroll via JS) -->
+    <div class="proj-viewport">
+      <!-- rail -->
+      <div class="proj-rail" id="projRail" aria-live="polite">
+        <!-- P1 -->
+        <article class="proj card" data-index="0" aria-label="Interfolio · AI Portfolio Chatbot">
           <div class="rib">ONGOING</div>
           <div class="thumb">Interfolio · AI Portfolio Chatbot</div>
           <p class="muted">Conversational portfolio browsing and interview prep using LLM API.</p>
-          <div class="stack"><span class="pill">React</span><span class="pill">Node</span><span class="pill">OpenAI API</span></div>
-          <div class="proj-cta"><button class="btn ghost case-btn" data-index="0" type="button">Case Study</button></div>
+          <div class="stack">
+            <span class="pill">React</span><span class="pill">Node</span><span class="pill">OpenAI API</span>
+          </div>
+          <div class="proj-actions">
+            <a class="repo-ico" href="https://github.com/SANJAYMARIMUTHU/Interfolio-AI-Portfolio-Chatbot" target="_blank" aria-label="Open repository">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.725-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.757-1.333-1.757-1.089-.745.083-.729.083-.729 1.205.084 1.84 1.237 1.84 1.237 1.07 1.835 2.807 1.305 3.492.998.108-.776.418-1.305.762-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.469-2.382 1.236-3.222-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23a11.48 11.48 0 0 1 3.003-.404c1.02.005 2.045.138 3.003.404 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.912 1.23 3.222 0 4.61-2.807 5.625-5.48 5.92.43.372.81 1.102.81 2.222 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+            </a>
+            <button class="btn ghost case-btn" data-index="0" type="button">Case Study</button>
+          </div>
         </article>
 
-        <article class="proj card" data-index="1">
+        <!-- P2 -->
+        <article class="proj card" data-index="1" aria-label="Academic Risk Indicators">
           <div class="thumb">Academic Risk Indicators</div>
-          <p class="muted">Predicted at-risk students using attendance and submission data; early-alert framework.</p>
-          <div class="stack"><span class="pill">Excel</span><span class="pill">SQL</span><span class="pill">Power BI</span></div>
-          <div class="proj-cta"><button class="btn ghost case-btn" data-index="1" type="button">Case Study</button></div>
+          <p class="muted">Predicted at-risk students using attendance and submission data.</p>
+          <div class="stack">
+            <span class="pill">Excel</span><span class="pill">SQL</span><span class="pill">Power BI</span>
+          </div>
+          <div class="proj-actions">
+            <a class="repo-ico" href="https://github.com/SANJAYMARIMUTHU/Academic-Performance-Risk-Indicators" target="_blank" aria-label="Open repository">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.725-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.757-1.333-1.757-1.089-.745.083-.729.083-.729 1.205.084 1.84 1.237 1.84 1.237 1.07 1.835 2.807 1.305 3.492.998.108-.776.418-1.305.762-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.469-2.382 1.236-3.222-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23a11.48 11.48 0 0 1 3.003-.404c1.02.005 2.045.138 3.003.404 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.912 1.23 3.222 0 4.61-2.807 5.625-5.48 5.92.43.372.81 1.102.81 2.222 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+            </a>
+            <button class="btn ghost case-btn" data-index="1" type="button">Case Study</button>
+          </div>
         </article>
 
-        <article class="proj card" data-index="2">
+        <!-- P3 -->
+        <article class="proj card" data-index="2" aria-label="India Road Accident Analysis">
           <div class="thumb">India Road Accident Analysis</div>
-          <p class="muted">Identified high-risk corridors; K-Means + Random Forest to estimate severity.</p>
-          <div class="stack"><span class="pill">Python</span><span class="pill">Pandas</span><span class="pill">Power BI</span></div>
-          <div class="proj-cta"><button class="btn ghost case-btn" data-index="2" type="button">Case Study</button></div>
+          <p class="muted">K-Means + Random Forest to estimate severity; hotspot analysis.</p>
+          <div class="stack">
+            <span class="pill">Python</span><span class="pill">Pandas</span><span class="pill">Power BI</span>
+          </div>
+          <div class="proj-actions">
+            <a class="repo-ico" href="https://github.com/SANJAYMARIMUTHU/India-Road-Accident-Analysis" target="_blank" aria-label="Open repository">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.725-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.757-1.333-1.757-1.089-.745.083-.729.083-.729 1.205.084 1.84 1.237 1.84 1.237 1.07 1.835 2.807 1.305 3.492.998.108-.776.418-1.305.762-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.469-2.382 1.236-3.222-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23a11.48 11.48 0 0 1 3.003-.404c1.02.005 2.045.138 3.003.404 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.912 1.23 3.222 0 4.61-2.807 5.625-5.48 5.92.43.372.81 1.102.81 2.222 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+            </a>
+            <button class="btn ghost case-btn" data-index="2" type="button">Case Study</button>
+          </div>
         </article>
-      </div>
-    </div>
-  </section>
-  
-<article class="proj card" data-index="2">
-          <div class="thumb">India Road Accident Analysis</div>
-          <p class="muted">Identified high-risk corridors; K-Means + Random Forest to estimate severity.</p>
-          <div class="stack"><span class="pill">Python</span><span class="pill">Pandas</span><span class="pill">Power BI</span></div>
-          <div class="proj-cta"><button class="btn ghost case-btn" data-index="2" type="button">Case Study</button></div>
-        </article>
-      </div>
-    </div>
-  </section>
 
-  <!-- CASE STUDY MODALS -->
-  <div id="caseStudyModals">
-    <!-- Interfolio -->
-    <div id="modalInterfolio" class="cs-modal">
-      <div class="wrap cs-wrap">
-        <div>
-          <h2 class="accent mt-0">Interfolio · AI Portfolio Chatbot</h2>
-          <p class="muted mt-8">AI chatbot that answers portfolio questions and simulates interview prep.<br>Built using OpenAI + React + Node for real-time responses.<br>Improves recruiter navigation and candidate confidence.</p>
-          <div class="stack mt-14"><span class="pill">React</span><span class="pill">Node.js</span><span class="pill">OpenAI API</span></div>
-          <div class="proj-links mt-14 right">
-            <a href="https://github.com/SANJAYMARIMUTHU/Interfolio-AI-Portfolio-Chatbot" target="_blank" rel="noopener" aria-label="Open Interfolio repo">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="var(--accent)"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.725-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.757-1.333-1.757-1.089-.745.083-.729.083-.729 1.205.084 1.84 1.237 1.84 1.237 1.07 1.835 2.807 1.305 3.492.998.108-.776.418-1.305.762-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.469-2.382 1.236-3.222-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23a11.48 11.48 0 0 1 3.003-.404c1.02.005 2.045.138 3.003.404 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.912 1.23 3.222 0 4.61-2.807 5.625-5.48 5.92.43.372.81 1.102.81 2.222 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-            </a>
-          </div>
-        </div>
-        <div><img src="images/interfolioChatbot.png" class="cs-img" alt="Interfolio demo"></div>
-        <div class="cs-close" data-close="#modalInterfolio">✕</div>
-      </div>
-    </div>
+        
 
-    <!-- Academic -->
-    <div id="modalAcademicRisk" class="cs-modal">
-      <div class="wrap cs-wrap">
-        <div>
-          <h2 class="accent mt-0">Academic Risk Indicators</h2>
-          <p class="muted mt-8">Predicts students at risk using attendance + submission + score patterns.<br>Statistical modeling + Power BI visualization to guide early intervention.</p>
-          <div class="stack mt-14"><span class="pill">Excel</span><span class="pill">SQL</span><span class="pill">Power BI</span></div>
-          <div class="proj-links mt-14 right">
-            <a href="https://github.com/SANJAYMARIMUTHU/Academic-Performance-Risk-Indicators" target="_blank" rel="noopener" aria-label="Open Academic Risk repo">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="var(--accent)"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.725-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.757-1.333-1.757-1.089-.745.083-.729.083-.729 1.205.084 1.84 1.237 1.84 1.237 1.07 1.835 2.807 1.305 3.492.998.108-.776.418-1.305.762-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.469-2.382 1.236-3.222-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23a11.48 11.48 0 0 1 3.003-.404c1.02.005 2.045.138 3.003.404 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.912 1.23 3.222 0 4.61-2.807 5.625-5.48 5.92.43.372.81 1.102.81 2.222 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-            </a>
-          </div>
-        </div>
-        <div><img src="images/academicRisk.png" class="cs-img" alt="Academic risk dashboard"></div>
-        <div class="cs-close" data-close="#modalAcademicRisk">✕</div>
-      </div>
+    <!-- Bottom petal controls -->
+    <div class="petal-wrap">
+      <button class="petal-btn" id="projPrevBtn">◀ Pre</button>
+      <button class="petal-btn" id="projNextBtn">Next ▶</button>
     </div>
+  </div>
+</section>
 
-    <!-- Road Accident -->
-    <div id="modalRoadAccident" class="cs-modal">
-      <div class="wrap cs-wrap">
-        <div>
-          <h2 class="accent mt-0">India Road Accident Analysis</h2>
-          <p class="muted mt-8">Analyzed national accident datasets to identify hotspot zones + patterns.<br>Used K-Means + Random Forest + Power BI dashboards for public safety insights.</p>
-          <div class="stack mt-14"><span class="pill">Python</span><span class="pill">Pandas</span><span class="pill">Power BI</span></div>
-          <div class="proj-links mt-18 right">
-            <a href="https://github.com/SANJAYMARIMUTHU/India-Road-Accident-Analysis" target="_blank" rel="noopener" aria-label="Open Road Accident repo">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="var(--accent)"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.725-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.757-1.333-1.757-1.089-.745.083-.729.083-.729 1.205.084 1.84 1.237 1.84 1.237 1.07 1.835 2.807 1.305 3.492.998.108-.776.418-1.305.762-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31 .469-2.382 1.236-3.222-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23a11.48 11.48 0 0 1 3.003-.404c1.02.005 2.045.138 3.003.404 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.912 1.23 3.222 0 4.61-2.807 5.625-5.48 5.92.43.372.81 1.102.81 2.222 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-            </a>
-          </div>
+<!-- ===== CASE STUDY MODALS (all 6) ===== -->
+<div id="caseStudyModals">
+
+  <!-- M0 Interfolio -->
+  <div id="modalP0" class="cs-modal">
+    <div class="wrap cs-inner">
+      <div class="cs-left">
+        <h2 class="accent" style="margin:0 0 10px">Interfolio · AI Portfolio Chatbot</h2>
+        <p class="muted">AI chatbot that answers portfolio questions and simulates interview prep.
+          Built with OpenAI + React + Node for real-time responses.</p>
+        <div class="stack" style="margin-top:14px">
+          <span class="pill">React</span><span class="pill">Node.js</span><span class="pill">OpenAI API</span>
         </div>
-        <div><img src="images/roadAccident.png" class="cs-img" alt="Road accident analysis"></div>
-        <div class="cs-close" data-close="#modalRoadAccident">✕</div>
+        <button class="cs-close" data-close="modalP0">✕</button>
+      </div>
+      <div class="cs-right">
+        <img src="images/interfolioChatbot.png" alt="Interfolio preview">
       </div>
     </div>
   </div>
 
+  <!-- M1 Academic -->
+  <div id="modalP1" class="cs-modal">
+    <div class="wrap cs-inner">
+      <div class="cs-left">
+        <h2 class="accent" style="margin:0 0 10px">Academic Risk Indicators</h2>
+        <p class="muted">Predicts at-risk students via attendance/submission/score patterns. Power BI visualizations support early intervention.</p>
+        <div class="stack" style="margin-top:14px">
+          <span class="pill">Excel</span><span class="pill">SQL</span><span class="pill">Power BI</span>
+        </div>
+        <button class="cs-close" data-close="modalP1">✕</button>
+      </div>
+      <div class="cs-right">
+        <img src="images/academicRisk.png" alt="Academic Risk preview">
+      </div>
+    </div>
+  </div>
+
+  <!-- M2 Road Accident -->
+  <div id="modalP2" class="cs-modal">
+    <div class="wrap cs-inner">
+      <div class="cs-left">
+        <h2 class="accent" style="margin:0 0 10px">India Road Accident Analysis</h2>
+        <p class="muted">Analyzed national datasets to identify hotspot zones & patterns. K-Means + Random Forest + BI dashboards.</p>
+        <div class="stack" style="margin-top:14px">
+          <span class="pill">Python</span><span class="pill">Pandas</span><span class="pill">Power BI</span>
+        </div>
+        <button class="cs-close" data-close="modalP2">✕</button>
+      </div>
+      <div class="cs-right">
+        <img src="images/roadAccident.png" alt="Road Accident preview">
+      </div>
+    </div>
+  </div>
+
+  
+  <!-- Skills (Donut Progress Bars) -->
+   <section id="skills">
+    <div class="wrap center">
+      <div class="h2">skills</div>
+<section id="skills-donuts" class="sd-wrap">
+  <!-- Programming -->
+  <div class="sd-cat">
+    <h3 class="sd-title">Programming</h3>
+    <div class="sd-row">
+      <div class="sd-item">
+        <div class="sd-donut" data-percent="90" aria-label="Python skill level 90"></div>
+        <div class="sd-label">Python</div>
+      </div>
+      <div class="sd-item">
+        <div class="sd-donut" data-percent="90" aria-label="SQL skill level 90"></div>
+        <div class="sd-label">SQL</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Data Visualization -->
+  <div class="sd-cat">
+    <h3 class="sd-title">Data Visualization</h3>
+    <div class="sd-row">
+      <div class="sd-item"><div class="sd-donut" data-percent="80" aria-label="Power BI 80"></div><div class="sd-label">Power BI</div></div>
+      <div class="sd-item"><div class="sd-donut" data-percent="80" aria-label="Tableau 80"></div><div class="sd-label">Tableau</div></div>
+      <div class="sd-item"><div class="sd-donut" data-percent="80" aria-label="Excel 80"></div><div class="sd-label">Excel</div></div>
+      <div class="sd-item"><div class="sd-donut" data-percent="70" aria-label="Streamlit 70"></div><div class="sd-label">Streamlit</div></div>
+    </div>
+  </div>
+
+  <!-- Databases -->
+  <div class="sd-cat">
+    <h3 class="sd-title">Databases</h3>
+    <div class="sd-row">
+      <div class="sd-item"><div class="sd-donut" data-percent="90" aria-label="MySQL 90"></div><div class="sd-label">MySQL</div></div>
+      <div class="sd-item"><div class="sd-donut" data-percent="80" aria-label="SQLite 80"></div><div class="sd-label">SQLite</div></div>
+      <div class="sd-item"><div class="sd-donut" data-percent="70" aria-label="Oracle 70"></div><div class="sd-label">Oracle</div></div>
+    </div>
+  </div>
+
+  <!-- Machine Learning -->
+  <div class="sd-cat">
+    <h3 class="sd-title">Machine Learning</h3>
+    <div class="sd-row">
+      <div class="sd-item"><div class="sd-donut" data-percent="60" aria-label="Scikit-learn 60"></div><div class="sd-label">Scikit-learn</div></div>
+      <div class="sd-item"><div class="sd-donut" data-percent="60" aria-label="Regression Models 60"></div><div class="sd-label">Regression Models</div></div>
+      <div class="sd-item"><div class="sd-donut" data-percent="50" aria-label="Clustering 50"></div><div class="sd-label">Clustering</div></div>
+    </div>
+  </div>
+
+  <!-- Core Strengths -->
+  <div class="sd-cat">
+    <h3 class="sd-title">Core Strengths</h3>
+    <div class="sd-row">
+      <div class="sd-item"><div class="sd-donut" data-percent="75" aria-label="Analytical Thinking 75"></div><div class="sd-label">Analytical Thinking</div></div>
+      <div class="sd-item"><div class="sd-donut" data-percent="85" aria-label="Problem Solving 85"></div><div class="sd-label">Problem Solving</div></div>
+      <div class="sd-item"><div class="sd-donut" data-percent="75" aria-label="Statistical Analysis 75"></div><div class="sd-label">Statistical Analysis</div></div>
+    </div>
+  </div>
+</section>
+
+
   <!-- CONTACT -->
   <section id="contact">
-    <div class="wrap"style="text-align:center">
+    <div class="wrap">
       <div class="h2">Contact <span class="accent">Me</span></div>
-      <div class="card" style="margin-top:22px">
-        <p class="muted">📧 Gmail: <a style="color:var(--accent)" href="mailto:sanjaymarimuthu505@gmail.com">sanjaymarimuthu505@gmail.com</a></p>
-        <p class="muted">🔗 LinkedIn: <a style="color:var(--accent)" href="https://www.linkedin.com/in/sanjaymarimuthu" target="_blank">linkedin.com/in/sanjaymarimuthu</a></p>
-        <p class="muted">📦 GitHub: <a style="color:var(--accent)" href="https://github.com/SANJAYMARIMUTHU" target="_blank">github.com/SANJAYMARIMUTHU</a></p>
-        <form id="contactForm" style="margin-top:20px;display:flex;flex-direction:column;gap:14px">
-          <input type="text" name="fullname" placeholder="Full Name" required style="padding:14px;border-radius:12px;border:1px solid var(--line);background:transparent;color:var(--ink)">
-          <input type="email" name="email" placeholder="Email Address" required style="padding:14px;border-radius:12px;border:1px solid var(--line);background:transparent;color:var(--ink)">
-          <textarea name="message" placeholder="Your Message" required style="padding:14px;border-radius:12px;border:1px solid var(--line);background:transparent;color:var(--ink);min-height:140px"></textarea>
-          <input type="text" name="hp" style="display:none">
-          <button type="submit" class="btn" style="width:max-content">Send Message</button>
+      <div class="card contact-card">
+        <p class="muted">📧 Gmail: <a class="link" href="mailto:sanjaymarimuthu505@gmail.com">sanjaymarimuthu505@gmail.com</a></p>
+        <p class="muted">🔗 LinkedIn: <a class="link" href="https://www.linkedin.com/in/sanjaymarimuthu" target="_blank">linkedin.com/in/sanjaymarimuthu</a></p>
+        <p class="muted">📦 GitHub: <a class="link" href="https://github.com/SANJAYMARIMUTHU" target="_blank">github.com/SANJAYMARIMUTHU</a></p>
+
+        <form id="contactForm" class="contact-form" novalidate>
+          <input type="text" name="fullname" placeholder="Full Name" required aria-label="Full Name">
+          <input type="email" name="email" placeholder="Email Address" required aria-label="Email Address">
+          <textarea name="message" placeholder="Your Message" required aria-label="Your Message"></textarea>
+          <input type="text" name="hp" class="hp" aria-hidden="true" tabindex="-1">
+          <button type="submit" class="btn">Send Message</button>
         </form>
       </div>
     </div>
@@ -405,102 +338,18 @@
 
   <!-- FOOTER -->
   <footer>
-    <div class="wrap" style="text-align:center">
+    <div class="wrap foot">
       <div class="muted">
-        <a href="mailto:sanjaymarimuthu505@gmail.com">Gmail</a> · 
-        <a href="https://www.linkedin.com/in/sanjaymarimuthu" target="_blank">LinkedIn</a> · 
-        <a href="https://github.com/SANJAYMARIMUTHU" target="_blank">GitHub</a> · 
-        <a href="https://www.kaggle.com/itzsanjay" target="_blank">Kaggle</a>
+        <a class="link" href="mailto:sanjaymarimuthu505@gmail.com">Gmail</a> · 
+        <a class="link" href="https://www.linkedin.com/in/sanjaymarimuthu" target="_blank">LinkedIn</a> · 
+        <a class="link" href="https://github.com/SANJAYMARIMUTHU" target="_blank">GitHub</a> · 
+        <a class="link" href="https://www.kaggle.com/itzsanjay" target="_blank">Kaggle</a>
       </div>
-      <div class="muted" style="margin-top:6px">© <span id="yr"></span> Sanjay Marimuthu. All rights reserved.</div>
+      <div class="muted">© <span id="yr"></span> Sanjay Marimuthu.</div>
     </div>
   </footer>
 
-  <script>
-    // Build (link, section) pairs so indices never mismatch even if a link has no section
-    const links = [...document.querySelectorAll('#navLinks a')];
-    const pairs = links
-      .map(a => [a, document.querySelector(a.getAttribute('href'))])
-      .filter(([, s]) => !!s);
-
-    const setActive = () => {
-      const y = scrollY + 120;
-      let activeLink = pairs[0]?.[0] || null;
-      pairs.forEach(([link, sec]) => { if (sec.offsetTop <= y) activeLink = link; });
-      links.forEach(a => a.classList.remove('active'));
-      if (activeLink){
-        activeLink.classList.add('active');
-        // smooth neon fade for active state
-        activeLink.style.transition = 'background 0.35s ease, color 0.35s ease';
-      }
-    };
-    addEventListener('scroll', setActive, {passive:true});
-    setActive();
-
-    document.getElementById('yr').textContent = new Date().getFullYear();
-
-    // search overlay control
-    document.querySelector('.search-icon')?.addEventListener('click',()=>{
-      document.getElementById('searchOverlay').style.display='grid';
-    });
-    document.getElementById('closeSearch')?.addEventListener('click',()=>{
-      document.getElementById('searchOverlay').style.display='none';
-    });
-
-    // global tilt — removed per preference (glow-only, no transform)
-
-    // (legacy) carousel helpers kept no-op safe — no DOM call unless used
-    // Case Study modal binding (index-based)
-    const projCards=[...document.querySelectorAll('#projects .proj.card')];
-    const openMap=[
-      ()=>document.getElementById('modalInterfolio').style.display='grid',
-      ()=>document.getElementById('modalAcademicRisk').style.display='grid',
-      ()=>document.getElementById('modalRoadAccident').style.display='grid'
-    ];
-    projCards.forEach((card, i)=>{
-      // card click opens modal
-      card.addEventListener('click', (e)=>{
-        if(e.target.closest('button, a')) return;
-        openMap[i]?.();
-      });
-    });
-    document.querySelectorAll('#projects .case-btn').forEach(btn=>{
-      btn.addEventListener('click', (e)=>{ e.stopPropagation(); const i=+btn.dataset.index||0; openMap[i]?.(); });
-    });
-
-    // ===== Contact form handler (EmailJS-ready skeleton) =====
-    (function(){
-      const form = document.getElementById('contactForm');
-      if(!form) return;
-      const hp = form.querySelector('[name="hp"]');
-      let start = Date.now();
-
-      // live validity styling
-      form.querySelectorAll('input[required], textarea[required]').forEach(el=>{
-        el.addEventListener('input',()=>{
-          if(el.checkValidity()) { el.classList.add('ok'); } else { el.classList.remove('ok'); }
-        });
-      });
-
-      form.addEventListener('submit', (e)=>{
-        e.preventDefault();
-        const elapsed = Date.now() - start;
-        // anti-spam: honeypot or too fast
-        if(hp && hp.value) return; // bot filled hidden field
-        if(elapsed < 1500) return; // too fast
-        if(!form.checkValidity()) { form.reportValidity(); return; }
-
-        // success snackbar
-        const bar = document.getElementById('snackbar');
-        if(bar){
-          bar.textContent = 'Message sent successfully';
-          bar.classList.add('show');
-          setTimeout(()=> bar.classList.remove('show'), 5000);
-        }
-        form.reset();
-        start = Date.now();
-      });
-    })();
-  </script>
+  <!-- App JS -->
+  <script src="script.js"></script>
 </body>
 </html>
