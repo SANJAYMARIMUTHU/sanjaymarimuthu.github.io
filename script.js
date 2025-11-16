@@ -1,215 +1,493 @@
-// ----- Nav Active on scroll -----
-const links = [...document.querySelectorAll('#navLinks a')];
-const pairs = links.map(a => [a, document.querySelector(a.getAttribute('href'))]).filter(([, s]) => !!s);
+// ======================================
+// SANJAY PORTFOLIO – FINAL JS (loader + two-page + features)
+// ======================================
 
-function setActive(){
-  const y = scrollY + 120;
-  let activeLink = pairs[0]?.[0] || null;
-  pairs.forEach(([link, sec]) => { if (sec.offsetTop <= y) activeLink = link; });
-  links.forEach(a => a.classList.remove('active'));
-  if (activeLink){
-    activeLink.classList.add('active');
-    activeLink.style.transition = 'background 0.35s ease, color 0.35s ease';
-  }
+/* ---------- TYPING LOADER (Option D) ---------- */
+const LOADER_TEXTS = [
+  "Sanjay is preparing your experience...",
+  "Loading projects, portfolios and insights...",
+  "Getting your dashboard-ready..."
+];
+
+function typeText(el, text, speed = 40) {
+  return new Promise(resolve => {
+    el.textContent = "";
+    let i = 0;
+    const t = setInterval(() => {
+      el.textContent += text.charAt(i);
+      i++;
+      if (i >= text.length) {
+        clearInterval(t);
+        setTimeout(resolve, 600);
+      }
+    }, speed);
+  });
 }
-addEventListener('scroll', setActive, {passive:true});
-setActive();
 
-// Year in footer
-document.getElementById('yr').textContent = new Date().getFullYear();
+document.addEventListener("DOMContentLoaded", () => {
+  const loader = document.getElementById("loader");
+  const typingEl = document.getElementById("typingText");
+  const pageContainer = document.querySelector(".page-container");
 
-/* === Projects Slider (3 visible, shift by 1, total = 6) === */
-(function(){
-  const rail  = document.getElementById('projRail');
-  if(!rail) return;
+  // Run short typing cycle (two texts) then hide loader
+  (async () => {
+    await typeText(typingEl, LOADER_TEXTS[0]);
+    await typeText(typingEl, LOADER_TEXTS[1]);
+    // fade out loader
+    loader.style.opacity = "0";
+    loader.style.pointerEvents = "none";
+    setTimeout(() => {
+      loader.remove();
+      // reveal page container to assist screen-readers
+      pageContainer && pageContainer.setAttribute("aria-hidden", "false");
+    }, 420);
+  })();
+});
 
-  const cards = [...rail.children];
-  const total = cards.length;   // expect 6
-  const visible = 3;
-  let i = 0;
+/* ---------- Rest of app behavior runs after DOM loaded (and loader removed) ---------- */
+document.addEventListener("DOMContentLoaded", () => {
 
-  function stepSize(){
-    if(cards.length === 0) return 0;
-    const first = cards[0];
-    const style = getComputedStyle(rail);
-    const gap = parseFloat(style.columnGap || style.gap || 18);
-    return first.getBoundingClientRect().width + gap;
+  // years
+  const yr = new Date().getFullYear();
+  document.getElementById("yr") && (document.getElementById("yr").textContent = yr);
+  document.getElementById("yr-side") && (document.getElementById("yr-side").textContent = yr);
+
+  // role rotate
+  const roles = ['Data Analyst', 'AI/ML Enthusiast', 'Dashboard Builder', 'Predictive Analyst'];
+  let rIndex = 0;
+  const roleEl = document.querySelector('.role-rotate');
+  if (roleEl) {
+    roleEl.textContent = roles[0];
+    setInterval(() => {
+      rIndex = (rIndex + 1) % roles.length;
+      roleEl.style.opacity = 0;
+      setTimeout(() => {
+        roleEl.textContent = roles[rIndex];
+        roleEl.style.opacity = 1;
+      }, 240);
+    }, 3000);
   }
-  function clampIndex(n){ return Math.max(0, Math.min(n, total - visible)); }
-  function goTo(n){
-    i = clampIndex(n);
-    const dx = stepSize() * i;
-    rail.style.transform = `translateX(${-dx}px)`;
-    // update disable state
-    prevBtn.disabled = (i === 0);
-    nextBtn.disabled = (i === total - visible);
+
+  // page switcher
+  const pageHome = document.getElementById("page-home");
+  const pageMain = document.getElementById("page-main");
+  const mainInner = document.getElementById("mainInner");
+  const aboutBtn = document.getElementById("aboutBtn");
+  const letsTalkBtn = document.getElementById("letsTalkBtn");
+  const sideLinks = document.querySelectorAll(".side-link");
+
+  function showMain() {
+    if (pageMain.classList.contains("active")) return;
+    pageHome.classList.remove("active");
+    pageHome.classList.add("slide-out-left");
+    setTimeout(() => {
+      pageHome.classList.remove("slide-out-left");
+      pageMain.classList.add("active");
+    }, 650);
   }
 
-  // bottom petal controls
-  const prevBtn = document.getElementById('projPrevBtn');
-  const nextBtn = document.getElementById('projNextBtn');
-  prevBtn?.addEventListener('click', ()=> goTo(i - 1));
-  nextBtn?.addEventListener('click', ()=> goTo(i + 1));
+  function showHome() {
+    if (pageHome.classList.contains("active")) return;
+    pageMain.classList.remove("active");
+    pageMain.classList.add("slide-out-right");
+    setTimeout(() => {
+      pageMain.classList.remove("slide-out-right");
+      pageHome.classList.add("active");
+    }, 650);
+  }
 
-  // Card surface → no action (modal opens ONLY via Case Study)
-  cards.forEach(card=>{
-    card.addEventListener('click', (e)=>{
-      if(e.target.closest('.case-btn, .repo-ico')) return; // allow those
-      e.preventDefault(); e.stopPropagation();
+  // helpers
+  function setActiveLink(target) {
+    sideLinks.forEach(l => l.classList.remove("active"));
+    const match = Array.from(sideLinks).find(l => l.getAttribute("data-target") === target);
+    if (match) match.classList.add("active");
+  }
+
+  function scrollToSection(id) {
+    const el = document.querySelector(id);
+    if (!el || !mainInner) return;
+    const rect = el.getBoundingClientRect();
+    const containerRect = mainInner.getBoundingClientRect();
+    const offset = rect.top - containerRect.top + mainInner.scrollTop - 10;
+    mainInner.scrollTo({ top: offset, behavior: "smooth" });
+  }
+
+  // ---------- Projects / Case Study modal wiring ----------
+document.addEventListener('DOMContentLoaded', () => {
+  // map data-index -> modal id (make sure ids match your HTML)
+  const modalMap = {
+    0: 'modalInterfolio',
+    1: 'modalAcademicRisk',
+    2: 'modalRoadAccident'
+  };
+
+  // open modal on case-btn click
+  document.querySelectorAll('.case-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const idx = btn.getAttribute('data-index');
+      const id = modalMap[idx];
+      if (!id) return;
+      const modal = document.getElementById(id);
+      if (!modal) return;
+      modal.style.display = 'block';
+      // prevent body scroll while open
+      document.body.style.overflow = 'hidden';
+      // add show class (for specificity)
+      modal.classList.add('cs-show');
+      // focus first close button for accessibility
+      const close = modal.querySelector('.cs-close');
+      if (close) close.focus && close.focus();
     });
   });
 
-  // Case Study buttons → open modals (all 6)
-  const modalIds = ['modalP0','modalP1','modalP2','modalP3','modalP4','modalP5'];
-  document.querySelectorAll('#projects .case-btn').forEach(btn=>{
-    btn.addEventListener('click', (e)=>{
-      e.stopPropagation();
-      const idx = +btn.dataset.index || 0;
-      const id  = modalIds[idx];
-      const el  = id && document.getElementById(id);
-      if(el) el.style.display = 'grid';
+  // close on click of close elements
+  document.querySelectorAll('.cs-close').forEach(x => {
+    x.addEventListener('click', (e) => {
+      const modal = x.closest('.cs-modal');
+      if (!modal) return;
+      modal.style.display = 'none';
+      modal.classList.remove('cs-show');
+      document.body.style.overflow = ''; // restore
     });
   });
 
-  // Close buttons
-  document.querySelectorAll('.cs-close').forEach(btn=>{
-    btn.addEventListener('click', ()=>{
-      const id = btn.getAttribute('data-close');
-      const el = id && document.getElementById(id);
-      if(el) el.style.display = 'none';
-    });
-  });
-
-  // Click outside (overlay) to close
-  document.querySelectorAll('.cs-modal').forEach(overlay=>{
-    overlay.addEventListener('click', (e)=>{
-      if(e.target.classList.contains('cs-modal')) overlay.style.display = 'none';
-    });
-  });
-
-  // re-measure on resize
-  let t; addEventListener('resize', ()=>{ clearTimeout(t); t=setTimeout(()=>goTo(i),120); });
-
-  // init
-  goTo(0);
-})();
-
-// Donut builder using SVG strokes with a fixed open gap (style like your image)
-(function buildDonuts(){
-  const donuts = document.querySelectorAll('.sd-donut');
-  const TAU = Math.PI * 2;
-  const r = 44;                               // radius used in SVG
-  const C = 2 * Math.PI * r;                  // full circumference
-
-  donuts.forEach(el=>{
-    // create SVG once
-    const svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
-    svg.setAttribute('viewBox','0 0 120 120');
-
-    const center = 60, radius = r; // centered circle
-    const thick = getComputedStyle(el).getPropertyValue('--thick').trim() || '14px';
-
-    // Fixed gap length (in pixels of stroke along the circumference)
-    const GAP = parseFloat(getComputedStyle(el).getPropertyValue('--gap')) || 52;
-    const ACTIVE_ARC = C - GAP;
-
-    // Track (background ring) with an open gap
-    const track = document.createElementNS(svg.namespaceURI,'circle');
-    track.setAttribute('cx',center); track.setAttribute('cy',center); track.setAttribute('r',radius);
-    track.setAttribute('fill','none');
-    track.setAttribute('stroke','var(--sd-track)');
-    track.setAttribute('stroke-width', parseFloat(thick));
-    track.setAttribute('stroke-linecap','round');
-    track.setAttribute('transform',`rotate(-90 ${center} ${center})`);
-    track.setAttribute('stroke-dasharray', `${ACTIVE_ARC} ${GAP}`);
-    track.setAttribute('stroke-dashoffset','0');
-
-    // Progress arc (same dash pattern; JS will change dasharray second value)
-    const prog = document.createElementNS(svg.namespaceURI,'circle');
-    prog.setAttribute('cx',center); prog.setAttribute('cy',center); prog.setAttribute('r',radius);
-    prog.setAttribute('fill','none');
-    prog.setAttribute('stroke','var(--sd-accent)');
-    prog.setAttribute('stroke-width', parseFloat(thick));
-    prog.setAttribute('stroke-linecap','round');
-    prog.setAttribute('transform',`rotate(-90 ${center} ${center})`);
-    prog.setAttribute('stroke-dasharray', `0 ${C}`); // will animate to portion of ACTIVE_ARC
-
-    svg.append(track, prog);
-    el.appendChild(svg);
-
-    // store for animation
-    el._sd = {prog, ACTIVE_ARC};
-  });
-
-  // Animate on enter; reset on leave (so it replays every scroll)
-  const IO = new IntersectionObserver((entries)=>{
-    entries.forEach(({isIntersecting, target})=>{
-      const pct = Math.min(100, Math.max(0, Number(target.dataset.percent)||0));
-      const {prog, ACTIVE_ARC} = target._sd;
-
-      if(isIntersecting){
-        // animate from 0 to pct% of the active arc
-        const targetLen = ACTIVE_ARC * (pct/100);
-        const start = performance.now(), dur = 900; // ms
-        function tick(t){
-          const k = Math.min(1, (t - start)/dur);
-          const len = targetLen * (0.5 - 0.5 * Math.cos(Math.PI*k)); // easeInOut
-          prog.setAttribute('stroke-dasharray', `${len} ${C}`);
-          if(k < 1) requestAnimationFrame(tick);
-        }
-        requestAnimationFrame(tick);
-      }else{
-        // reset to 0 so it animates again later
-        prog.setAttribute('stroke-dasharray', `0 ${C}`);
+  // close when clicking outside panel
+  document.querySelectorAll('.cs-modal').forEach(modal => {
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.style.display = 'none';
+        modal.classList.remove('cs-show');
+        document.body.style.overflow = '';
       }
     });
-  }, {threshold: 0.35});
+  });
 
-  donuts.forEach(d=>IO.observe(d));
+  // close on Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.cs-modal').forEach(m => {
+        if (m.style.display === 'block') {
+          m.style.display = 'none';
+          m.classList.remove('cs-show');
+        }
+      });
+      document.body.style.overflow = '';
+    }
+  });
+});
+
+
+  // home buttons
+  aboutBtn && aboutBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    showMain();
+    setTimeout(() => { scrollToSection("#about"); setActiveLink("#about"); }, 700);
+  });
+  letsTalkBtn && letsTalkBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    showMain();
+    setTimeout(() => { scrollToSection("#contact"); setActiveLink("#contact"); }, 700);
+  });
+
+  // sidebar links
+  sideLinks.forEach(link => {
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+      const target = link.getAttribute("data-target");
+      if (target === "#home") { showHome(); setActiveLink("#home"); return; }
+      showMain();
+      setActiveLink(target);
+      setTimeout(() => scrollToSection(target), 700);
+    });
+  });
+// Projects slider + modals (fixed for 3 project cards)
+(function () {
+  const rail = document.getElementById('projRail');
+  if (!rail) return;
+
+  const cards = Array.from(rail.querySelectorAll('.proj.card'));
+  const total = cards.length;
+  const visible = 3; // we have 3 cards visible in layout
+  let index = 0;
+
+  function stepSize() {
+    if (!cards[0]) return 0;
+    const gap = parseFloat(getComputedStyle(rail).gap || 18);
+    return cards[0].getBoundingClientRect().width + gap;
+  }
+
+  function clamp(n) {
+    return Math.max(0, Math.min(n, Math.max(0, total - visible)));
+  }
+
+  function updateButtons() {
+    prevBtn.disabled = index === 0;
+    nextBtn.disabled = index >= Math.max(0, total - visible);
+  }
+
+  function goTo(n) {
+    index = clamp(n);
+    const dx = stepSize() * index;
+    rail.style.transform = `translateX(${-dx}px)`;
+    updateButtons();
+  }
+
+  const prevBtn = document.getElementById('projPrevBtn');
+  const nextBtn = document.getElementById('projNextBtn');
+
+  prevBtn?.addEventListener('click', () => goTo(index - 1));
+  nextBtn?.addEventListener('click', () => goTo(index + 1));
+
+  // prevent card click from doing anything except for buttons/links
+  cards.forEach(card => {
+    card.addEventListener('click', (e) => {
+      if (e.target.closest('.case-btn') || e.target.closest('.repo-ico') || e.target.closest('a')) return;
+      e.preventDefault();
+      e.stopPropagation();
+    });
+  });
+
+  // Modal logic (only modalP0..modalP2 exist)
+  const modalIds = ['modalP0', 'modalP1', 'modalP2'];
+
+  document.querySelectorAll('#projects .case-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const idx = Number(btn.dataset.index || 0);
+      const id = modalIds[idx];
+      const el = id && document.getElementById(id);
+      if (el) {
+        el.style.display = 'grid';
+        el.setAttribute('aria-hidden', 'false');
+        btn.setAttribute('aria-expanded', 'true');
+        // focus management
+        const close = el.querySelector('.cs-close');
+        close && close.focus();
+      }
+    });
+  });
+
+  // close buttons
+  document.querySelectorAll('.cs-close').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const id = btn.getAttribute('data-close') || btn.closest('.cs-modal')?.id;
+      const el = id && document.getElementById(id);
+      if (el) {
+        el.style.display = 'none';
+        el.setAttribute('aria-hidden', 'true');
+        // restore aria-expanded on related case-btn
+        const idx = modalIds.indexOf(id);
+        const trigger = document.querySelector(`#projects .case-btn[data-index="${idx}"]`);
+        trigger && trigger.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
+
+  // click outside to close
+  document.querySelectorAll('.cs-modal').forEach(overlay => {
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) {
+        overlay.style.display = 'none';
+        overlay.setAttribute('aria-hidden', 'true');
+      }
+    });
+  });
+
+  // keyboard ESC to close any open modal
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.cs-modal').forEach(m => {
+        if (m.style.display !== 'none') {
+          m.style.display = 'none';
+          m.setAttribute('aria-hidden', 'true');
+        }
+      });
+    }
+  });
+
+  // responsive re-calc
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => goTo(index), 120);
+  });
+
+  // initial
+  goTo(0);
+
+  // OPTIONAL: fill slide links placeholders (you can replace '#' with actual slide URLs)
+  // Example: document.getElementById('p0Slides').href = 'https://drive.google.com/...';
+  // If you give me the slide links I will fill them automatically for you.
 })();
 
 
-// ----- Contact form handler (honeypot + basic UX) -----
-(function(){
+  // contact form & snackbar
+  const contactForm = document.getElementById("contactForm");
+  const snackbar = document.getElementById("snackbar");
+  function showSnack(msg) {
+    if (!snackbar) return;
+    snackbar.textContent = msg;
+    snackbar.style.opacity = 1;
+    snackbar.style.transform = "translateY(0)";
+    setTimeout(() => { snackbar.style.opacity = 0; snackbar.style.transform = "translateY(10px)"; }, 3000);
+  }
+  contactForm && contactForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const f = e.currentTarget;
+    if (f.hp && f.hp.value) return;
+    const name = f.fullname.value.trim();
+    const email = f.email.value.trim();
+    const msg = f.message.value.trim();
+    if (!name || !email || !msg) { showSnack("Please complete all fields."); return; }
+    f.reset(); showSnack("Message sent successfully ✅");
+  });
+
+  // keyboard escape -> home
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") showHome(); });
+
+});
+
+const sections = document.querySelectorAll(".page-section");
+
+function showSection(id) {
+  sections.forEach(sec => sec.classList.remove("active", "left"));
+
+  const current = document.querySelector(id);
+  current.classList.add("active");
+}
+
+sideLinks.forEach(link => {
+  link.addEventListener("click", (e) => {
+    e.preventDefault();
+    const target = link.getAttribute("data-target");
+    showSection(target);
+    setActiveLink(target);
+    showMain(); // ensure main page visible
+  });
+});
+
+// ======================
+// CONTACT FORM + SNACKBAR
+// ======================
+(function () {
   const form = document.getElementById('contactForm');
-  if(!form) return;
+  if (!form) return;
   const hp = form.querySelector('[name="hp"]');
   let start = Date.now();
 
-  // live validity styling
-  form.querySelectorAll('input[required], textarea[required]').forEach(el=>{
-    el.addEventListener('input', ()=>{
-      if(el.checkValidity()) el.classList.add('ok'); else el.classList.remove('ok');
+  form.querySelectorAll('input[required], textarea[required]').forEach(el => {
+    el.addEventListener('input', () => {
+      el.classList.toggle('ok', el.checkValidity());
     });
   });
 
-  form.addEventListener('submit', (e)=>{
+  form.addEventListener('submit', (e) => {
     e.preventDefault();
     const elapsed = Date.now() - start;
-    if(hp && hp.value) return; // bot check
-    if(elapsed < 1500) return; // too fast
-    if(!form.checkValidity()) { form.reportValidity(); return; }
+    if (hp && hp.value) return;
+    if (elapsed < 1500) return;
+    if (!form.checkValidity()) return form.reportValidity();
 
-    // success snackbar
     const bar = document.getElementById('snackbar');
-    if(bar){
+    if (bar) {
       bar.textContent = 'Message sent successfully ✅';
       bar.classList.add('show');
-      setTimeout(()=> bar.classList.remove('show'), 5000);
+      setTimeout(() => bar.classList.remove('show'), 4000);
     }
     form.reset();
     start = Date.now();
   });
 })();
 
-// Focus search when clicking the icon or Go
-const q = document.getElementById('searchInput');
-document.querySelector('.search-ico')?.addEventListener('click', ()=> q?.focus());
-document.querySelector('.search-go')?.addEventListener('click', ()=> q?.focus());
 
-// Tiny hover ripple for CTA
-document.querySelectorAll('.btn').forEach(btn=>{
-  btn.addEventListener('pointerdown', ()=> btn.style.transform = 'translateY(1px) scale(.99)');
-  btn.addEventListener('pointerup',   ()=> btn.style.transform = '');
-  btn.addEventListener('pointerleave',()=> btn.style.transform = '');
-});
+// MOBILE SIDEBAR TOGGLE (collapsible) — add after DOM loaded scripts
+(function () {
+  // create hamburger inside header if missing (so no HTML edits required)
+  const header = document.querySelector('header.wrap');
+  if (!header) return;
+
+  // build hamburger element
+  const hamb = document.createElement('button');
+  hamb.className = 'mobile-hamburger';
+  hamb.setAttribute('aria-label', 'Open navigation');
+  hamb.setAttribute('aria-expanded', 'false');
+  hamb.setAttribute('type', 'button');
+  hamb.innerHTML = '<span class="bar"></span><span class="bar"></span><span class="bar"></span>';
+
+  // insert hamburger at start of header (left)
+  header.insertBefore(hamb, header.firstChild);
+
+  // overlay element
+  const overlay = document.createElement('div');
+  overlay.className = 'mobile-overlay';
+  document.body.appendChild(overlay);
+
+  const sidebar = document.querySelector('.sidebar');
+  const mainPane = document.querySelector('.main-pane');
+
+  function openSidebar() {
+    hamb.classList.add('open');
+    hamb.setAttribute('aria-expanded', 'true');
+    sidebar && sidebar.classList.add('open');
+    overlay.classList.add('show');
+    mainPane && mainPane.classList.add('shifted');
+    document.body.classList.add('no-scroll');
+
+    // focus first link in sidebar for keyboard users
+    const firstLink = sidebar && sidebar.querySelector('a, button');
+    if (firstLink) firstLink.focus();
+  }
+
+  function closeSidebar() {
+    hamb.classList.remove('open');
+    hamb.setAttribute('aria-expanded', 'false');
+    sidebar && sidebar.classList.remove('open');
+    overlay.classList.remove('show');
+    mainPane && mainPane.classList.remove('shifted');
+    document.body.classList.remove('no-scroll');
+    // return focus to hamburger for accessibility
+    hamb.focus();
+  }
+
+  // toggle
+  hamb.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (sidebar && sidebar.classList.contains('open')) closeSidebar();
+    else openSidebar();
+  });
+
+  // close on overlay click
+  overlay.addEventListener('click', closeSidebar);
+
+  // close on Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      if (sidebar && sidebar.classList.contains('open')) closeSidebar();
+    }
+  });
+
+  // when a sidebar link is clicked, close (nice UX)
+  sidebar && sidebar.addEventListener('click', (e) => {
+    const link = e.target.closest('a, button');
+    if (!link) return;
+    // allow links that open external pages; if internal anchor -> close
+    closeSidebar();
+  });
+
+  // ensure resize removes mobile-only inline classes if user returns to desktop size
+  let rTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(rTimer);
+    rTimer = setTimeout(() => {
+      if (window.innerWidth > 1060) {
+        // cleanup mobile classes
+        sidebar && sidebar.classList.remove('open');
+        overlay.classList.remove('show');
+        hamb.classList.remove('open');
+        document.body.classList.remove('no-scroll');
+        mainPane && mainPane.classList.remove('shifted');
+        hamb.setAttribute('aria-expanded', 'false');
+      }
+    }, 120);
+  });
+})();

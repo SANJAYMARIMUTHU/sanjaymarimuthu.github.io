@@ -1,142 +1,246 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Sanjay Marimuthu · Data Analyst Portfolio</title>
 
-  <!-- SEO: S3 (Title + Meta + OpenGraph + Twitter + JSON-LD) -->
-  <meta name="description" content="Sanjay Marimuthu — Data Analyst & AI/ML Enthusiast. Python, SQL, Power BI, scikit-learn. Projects: Interfolio AI Portfolio Chatbot, Academic Risk Indicators, India Road Accident Analysis." />
-  <meta name="keywords" content="Sanjay Marimuthu, Data Analyst, AI, Machine Learning, Python, SQL, Power BI, scikit-learn, Portfolio, Dashboard, India Road Accident, Academic Risk" />
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-  <!-- Open Graph -->
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Sanjay Marimuthu · Data Analyst Portfolio" />
-  <meta property="og:description" content="Turning raw data into clear stories & predictive insights. Explore projects, skills, and contact." />
-  <meta property="og:url" content="https://sanjaymarimuthu.github.io" />
-  <meta property="og:image" content="https://sanjaymarimuthu.github.io/images/profile.jpg" />
+  <meta name="description" content="Sanjay Marimuthu — Data Analyst & AI/ML Enthusiast. Skilled in Python, SQL, Power BI, and scikit-learn." />
+  <link rel="icon" href="images/favicon.png">
 
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Sanjay Marimuthu · Data Analyst Portfolio" />
-  <meta name="twitter:description" content="Python, SQL, Power BI, scikit-learn. Explore projects & get in touch." />
-  <meta name="twitter:image" content="https://sanjaymarimuthu.github.io/images/profile.jpg" />
-
-  <!-- JSON-LD Schema.org -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Sanjay Marimuthu",
-    "jobTitle": "Data Analyst",
-    "url": "https://sanjaymarimuthu.github.io",
-    "image": "https://sanjaymarimuthu.github.io/images/profile.jpg",
-    "sameAs": [
-      "https://www.linkedin.com/in/sanjaymarimuthu",
-      "https://github.com/SANJAYMARIMUTHU",
-      "https://www.kaggle.com/itzsanjay"
-    ],
-    "knowsAbout": ["Data Analysis","Python","SQL","Power BI","Machine Learning","scikit-learn"]
-  }
-  </script>
-
-  <!-- Favicon (optional) -->
-  <link rel="icon" href="/images/favicon.png" />
-
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
-  <!-- App CSS -->
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Background strokes -->
-  <div class="strokes" aria-hidden="true">
-    <svg viewBox="0 0 100 100" preserveAspectRatio="none">
-      <defs>
-        <pattern id="wave" width="1" height="1" patternUnits="objectBoundingBox">
-          <path d="M0,20 C20,0 40,40 60,20 80,0 100,40 120,20" stroke="rgba(27,216,166,.35)" stroke-width="1" fill="none" />
-        </pattern>
-      </defs>
-      <rect x="-50" y="-50" width="200" height="200" fill="url(#wave)" />
-    </svg>
-  </div>
-
-  <!-- NAV -->
-  <header class="nav">
-    <div class="wrap nav-inner">
-      <div class="brand"><div class="logo">▲</div><span>Portfolio</span></div>
-      <nav class="nav-links" id="navLinks">
-        <a href="#home" class="active">HOME</a>
-        <a href="#about">ABOUT</a>
-        <a href="#projects">PROJECTS</a>
-        <a href="#skills">SKILLS</a>
-        <a href="#contact">CONTACT</a>
-      </nav>
+  <!-- LOADER: Typing style -->
+<div id="loader" class="loader">
+  <div class="loader-inner">
+    <img src="images/logo.svg" class="loader-logo-img" alt="Logo">
+    <div class="loader-line">
+      <span id="typingText"></span><span class="cursor">|</span>
     </div>
-  </header>
+  </div>
+</div>
 
-  <!-- HERO -->
-  <main id="home" class="hero">
-    <div class="wrap hero-grid">
-      <div>
-        <div class="kicker">hello, <span class="im">I'm</span></div>
-        <h1><span class="name">Sanjay Marimuthu</span></h1>
-        <h3 class="muted hero-role">Data Analyst & AI/ML Enthusiast</h3>
-        <p class="sub">I turn raw data into clear stories and predictive insights using Python, SQL, Power BI and scikit-learn. Currently open to internships and real-world analytics projects.</p>
-        <div class="cta-row">
-          <a class="btn" href="#contact">Let's Talk</a>
-          <a class="btn ghost" href="assets/Sanjay Marimuthu.pdf" download>Download CV</a>
+  <div class="page-container" aria-hidden="true">
+
+    <!-- PAGE 1: HOME -->
+    <div id="page-home" class="page active" aria-label="Home page">
+      <section class="hero" role="region" aria-labelledby="home-title">
+        <div class="side-decor left-bar" aria-hidden="true"></div>
+        <div class="side-decor right-bar" aria-hidden="true"></div>
+
+        <div class="wrap hero-slide">
+          <div class="hero-left">
+            <p class="kicker">Hello, <span class="im">I'm</span></p>
+            <h1 class="name" id="home-title">Sanjay Marimuthu</h1>
+            <h2 class="hero-role muted">And I'm a <span class="role-rotate accent-role">Data Analyst</span></h2>
+            <p class="sub">
+              I turn raw data into clear stories and predictive insights using Python, SQL, Power BI, and scikit-learn.
+              Currently open to internships and real-world analytics projects.
+            </p>
+
+            <div class="cta-row">
+              <button class="btn" id="letsTalkBtn">Let's Talk</button>
+              <button class="btn ghost" id="aboutBtn">More About Me</button>
+            </div>
+          </div>
+
+          <div class="hero-right">
+            <div class="hero-photo-wrap" aria-hidden="true">
+              <div class="photo-circle">
+                <img src="images/sanjay.png" alt="Portrait of Sanjay Marimuthu" />
+              </div>
+
+             
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- PAGE 2: MAIN -->
+    <div id="page-main" class="page" aria-label="Main page">
+      <aside class="sidebar" role="navigation" aria-label="Primary">
+        <div class="profile-shot" aria-hidden="true">
+          <img src="images/sanjay.png" alt="Sanjay Marimuthu portrait" />
         </div>
 
-        <div class="check-row">
-          <span class="muted">Check out my</span>
-          <div class="pill-row">
-            <a class="pill" target="_blank" href="https://www.linkedin.com/in/sanjaymarimuthu" aria-label="LinkedIn">LinkedIn</a>
-            <a class="pill" target="_blank" href="https://github.com/SANJAYMARIMUTHU" aria-label="GitHub">GitHub</a>
-            <a class="pill" target="_blank" href="https://www.kaggle.com/itzsanjay" aria-label="Kaggle">Kaggle</a>
+        <div class="sidebar-name">
+          <div class="logo-mini">▲</div>
+          <div>
+            <div class="brand-short">SNJ</div>
+            <div class="role-small">Data Analyst</div>
+          </div>
+        </div>
+
+        <nav class="side-nav" id="sideNav" aria-label="Sections">
+          <a class="side-link" data-target="#home" href="#home"><i class="fa-solid fa-house"></i><span>Home</span></a>
+          <a class="side-link" data-target="#about" href="#about"><i class="fa-solid fa-user"></i><span>About</span></a>
+          <a class="side-link" data-target="#resume" href="#resume"><i class="fa-solid fa-file-lines"></i><span>Resume</span></a>
+          <a class="side-link" data-target="#projects" href="#projects"><i class="fa-solid fa-folder-open"></i><span>Projects</span></a>
+          <a class="side-link" data-target="#skills" href="#skills"><i class="fa-solid fa-star"></i><span>Skills</span></a>
+          <a class="side-link" data-target="#contact" href="#contact"><i class="fa-solid fa-envelope"></i><span>Contact</span></a>
+        </nav>
+
+        <div class="social-links" aria-hidden="true">
+          <a href="https://github.com/SANJAYMARIMUTHU" target="_blank"><i class="fa-brands fa-github"></i></a>
+          <a href="https://www.linkedin.com/in/sanjaymarimuthu" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+          <a href="https://www.kaggle.com/itzsanjay" target="_blank"><i class="fa-brands fa-kaggle"></i></a>
+        </div>
+
+        <div class="sidebar-footer">© <span id="yr-side"></span></div>
+      </aside>
+
+      <div class="main-pane" role="main">
+<div class="main-inner" id="mainInner">
+  <div class="sections-wrapper">
+          <header class="wrap" style="padding:0 0 18px 0; display:flex; justify-content:space-between; align-items:center">
+            <div style="display:flex;gap:12px;align-items:center">
+              <div class="logo-mini" style="width:48px;height:48px"></div>
+              <div style="font-weight:800">Sanjay Marimuthu</div>
+            </div>
+            <div>
+              <a class="btn ghost" href="assets/Sanjay Marimuthu.pdf" download>Download CV</a>
+            </div>
+          </header>
+
+          <!-- About -->
+          <section id="about" class="about-page fullpage slide-page" aria-labelledby="about-heading">
+  <div class="about-wrapper wrap">
+    <div class="about-left-col">
+      <h1 id="about-heading" class="about-title">ABOUT ME</h1>
+      <p class="about-intro">
+        I'm <span class="highlight">Sanjay Marimuthu</span>, a Data Analyst &amp; AI Enthusiast.
+        I turn raw datasets into insights using Python, SQL, Power BI, and Machine Learning.
+      </p>
+
+      <div class="about-labels">
+        <div class="label yellow-label">What I Do?</div>
+        <div class="label yellow-label">Fun Facts</div>
+      </div>
+
+      <div class="about-items">
+        <div class="about-item">
+          <div class="about-icon"><img src="icons/analysis.png" alt=""></div>
+          <div class="about-text">
+            <h3>Data Analysis</h3>
+            <p>Cleaning, processing &amp; exploring datasets to uncover actionable patterns.</p>
+          </div>
+        </div>
+
+        <div class="about-item">
+          <div class="about-icon"><img src="icons/dashboard.png" alt=""></div>
+          <div class="about-text">
+            <h3>Dashboard Reporting</h3>
+            <p>Power BI dashboards with KPIs, storytelling and automation.</p>
+          </div>
+        </div>
+
+        <div class="about-item">
+          <div class="about-icon"><img src="icons/ml.png" alt=""></div>
+          <div class="about-text">
+            <h3>Machine Learning</h3>
+            <p>Regression, classification and clustering with scikit-learn.</p>
           </div>
         </div>
       </div>
+    </div>
 
-      <div class="hero-image">
-    <img src="images/sanjay.png" alt="Sanjay Photo" />
+    <aside class="about-right-col" aria-hidden="true">
+
+      <div class="facts-grid">
+        <div class="fact-circle">
+          <h2>1+</h2><p>Years Experience</p>
+        </div>
+        <div class="fact-circle">
+          <h2>10+</h2><p>Projects Done</p>
+        </div>
+        <div class="fact-circle">
+          <h2>5+</h2><p>Dashboards</p>
+        </div>
+        <div class="fact-circle">
+          <h2>3+</h2><p>ML Models</p>
+        </div>
+      </div>
+    </aside>
   </div>
 </section>
-    </div>
-  </main>
 
-  <!-- ABOUT -->
-  <section id="about">
-    <div class="wrap center">
-      <div class="h2">ABOUT</div>
-      <div class="grid-2 about-grid">
-        <article class="card">
-          <strong>Who I Am</strong>
-          <p class="muted">I’m a Data Analyst who enjoys turning raw datasets into clear insights, stories, and measurable outcomes. I focus on simplifying complexity, building data models that make sense to humans, and creating dashboards that drive meaningful decisions. I love solving real problems using data and I’m actively looking for internship opportunities to apply my skills in impactful environments.</p>
-        </article>
-        <article class="card">
-          <strong>Experience</strong>
-          <p class="muted">Data Analyst Intern · Qaroo Learning India Pvt. Ltd. Cleaned & analyzed student datasets, built dashboards, improved SQL performance ≈25% faster, delivered actionable insights.</p>
-        </article>
-        <article class="card">
-          <strong>Education</strong>
-          <p class="muted">B.Tech AI & Data Science · Kangeyam Institute of Technology (2023–2027). HSC 69.5% (2023).</p>
-        </article>
-      </div>
+
+
+          <!-- Resume -->
+          <section id="resume" class="resume-modern">
+  <div class="resume-inner wrap">
+
+    <h1 class="resume-main-title">RESUME</h1>
+
+    <div class="resume-two-col">
+
+      <!-- LEFT COLUMN -->
+      <div class="resume-left">
+
+        <!-- Education -->
+        <h2 class="resume-cat">EDUCATION</h2>
+
+<div class="resume-edu-row">
+
+  <div class="resume-edu-card">
+    <div class="resume-year-tag">2023 – 2027</div>
+    <h3 class="resume-role">B.Tech · AI & Data Science</h3>
+    <p class="resume-place">Kangeyam Institute of Technology</p>
+  </div>
+
+  <div class="resume-edu-card">
+    <div class="resume-year-tag">2021 – 2023</div>
+    <h3 class="resume-role">HSC</h3>
+    <p class="resume-place">Percentage: 69.5%</p>
+  </div>
+
+</div>
+
+        <!-- Experience -->
+        <h2 class="resume-cat">EXPERIENCE</h2>
+
+<div class="resume-exp-row">
+
+  <div class="resume-exp-card">
+    <div class="resume-year-tag">2024</div>
+    <h3 class="resume-role">Data Analyst Intern</h3>
+    <p class="resume-place">Qaroo Learning India Pvt. Ltd.</p>
+    <p class="resume-desc">
+      Built dashboards, optimized SQL queries, delivered insights.
+    </p>
+  </div>
+
+  <div class="resume-exp-card">
+    <div class="resume-year-tag">2023</div>
+    <h3 class="resume-role">Academic Risk Indicators</h3>
+    <p class="resume-place">Self Project</p>
+    <p class="resume-desc">
+      Predicted at-risk students using attendance + submissions data.
+    </p>
+  </div>
+
+</div>
+
+
+
     </div>
-  </section>
+  </div>
+</section>
+
+
 
 <!-- PROJECTS -->
 <section id="projects">
   <div class="wrap">
-    <div class="h2">Projects</div>
+    <div class="h2 type-section" data-text="PROJECTS">PROJECTS</div>
 
-    <!-- viewport (3 visible; horizontal scroll via JS) -->
-    <div class="proj-viewport">
-      <!-- rail -->
+    <div class="proj-viewport" aria-hidden="false">
       <div class="proj-rail" id="projRail" aria-live="polite">
         <!-- P1 -->
         <article class="proj card" data-index="0" aria-label="Interfolio · AI Portfolio Chatbot">
@@ -147,10 +251,13 @@
             <span class="pill">React</span><span class="pill">Node</span><span class="pill">OpenAI API</span>
           </div>
           <div class="proj-actions">
-            <a class="repo-ico" href="https://github.com/SANJAYMARIMUTHU/Interfolio-AI-Portfolio-Chatbot" target="_blank" aria-label="Open repository">
-              <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.725-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.757-1.333-1.757-1.089-.745.083-.729.083-.729 1.205.084 1.84 1.237 1.84 1.237 1.07 1.835 2.807 1.305 3.492.998.108-.776.418-1.305.762-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.469-2.382 1.236-3.222-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23a11.48 11.48 0 0 1 3.003-.404c1.02.005 2.045.138 3.003.404 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.912 1.23 3.222 0 4.61-2.807 5.625-5.48 5.92.43.372.81 1.102.81 2.222 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+            <a class="repo-ico" href="https://github.com/SANJAYMARIMUTHU/Interfolio-AI-Portfolio-Chatbot" target="_blank" rel="noopener" aria-label="Open Interfolio repository">
+              <!-- GitHub SVG -->
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+                <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.725-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.757-1.333-1.757-1.089-.745.083-.729.083-.729 1.205.084 1.84 1.237 1.84 1.237 1.07 1.835 2.807 1.305 3.492.998.108-.776.418-1.305.762-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.469-2.382 1.236-3.222-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23a11.48 11.48 0 0 1 3.003-.404c1.02.005 2.045.138 3.003.404 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.912 1.23 3.222 0 4.61-2.807 5.625-5.48 5.92.43.372.81 1.102.81 2.222 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+              </svg>
             </a>
-            <button class="btn ghost case-btn" data-index="0" type="button">Case Study</button>
+            <button class="btn ghost case-btn" data-index="0" type="button" aria-expanded="false">Case Study</button>
           </div>
         </article>
 
@@ -162,10 +269,12 @@
             <span class="pill">Excel</span><span class="pill">SQL</span><span class="pill">Power BI</span>
           </div>
           <div class="proj-actions">
-            <a class="repo-ico" href="https://github.com/SANJAYMARIMUTHU/Academic-Performance-Risk-Indicators" target="_blank" aria-label="Open repository">
-              <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.725-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.757-1.333-1.757-1.089-.745.083-.729.083-.729 1.205.084 1.84 1.237 1.84 1.237 1.07 1.835 2.807 1.305 3.492.998.108-.776.418-1.305.762-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.469-2.382 1.236-3.222-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23a11.48 11.48 0 0 1 3.003-.404c1.02.005 2.045.138 3.003.404 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.912 1.23 3.222 0 4.61-2.807 5.625-5.48 5.92.43.372.81 1.102.81 2.222 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+            <a class="repo-ico" href="https://github.com/SANJAYMARIMUTHU/Academic-Performance-Risk-Indicators" target="_blank" rel="noopener" aria-label="Open Academic Risk repository">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+                <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.725-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.757-1.333-1.757-1.089-.745.083-.729.083-.729 1.205.084 1.84 1.237 1.84 1.237 1.07 1.835 2.807 1.305 3.492.998.108-.776.418-1.305.762-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.469-2.382 1.236-3.222-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23a11.48 11.48 0 0 1 3.003-.404c1.02.005 2.045.138 3.003.404 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.912 1.23 3.222 0 4.61-2.807 5.625-5.48 5.92.43.372.81 1.102.81 2.222 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+              </svg>
             </a>
-            <button class="btn ghost case-btn" data-index="1" type="button">Case Study</button>
+            <button class="btn ghost case-btn" data-index="1" type="button" aria-expanded="false">Case Study</button>
           </div>
         </article>
 
@@ -177,54 +286,58 @@
             <span class="pill">Python</span><span class="pill">Pandas</span><span class="pill">Power BI</span>
           </div>
           <div class="proj-actions">
-            <a class="repo-ico" href="https://github.com/SANJAYMARIMUTHU/India-Road-Accident-Analysis" target="_blank" aria-label="Open repository">
-              <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.725-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.757-1.333-1.757-1.089-.745.083-.729.083-.729 1.205.084 1.84 1.237 1.84 1.237 1.07 1.835 2.807 1.305 3.492.998.108-.776.418-1.305.762-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.469-2.382 1.236-3.222-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23a11.48 11.48 0 0 1 3.003-.404c1.02.005 2.045.138 3.003.404 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.912 1.23 3.222 0 4.61-2.807 5.625-5.48 5.92.43.372.81 1.102.81 2.222 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+            <a class="repo-ico" href="https://github.com/SANJAYMARIMUTHU/India-Road-Accident-Analysis" target="_blank" rel="noopener" aria-label="Open Road Accident repository">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+                <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.725-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.757-1.333-1.757-1.089-.745.083-.729.083-.729 1.205.084 1.84 1.237 1.84 1.237 1.07 1.835 2.807 1.305 3.492.998.108-.776.418-1.305.762-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.469-2.382 1.236-3.222-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23a11.48 11.48 0 0 1 3.003-.404c1.02.005 2.045.138 3.003.404 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.912 1.23 3.222 0 4.61-2.807 5.625-5.48 5.92.43.372.81 1.102.81 2.222 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+              </svg>
             </a>
-            <button class="btn ghost case-btn" data-index="2" type="button">Case Study</button>
+            <button class="btn ghost case-btn" data-index="2" type="button" aria-expanded="false">Case Study</button>
           </div>
         </article>
+      </div>
 
-        
-
-    <!-- Bottom petal controls -->
-    <div class="petal-wrap">
-      <button class="petal-btn" id="projPrevBtn">◀ Pre</button>
-      <button class="petal-btn" id="projNextBtn">Next ▶</button>
+      <!-- Bottom petal controls -->
+      <div class="petal-wrap" aria-hidden="false">
+        <button class="petal-btn" id="projPrevBtn" aria-label="Previous projects" disabled>◀ Pre</button>
+        <button class="petal-btn" id="projNextBtn" aria-label="Next projects">Next ▶</button>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ===== CASE STUDY MODALS (all 6) ===== -->
+<!-- CASE STUDY MODALS (only 3 - modalP0..modalP2) -->
 <div id="caseStudyModals">
-
   <!-- M0 Interfolio -->
-  <div id="modalP0" class="cs-modal">
+  <div id="modalP0" class="cs-modal" role="dialog" aria-hidden="true" aria-labelledby="modalP0Title">
     <div class="wrap cs-inner">
       <div class="cs-left">
-        <h2 class="accent" style="margin:0 0 10px">Interfolio · AI Portfolio Chatbot</h2>
-        <p class="muted">AI chatbot that answers portfolio questions and simulates interview prep.
-          Built with OpenAI + React + Node for real-time responses.</p>
-        <div class="stack" style="margin-top:14px">
-          <span class="pill">React</span><span class="pill">Node.js</span><span class="pill">OpenAI API</span>
-        </div>
-        <button class="cs-close" data-close="modalP0">✕</button>
+        <h2 id="modalP0Title" class="accent">Interfolio · AI Portfolio Chatbot</h2>
+        <p class="muted">AI chatbot that answers portfolio questions and simulates interview prep. Built with OpenAI + React + Node for real-time responses.</p>
+        <div class="stack" style="margin-top:14px"><span class="pill">React</span><span class="pill">Node.js</span><span class="pill">OpenAI API</span></div>
+        
       </div>
       <div class="cs-right">
         <img src="images/interfolioChatbot.png" alt="Interfolio preview">
+                      <button class="cs-close" data-close="modalP0" aria-label="Close project modal">✕</button>
+
       </div>
+              <button class="cs-close" data-close="modalP0" aria-label="Close project modal">✕</button>
+
     </div>
   </div>
 
   <!-- M1 Academic -->
-  <div id="modalP1" class="cs-modal">
+  <div id="modalP1" class="cs-modal" role="dialog" aria-hidden="true" aria-labelledby="modalP1Title">
     <div class="wrap cs-inner">
       <div class="cs-left">
-        <h2 class="accent" style="margin:0 0 10px">Academic Risk Indicators</h2>
+        <h2 id="modalP1Title" class="accent">Academic Risk Indicators</h2>
         <p class="muted">Predicts at-risk students via attendance/submission/score patterns. Power BI visualizations support early intervention.</p>
-        <div class="stack" style="margin-top:14px">
-          <span class="pill">Excel</span><span class="pill">SQL</span><span class="pill">Power BI</span>
+        <div class="stack" style="margin-top:14px"><span class="pill">Excel</span><span class="pill">SQL</span><span class="pill">Power BI</span></div>
+        <div class="cs-links" style="margin-top:14px">
+          <a class="p-link" href="https://github.com/SANJAYMARIMUTHU/Academic-Performance-Risk-Indicators" target="_blank" rel="noopener">View Repository</a>
+          <a class="p-link" href="#" id="p1Slides" target="_blank" rel="noopener">View Case Study Slides</a>
         </div>
-        <button class="cs-close" data-close="modalP1">✕</button>
+        <button class="cs-close" data-close="modalP1" aria-label="Close project modal">✕</button>
       </div>
       <div class="cs-right">
         <img src="images/academicRisk.png" alt="Academic Risk preview">
@@ -233,123 +346,72 @@
   </div>
 
   <!-- M2 Road Accident -->
-  <div id="modalP2" class="cs-modal">
+  <div id="modalP2" class="cs-modal" role="dialog" aria-hidden="true" aria-labelledby="modalP2Title">
     <div class="wrap cs-inner">
       <div class="cs-left">
-        <h2 class="accent" style="margin:0 0 10px">India Road Accident Analysis</h2>
+        <h2 id="modalP2Title" class="accent">India Road Accident Analysis</h2>
         <p class="muted">Analyzed national datasets to identify hotspot zones & patterns. K-Means + Random Forest + BI dashboards.</p>
-        <div class="stack" style="margin-top:14px">
-          <span class="pill">Python</span><span class="pill">Pandas</span><span class="pill">Power BI</span>
+        <div class="stack" style="margin-top:14px"><span class="pill">Python</span><span class="pill">Pandas</span><span class="pill">Power BI</span></div>
+        <div class="cs-links" style="margin-top:14px">
+          <a class="p-link" href="https://github.com/SANJAYMARIMUTHU/India-Road-Accident-Analysis" target="_blank" rel="noopener">View Repository</a>
+          <a class="p-link" href="#" id="p2Slides" target="_blank" rel="noopener">View Case Study Slides</a>
         </div>
-        <button class="cs-close" data-close="modalP2">✕</button>
+        <button class="cs-close" data-close="modalP2" aria-label="Close project modal">✕</button>
       </div>
       <div class="cs-right">
         <img src="images/roadAccident.png" alt="Road Accident preview">
       </div>
     </div>
   </div>
-
-  
-  <!-- Skills (Donut Progress Bars) -->
-   <section id="skills">
-    <div class="wrap center">
-      <div class="h2">skills</div>
-<section id="skills-donuts" class="sd-wrap">
-  <!-- Programming -->
-  <div class="sd-cat">
-    <h3 class="sd-title">Programming</h3>
-    <div class="sd-row">
-      <div class="sd-item">
-        <div class="sd-donut" data-percent="90" aria-label="Python skill level 90"></div>
-        <div class="sd-label">Python</div>
-      </div>
-      <div class="sd-item">
-        <div class="sd-donut" data-percent="90" aria-label="SQL skill level 90"></div>
-        <div class="sd-label">SQL</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Data Visualization -->
-  <div class="sd-cat">
-    <h3 class="sd-title">Data Visualization</h3>
-    <div class="sd-row">
-      <div class="sd-item"><div class="sd-donut" data-percent="80" aria-label="Power BI 80"></div><div class="sd-label">Power BI</div></div>
-      <div class="sd-item"><div class="sd-donut" data-percent="80" aria-label="Tableau 80"></div><div class="sd-label">Tableau</div></div>
-      <div class="sd-item"><div class="sd-donut" data-percent="80" aria-label="Excel 80"></div><div class="sd-label">Excel</div></div>
-      <div class="sd-item"><div class="sd-donut" data-percent="70" aria-label="Streamlit 70"></div><div class="sd-label">Streamlit</div></div>
-    </div>
-  </div>
-
-  <!-- Databases -->
-  <div class="sd-cat">
-    <h3 class="sd-title">Databases</h3>
-    <div class="sd-row">
-      <div class="sd-item"><div class="sd-donut" data-percent="90" aria-label="MySQL 90"></div><div class="sd-label">MySQL</div></div>
-      <div class="sd-item"><div class="sd-donut" data-percent="80" aria-label="SQLite 80"></div><div class="sd-label">SQLite</div></div>
-      <div class="sd-item"><div class="sd-donut" data-percent="70" aria-label="Oracle 70"></div><div class="sd-label">Oracle</div></div>
-    </div>
-  </div>
-
-  <!-- Machine Learning -->
-  <div class="sd-cat">
-    <h3 class="sd-title">Machine Learning</h3>
-    <div class="sd-row">
-      <div class="sd-item"><div class="sd-donut" data-percent="60" aria-label="Scikit-learn 60"></div><div class="sd-label">Scikit-learn</div></div>
-      <div class="sd-item"><div class="sd-donut" data-percent="60" aria-label="Regression Models 60"></div><div class="sd-label">Regression Models</div></div>
-      <div class="sd-item"><div class="sd-donut" data-percent="50" aria-label="Clustering 50"></div><div class="sd-label">Clustering</div></div>
-    </div>
-  </div>
-
-  <!-- Core Strengths -->
-  <div class="sd-cat">
-    <h3 class="sd-title">Core Strengths</h3>
-    <div class="sd-row">
-      <div class="sd-item"><div class="sd-donut" data-percent="75" aria-label="Analytical Thinking 75"></div><div class="sd-label">Analytical Thinking</div></div>
-      <div class="sd-item"><div class="sd-donut" data-percent="85" aria-label="Problem Solving 85"></div><div class="sd-label">Problem Solving</div></div>
-      <div class="sd-item"><div class="sd-donut" data-percent="75" aria-label="Statistical Analysis 75"></div><div class="sd-label">Statistical Analysis</div></div>
-    </div>
-  </div>
-</section>
+</div>
 
 
-  <!-- CONTACT -->
-  <section id="contact">
-    <div class="wrap">
-      <div class="h2">Contact <span class="accent">Me</span></div>
-      <div class="card contact-card">
-        <p class="muted">📧 Gmail: <a class="link" href="mailto:sanjaymarimuthu505@gmail.com">sanjaymarimuthu505@gmail.com</a></p>
-        <p class="muted">🔗 LinkedIn: <a class="link" href="https://www.linkedin.com/in/sanjaymarimuthu" target="_blank">linkedin.com/in/sanjaymarimuthu</a></p>
-        <p class="muted">📦 GitHub: <a class="link" href="https://github.com/SANJAYMARIMUTHU" target="_blank">github.com/SANJAYMARIMUTHU</a></p>
 
-        <form id="contactForm" class="contact-form" novalidate>
-          <input type="text" name="fullname" placeholder="Full Name" required aria-label="Full Name">
-          <input type="email" name="email" placeholder="Email Address" required aria-label="Email Address">
-          <textarea name="message" placeholder="Your Message" required aria-label="Your Message"></textarea>
-          <input type="text" name="hp" class="hp" aria-hidden="true" tabindex="-1">
-          <button type="submit" class="btn">Send Message</button>
-        </form>
+          <!-- Skills -->
+          <section id="skills" class="section-block wrap" aria-labelledby="skills-heading">
+            <h2 id="skills-heading" class="h2">Skills</h2>
+            <div class="grid-3">
+              <div class="card"><h4>Programming Languages</h4><p class="muted">Python, SQL, R, JavaScript</p></div>
+              <div class="card"><h4>Data Analysis & Visualization</h4><p class="muted">Pandas, NumPy, Matplotlib, Seaborn, Power BI, Excel</p></div>
+              <div class="card"><h4>Machine Learning</h4><p class="muted">Scikit-learn, Regression Models, Classification, Clustering</p></div>
+            </div>
+          </section>
+
+          <!-- Contact -->
+          <section id="contact" class="section-block wrap" aria-labelledby="contact-heading">
+            <h2 id="contact-heading" class="h2">Contact</h2>
+            <div class="contact-links">
+          <a class="brand-link gh" href="https://github.com/SANJAYMARIMUTHU" target="_blank">GitHub</a>
+          <a class="brand-link li" href="https://www.linkedin.com/in/sanjaymarimuthu" target="_blank">LinkedIn</a>
+          <a class="brand-link kg" href="https://www.kaggle.com/itzsanjay" target="_blank">kaggle</a>
+          <a class="brand-link gm" href="mailto:sanjaymarimuthu505@gmail.com">Gmail</a>
+        </div>
+
+              <form id="contactForm" class="contact-form" novalidate>
+                <input type="text" name="fullname" placeholder="Full Name" required aria-label="Full Name">
+                <input type="email" name="email" placeholder="Email Address" required aria-label="Email Address">
+                <textarea name="message" placeholder="Your Message" required aria-label="Your Message"></textarea>
+                <input type="text" name="hp" class="hp" tabindex="-1" autocomplete="off">
+                <button type="submit" class="btn">Send Message</button>
+              </form>
+            </div>
+          </section>
+
+          <footer class="wrap" style="margin-top:20px">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
+              <div style="color:var(--muted)">© <span id="yr"></span> Sanjay Marimuthu</div>
+              <div style="color:var(--muted)"><a href="mailto:sanjaymarimuthu505@gmail.com">Gmail</a> · <a href="https://www.linkedin.com/in/sanjaymarimuthu" target="_blank">LinkedIn</a></div>
+            </div>
+          </footer>
+
+        </div>
       </div>
     </div>
-  </section>
 
-  <!-- SNACKBAR -->
+  </div>
+
   <div id="snackbar" role="status" aria-live="polite">Message sent successfully ✅</div>
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="wrap foot">
-      <div class="muted">
-        <a class="link" href="mailto:sanjaymarimuthu505@gmail.com">Gmail</a> · 
-        <a class="link" href="https://www.linkedin.com/in/sanjaymarimuthu" target="_blank">LinkedIn</a> · 
-        <a class="link" href="https://github.com/SANJAYMARIMUTHU" target="_blank">GitHub</a> · 
-        <a class="link" href="https://www.kaggle.com/itzsanjay" target="_blank">Kaggle</a>
-      </div>
-      <div class="muted">© <span id="yr"></span> Sanjay Marimuthu.</div>
-    </div>
-  </footer>
-
-  <!-- App JS -->
   <script src="script.js"></script>
 </body>
 </html>
