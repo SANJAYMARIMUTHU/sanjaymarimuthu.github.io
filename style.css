@@ -639,73 +639,100 @@ footer{padding:18px 28px;color:var(--muted);font-size:14px;text-align:center}
 }
 
 /* =========================
-   MOBILE MODE — AUTO HIDE SIDEBAR
+   MOBILE HAMBURGER + SLIDE MENU (TOP-RIGHT)
+   Style 3: Text + left yellow accent bar
+   Mobile <=1060px
    ========================= */
 @media (max-width:1060px) {
 
-  /* Hide sidebar fully */
-  .sidebar {
-    display: none !important;
+  /* hamburger */
+  .mobile-hamburger{
+    display:inline-grid;
+    grid-auto-flow:col;
+    gap:6px;
+    align-items:center;
+    justify-items:center;
+    width:46px;height:46px;
+    border-radius:10px;
+    background:#fff;border:1px solid rgba(0,0,0,0.06);
+    box-shadow:0 10px 24px rgba(0,0,0,0.08);
+    cursor:pointer;padding:8px;
+    position:relative; /* inside header.wrap */
+    margin-left:12px;
+  }
+  .mobile-hamburger .bar{
+    width:18px;height:2px;background:#111;border-radius:2px;display:block;
+    transition:transform .22s ease,opacity .18s ease;
+  }
+  .mobile-hamburger.open .bar:nth-child(1){ transform: translateY(5px) rotate(45deg); }
+  .mobile-hamburger.open .bar:nth-child(2){ opacity:0; transform:scale(.1); }
+  .mobile-hamburger.open .bar:nth-child(3){ transform: translateY(-5px) rotate(-45deg); }
+
+  /* overlay */
+  .mobile-overlay{
+    display:none; position:fixed; inset:0; background:rgba(0,0,0,0.45);
+    z-index:1200; opacity:0; transition:opacity .22s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .mobile-overlay.show{ display:block; opacity:1; }
+
+  /* mobile nav (off-canvas from right) */
+  .mobile-nav{
+    position:fixed;
+    right:0;
+    top:0;
+    height:100vh;
+    width:86%;
+    max-width:380px;
+    transform:translateX(110%);
+    transition:transform .36s cubic-bezier(.22,.61,.36,1);
+    background:#fff;
+    z-index:1250;
+    box-shadow: -20px 40px 80px rgba(0,0,0,0.18);
+    padding:28px 20px;
+    display:flex;
+    align-items:flex-start;
+    justify-content:flex-start;
+    border-radius:18px 0 0 18px;
+  }
+  .mobile-nav.open{ transform:translateX(0); }
+
+  /* nav list */
+  .mobile-nav-list{ list-style:none; width:100%; padding:8px 4px; margin:0; display:flex; flex-direction:column; gap:12px; }
+  .mobile-nav-list li{ width:100%; }
+  .mobile-nav-list a{
+    display:block; padding:14px 14px; width:100%;
+    color:var(--dark); font-weight:800; text-transform:uppercase;
+    border-left:6px solid transparent; border-radius:10px;
+    transition: background .18s ease, border-left-color .18s ease, padding-left .18s ease;
   }
 
-  /* Main pane goes full width */
-  #page-main {
-    padding-top: 0;
-    display: block;
+  /* yellow accent on active/hover: left border + subtle bg */
+  .mobile-nav-list a:hover,
+  .mobile-nav-list a:focus{
+    background:rgba(245,184,0,0.06);
+    border-left-color:var(--yellow);
+    padding-left:18px;
+    outline:none;
   }
 
-  .main-pane {
-    width: 100% !important;
-    margin: 0 !important;
-    border-radius: 0 !important;
-    height: auto !important;
-    min-height: 100vh;
-  }
+  /* keep small text spacing */
+  .mobile-nav-list a { letter-spacing: .06em; font-size:16px; }
 
-  .main-inner {
-    padding: 20px !important;
-    overflow: auto;
-    height: auto !important;
-  }
+  /* ensure header.wrap shows hamburger on right */
+  header.wrap { display:flex; align-items:center; justify-content:space-between; gap:12px; position:sticky; top:0; z-index:1000; }
 
-  /* Fix header at top */
-  header.wrap {
-    position: sticky;
-    top: 0;
-    z-index: 999;
-    background: var(--panel);
-    padding: 16px 20px !important;
-    border-bottom: 1px solid rgba(0,0,0,0.06);
-  }
+  /* hide sidebar for auto-hide behaviour (if not already applied) */
+  .sidebar{ display:none !important; }
 
-  /* Projects */
-  #projects .proj.card {
-    min-width: 100% !important;
-    max-width: 100% !important;
-  }
-  .proj-rail {
-    gap: 16px !important;
-  }
+  /* main pane adjustments for mobile */
+  .main-pane{ margin:0; border-radius:0; height:auto; min-height:100vh; }
+  .main-inner{ padding:18px; }
 
-  /* Sections stack nicely */
-  .section-block {
-    height: auto !important;
-    padding: 22px !important;
-  }
+  /* close button accessible focus style on nav links */
+  .mobile-nav-list a:focus{ box-shadow: inset 0 0 0 2px rgba(245,184,0,0.12); }
 
-  .page-section {
-    position: relative !important;
-    opacity: 1 !important;
-    transform: none !important;
-  }
+  /* make sure large clickable area */
+  .mobile-nav-list a { touch-action:manipulation; -webkit-tap-highlight-color: transparent; }
 
-  /* About page grid → vertical */
-  .about-wrapper {
-    grid-template-columns: 1fr !important;
-  }
-
-  /* Resume grid → 1 column */
-  .resume-grid {
-    grid-template-columns: 1fr !important;
-  }
 }

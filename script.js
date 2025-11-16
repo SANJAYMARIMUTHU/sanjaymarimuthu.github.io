@@ -400,94 +400,83 @@ sideLinks.forEach(link => {
 })();
 
 
-// MOBILE SIDEBAR TOGGLE (collapsible) — add after DOM loaded scripts
+// MOBILE HAMBURGER + SLIDE MENU (top-right) — append to script.js
 (function () {
-  // create hamburger inside header if missing (so no HTML edits required)
-  const header = document.querySelector('header.wrap');
-  if (!header) return;
+  const hamb = document.getElementById('mobileHamb');
+  const nav = document.getElementById('mobileNav');
+  const overlay = document.getElementById('mobileOverlay');
+  if (!hamb || !nav || !overlay) return;
 
-  // build hamburger element
-  const hamb = document.createElement('button');
-  hamb.className = 'mobile-hamburger';
-  hamb.setAttribute('aria-label', 'Open navigation');
-  hamb.setAttribute('aria-expanded', 'false');
-  hamb.setAttribute('type', 'button');
-  hamb.innerHTML = '<span class="bar"></span><span class="bar"></span><span class="bar"></span>';
-
-  // insert hamburger at start of header (left)
-  header.insertBefore(hamb, header.firstChild);
-
-  // overlay element
-  const overlay = document.createElement('div');
-  overlay.className = 'mobile-overlay';
-  document.body.appendChild(overlay);
-
-  const sidebar = document.querySelector('.sidebar');
-  const mainPane = document.querySelector('.main-pane');
-
-  function openSidebar() {
+  function openNav() {
     hamb.classList.add('open');
     hamb.setAttribute('aria-expanded', 'true');
-    sidebar && sidebar.classList.add('open');
+    nav.classList.add('open');
     overlay.classList.add('show');
-    mainPane && mainPane.classList.add('shifted');
+    nav.setAttribute('aria-hidden', 'false');
+    overlay.setAttribute('aria-hidden', 'false');
+    // lock body scroll
     document.body.classList.add('no-scroll');
-
-    // focus first link in sidebar for keyboard users
-    const firstLink = sidebar && sidebar.querySelector('a, button');
-    if (firstLink) firstLink.focus();
+    // focus first link
+    const f = nav.querySelector('a');
+    if (f) f.focus();
   }
 
-  function closeSidebar() {
+  function closeNav() {
     hamb.classList.remove('open');
     hamb.setAttribute('aria-expanded', 'false');
-    sidebar && sidebar.classList.remove('open');
+    nav.classList.remove('open');
     overlay.classList.remove('show');
-    mainPane && mainPane.classList.remove('shifted');
+    nav.setAttribute('aria-hidden', 'true');
+    overlay.setAttribute('aria-hidden', 'true');
     document.body.classList.remove('no-scroll');
-    // return focus to hamburger for accessibility
+    // return focus to hamburger
     hamb.focus();
   }
 
-  // toggle
   hamb.addEventListener('click', (e) => {
     e.stopPropagation();
-    if (sidebar && sidebar.classList.contains('open')) closeSidebar();
-    else openSidebar();
+    if (nav.classList.contains('open')) closeNav();
+    else openNav();
   });
 
-  // close on overlay click
-  overlay.addEventListener('click', closeSidebar);
+  overlay.addEventListener('click', closeNav);
 
   // close on Escape
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      if (sidebar && sidebar.classList.contains('open')) closeSidebar();
+    if (e.key === 'Escape' && nav.classList.contains('open')) closeNav();
+  });
+
+  // close nav when a mobile nav link is clicked, and navigate using your existing scrollToSection logic if present
+  nav.addEventListener('click', (e) => {
+    const a = e.target.closest('a');
+    if (!a) return;
+    const target = a.getAttribute('data-target') || a.getAttribute('href');
+    // close menu first
+    closeNav();
+    // if it is an in-page target (starts with '#'), trigger page switch & scroll
+    if (target && target.startsWith('#')) {
+      // small delay to allow close animation
+      setTimeout(() => {
+        // if your scrollToSection exists globally use it; otherwise fallback to default anchor behavior
+        if (typeof scrollToSection === 'function') {
+          // ensure main page visible (if your showMain exists)
+          if (typeof showMain === 'function') showMain();
+          scrollToSection(target);
+          // also set active link in sidebar if available
+          try { setActiveLink(target); } catch (e) {}
+        } else {
+          const el = document.querySelector(target);
+          if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 380);
+      e.preventDefault();
     }
   });
 
-  // when a sidebar link is clicked, close (nice UX)
-  sidebar && sidebar.addEventListener('click', (e) => {
-    const link = e.target.closest('a, button');
-    if (!link) return;
-    // allow links that open external pages; if internal anchor -> close
-    closeSidebar();
-  });
-
-  // ensure resize removes mobile-only inline classes if user returns to desktop size
-  let rTimer;
+  // remove mobile nav if window gets bigger
   window.addEventListener('resize', () => {
-    clearTimeout(rTimer);
-    rTimer = setTimeout(() => {
-      if (window.innerWidth > 1060) {
-        // cleanup mobile classes
-        sidebar && sidebar.classList.remove('open');
-        overlay.classList.remove('show');
-        hamb.classList.remove('open');
-        document.body.classList.remove('no-scroll');
-        mainPane && mainPane.classList.remove('shifted');
-        hamb.setAttribute('aria-expanded', 'false');
-      }
-    }, 120);
+    if (window.innerWidth > 1060) {
+      if (nav.classList.contains('open')) closeNav();
+    }
   });
 })();
