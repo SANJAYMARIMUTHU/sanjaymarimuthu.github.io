@@ -637,3 +637,75 @@ footer{padding:18px 28px;color:var(--muted);font-size:14px;text-align:center}
   .proj-rail { gap:14px; }
   #projects .proj.card { min-width: calc(100% - 40px); max-width: calc(100% - 40px); }
 }
+
+/* =========================
+   MOBILE MODE — AUTO HIDE SIDEBAR
+   ========================= */
+@media (max-width:1060px) {
+
+  /* Hide sidebar fully */
+  .sidebar {
+    display: none !important;
+  }
+
+  /* Main pane goes full width */
+  #page-main {
+    padding-top: 0;
+    display: block;
+  }
+
+  .main-pane {
+    width: 100% !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    height: auto !important;
+    min-height: 100vh;
+  }
+
+  .main-inner {
+    padding: 20px !important;
+    overflow: auto;
+    height: auto !important;
+  }
+
+  /* Fix header at top */
+  header.wrap {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    background: var(--panel);
+    padding: 16px 20px !important;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+
+  /* Projects */
+  #projects .proj.card {
+    min-width: 100% !important;
+    max-width: 100% !important;
+  }
+  .proj-rail {
+    gap: 16px !important;
+  }
+
+  /* Sections stack nicely */
+  .section-block {
+    height: auto !important;
+    padding: 22px !important;
+  }
+
+  .page-section {
+    position: relative !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* About page grid → vertical */
+  .about-wrapper {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Resume grid → 1 column */
+  .resume-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
